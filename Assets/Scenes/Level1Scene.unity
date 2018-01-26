@@ -140,11 +140,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fd1da3b844e1d94ba4fe743872e070b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LevelMap: {fileID: 2800000, guid: 9dde331cfac75c54d9139b64ff1f0df3, type: 3}
+  LevelMap: {fileID: 2800000, guid: df4ae7c3a14ecbf4d81c08510bab097c, type: 3}
   colorToPrefab:
   - color:
       serializedVersion: 2
-      rgba: 4278190080
+      rgba: 4278321666
     prefab: {fileID: 1856362643228220, guid: 5e22ae1f520f3484ab0bdfe50792660a, type: 2}
 --- !u!4 &506495496
 Transform:

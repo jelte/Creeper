@@ -25,15 +25,7 @@ public class LevelLoader : MonoBehaviour {
 	void Start () {
 
         LoadMap();
-
-        /*
-        Color32  c32 = new Color32(255, 0, 0, 255); //red
-
-        Color32[] allMyPixels32 = LevelMap.GetPixels32();
-        allMyPixels32[4] = c32;
-        LevelMap.SetPixels32(allMyPixels32);
-        */
-
+        
     }
 	
     public void EmptyMap()
