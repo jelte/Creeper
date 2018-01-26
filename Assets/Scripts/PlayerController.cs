@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour {
 		character.Move (movement * Time.deltaTime);
 
 		// Add vertical velocity for jump
-		if (Input.GetButtonDown ("Jump") && rb2d.velocity.y == 0) {
+		if (Input.GetButtonDown ("Jump") && Mathf.Abs(rb2d.velocity.y) < 0.01f) {
 			rb2d.velocity += Physics2D.gravity * -1 * character.jumpModifier;
 		}
 
