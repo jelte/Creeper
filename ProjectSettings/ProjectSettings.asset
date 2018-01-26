@@ -634,9 +634,9 @@ PlayerSettings:
     UNet: 1
   facebookSdkVersion: 7.9.4
   apiCompatibilityLevel: 2
-  cloudProjectId: 24711875-3c66-4c4e-af51-01a1819446c7
-  projectName: FTP (1)
-  organizationId: unity_gdzpm6ic1dmcwq
+  cloudProjectId: fc3b3586-23f5-4f2c-b2ad-2f109d86f0af
+  projectName: FTP
+  organizationId: poonphat-yoovidhya
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0
