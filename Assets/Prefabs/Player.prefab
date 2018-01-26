@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 114547410714737286}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -145,4 +145,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   jumpModifier: 0.5
-  climbModifier: 2
+  climbSpeed: 2
