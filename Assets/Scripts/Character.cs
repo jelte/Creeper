@@ -9,8 +9,12 @@ public class Character : MonoBehaviour {
 	public float speed = 5f;
 	[Range(0.1f, 2.0f)]
 	public float jumpModifier = 0.5f;
-	[Range(0.1f, 2.0f)]
-	public float climbSpeed = 0.25f;
+	[Range(1.0f, 10.0f)]
+	public float climbSpeed = 5f;
+
+	public int maxJumps = 2;
+
+    public int PlayerHealth = 3;
 
 	// Various Variables or references.
 	Text invertWarning;
