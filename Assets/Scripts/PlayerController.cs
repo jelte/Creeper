@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour {
 	Character character;
 
 	int jumping = 0;
+	public bool climbable = false;
 
 	// Use this for initialization
 	void Start () {
@@ -23,7 +24,7 @@ public class PlayerController : MonoBehaviour {
 		// Add horizontal movement
 		movement.x = Input.GetAxis ("Horizontal") * character.speed;
 		// Add Vertical movement
-		if (rb2d.gravityScale == 0) {
+		if (climbable) {
 			movement.y = Input.GetAxis ("Vertical") * character.climbSpeed;
 		}
 		character.Move (movement * Time.deltaTime);
@@ -33,8 +34,6 @@ public class PlayerController : MonoBehaviour {
 			jumping += 1;
 			rb2d.velocity += Physics2D.gravity * -1f * (character.jumpModifier/jumping);
 		}
-			
-
 		// Trigger Attack
 		if (Input.GetButtonDown ("Fire1")) {
 			character.Attack ();
@@ -43,9 +42,28 @@ public class PlayerController : MonoBehaviour {
 
 	void FixedUpdate()
 	{
+		// Check if the character is grounded.
 		RaycastHit2D hit = Physics2D.Raycast (transform.position, Vector2.down, 1f, LayerMask.GetMask ("Ground"));
 		if (hit.collider != null) {
 			jumping = 0;
 		}
+		// Check if any surface is climbable ( left , right, down & up )
+		RaycastHit2D hitClimbableLeft = Physics2D.Raycast (transform.position, Vector2.left, 1f, LayerMask.GetMask ("Climbable"));
+		RaycastHit2D hitClimbableRight = Physics2D.Raycast (transform.position, Vector2.right, 1f, LayerMask.GetMask ("Climbable"));
+		RaycastHit2D hitClimbableUp = Physics2D.Raycast (transform.position, Vector2.up, 1f, LayerMask.GetMask ("Climbable"));
+		RaycastHit2D hitClimbableDown = Physics2D.Raycast (transform.position, Vector2.down, 1f, LayerMask.GetMask ("Climbable"));
+		if (hitClimbableLeft.collider != null || hitClimbableUp.collider != null || hitClimbableDown.collider != null || hitClimbableRight.collider != null) {
+			climbable = true;
+			rb2d.gravityScale = 0;
+		} else if (climbable) {
+			// Stop climbing after 0.1 second, to be able to get over the top
+			Invoke ("StopClimbing", 0.1f);
+		}
+	}
+
+	void StopClimbing()
+	{
+		climbable = false;
+		rb2d.gravityScale = 1;
 	}
 }
