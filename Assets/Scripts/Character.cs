@@ -27,6 +27,7 @@ public class Character : MonoBehaviour {
 
 		traitMan = GetComponent<TraitManager>();
 		rb2d = GetComponent<Rigidbody2D> ();
+		gravityScale = rb2d.gravityScale;
 		StartCoroutine (playerTrait(10));
 	}
 	
