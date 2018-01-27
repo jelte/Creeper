@@ -7,10 +7,10 @@ public class TraitManager : MonoBehaviour
 	public bool isBlind = false;
 	public bool isInvert = false;
 	public bool isNarrow = false;
-	public bool isShort = false;
-	public bool isTall = false;
 	public bool isBouncy = false;
 	public bool isHeavy = false;
+	public bool isMegaJump = false;
+	public bool noTrait = false;
 
 	//Rigidbody2D rb2d;
 

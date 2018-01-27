@@ -8,8 +8,7 @@ public class SpikeTrap : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision)
     {
         
-        if(collision.tag == "Player")
-        {
+		if(collision.CompareTag("Player")) {
             //reduce player health
             collision.GetComponent<Character>().PlayerHealth =- 1;
             //push player away from spike
