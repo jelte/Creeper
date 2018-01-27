@@ -111,7 +111,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   jumpModifier: 0.83
-  climbSpeed: 0.25
+  climbSpeed: 5
   maxJumps: 2
   PlayerHealth: 3
   displayMessage: 0

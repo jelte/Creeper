@@ -36,7 +36,7 @@ public class Character : MonoBehaviour {
 		gravityScale = rb2d.gravityScale;
 		//startScale = transform.localScale;
 		// Start the endless barrage of traits loop. (With a delay provided of X)
-		StartCoroutine (playerTrait(10));
+		//StartCoroutine (playerTrait(10));
 	}
 	
 	// Update is called once per frame
