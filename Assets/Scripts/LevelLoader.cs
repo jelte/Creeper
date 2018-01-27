@@ -76,7 +76,7 @@ public class LevelLoader : MonoBehaviour {
             }
         }
         //shouldnt be called unless wrong colour
-        Debug.Log("No color found");
+        //Debug.Log("No color found");
     }
 
     void SpawnPlayer()
