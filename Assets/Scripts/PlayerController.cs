@@ -47,11 +47,6 @@ public class PlayerController : MonoBehaviour {
 
 	void FixedUpdate()
 	{
-		// Check if the character is grounded.
-		RaycastHit2D hit = Physics2D.Raycast (transform.position, Vector2.down, 1f, LayerMask.GetMask ("Ground"));
-		if (hit.collider != null) {
-			jumping = 0;
-		}
 		// Check if any surface is climbable ( left , right, down & up )
 		RaycastHit2D hitClimbableLeft = Physics2D.Raycast (transform.position, Vector2.left, 1f, LayerMask.GetMask ("Climbable"));
 		RaycastHit2D hitClimbableRight = Physics2D.Raycast (transform.position, Vector2.right, 1f, LayerMask.GetMask ("Climbable"));
@@ -60,9 +55,16 @@ public class PlayerController : MonoBehaviour {
 		if (hitClimbableLeft.collider != null || hitClimbableUp.collider != null || hitClimbableDown.collider != null || hitClimbableRight.collider != null) {
 			climbable = true;
 			rb2d.gravityScale = 0;
+			rb2d.velocity = new Vector2 (rb2d.velocity.x, 0f);
 		} else if (climbable) {
 			// Stop climbing after 0.1 second, to be able to get over the top
 			Invoke ("StopClimbing", 0.1f);
+		}
+
+		// Check if the character is grounded.
+		RaycastHit2D hit = Physics2D.Raycast (transform.position, Vector2.down, 1f, LayerMask.GetMask ("Ground"));
+		if (hit.collider != null || climbable) {
+			jumping = 0;
 		}
 
 		// Animation parameters
