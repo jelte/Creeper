@@ -6,6 +6,7 @@ public class FollowPlayer : MonoBehaviour {
 
 	GameObject character;
 	public Vector3 offset;
+	public float maxDistance = 10f;
 
 	// Use this for initialization
 	void Start () {
@@ -17,10 +18,11 @@ public class FollowPlayer : MonoBehaviour {
 		if (character == null) {
 			character = GameObject.FindGameObjectWithTag ("Player");
 		} else {
+			float magnitude = (transform.position - (character.transform.position + offset)).magnitude/10f;
 			transform.position = Vector3.Lerp (
 				transform.position, 
 				character.transform.position + offset,
-				Time.deltaTime
+				Mathf.Clamp(magnitude, 0f, 1f)
 			);
 		}
 	}
