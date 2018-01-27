@@ -22,6 +22,7 @@ public class Character : MonoBehaviour {
 	TraitManager traitMan;
 	int countdown = 0;
 	float startGravityScale;
+	float startScale;
 	public bool displayMessage = false;
 
 
@@ -33,17 +34,27 @@ public class Character : MonoBehaviour {
 
 		// Get original Gravity Scale for reference.
 		startGravityScale = rb2d.gravityScale;
+		//startScale = transform.localScale;
 		// Start the endless barrage of traits loop. (With a delay provided of X)
 		StartCoroutine (playerTrait(10));
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (traitMan.isHeavy) {
-			rb2d.gravityScale = 3f;
-		} else {
-			rb2d.gravityScale = startGravityScale;
-		}
+		if (traitMan.isHeavy) {rb2d.gravityScale = 3f;} 
+		else {rb2d.gravityScale = startGravityScale;}
+
+		if (traitMan.isBouncy) {rb2d.gravityScale = 0.5f;} 
+		else {rb2d.gravityScale = startGravityScale;}
+
+//		if (traitMan.isShort) 
+//		{
+//			transform.localScale * 0.5f;
+//		} 
+//		else 
+//		{
+//			transform.localScale = (1.0f);
+//		}
 	}
 
 	public void Move(Vector2 movement) {
@@ -74,16 +85,16 @@ public class Character : MonoBehaviour {
 		{
 			// Deciding which trait to use.
 			Random rand = new Random ();
-			int traitChoice = Random.Range (0, 2);
-			Debug.Log (traitChoice);
+			int traitChoice = Random.Range (0, 3);
+			if (traitChoice == 0) {Debug.Log ("Current Trait = INVERTED ID: " + traitChoice);}
+			if (traitChoice == 1) {Debug.Log ("Current Trait = HEAVY ID: " + traitChoice);}
+			if (traitChoice == 2) {Debug.Log ("Current Trait = LIGHT ID: " + traitChoice);}
 			switch (traitChoice) 
 			{
 			// Case 0 is INVERTED CONTROLS.
 			case 0:
 				displayMessage = true;
-				//StartCoroutine (ShowMessage ("Inverting Controls", 3));
 				yield return new WaitForSeconds (delay);
-				//StartCoroutine (ShowMessage ("Controls Inverted", delay));
 				traitMan.isInvert = true;
 				yield return new WaitForSeconds (delay);
 				traitMan.isInvert = false;
@@ -95,6 +106,19 @@ public class Character : MonoBehaviour {
 				traitMan.isHeavy = true;
 				yield return new WaitForSeconds (delay);
 				traitMan.isHeavy = false;
+				break;
+				/// CASE 2 is BOUNCY (Decreased Gravity)
+			case 2:
+				yield return new WaitForSeconds (delay);
+				traitMan.isBouncy = true;
+				yield return new WaitForSeconds (delay);
+				traitMan.isBouncy = false;
+				break;
+			case 3:
+				yield return new WaitForSeconds (delay);
+				traitMan.isShort = true;
+				yield return new WaitForSeconds (delay);
+				traitMan.isShort = false;
 				break;
 			}
 		}
