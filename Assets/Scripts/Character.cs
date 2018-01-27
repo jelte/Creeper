@@ -17,12 +17,8 @@ public class Character : MonoBehaviour {
     public int PlayerHealth = 3;
 
 	// Various Variables or references.
-	Text invertWarning;
 	Rigidbody2D rb2d;
 	TraitManager traitMan;
-	int countdown = 0;
-	float startScale;
-	public bool displayMessage = false;
 	public float gravityScale = 1.0f;
 
 
@@ -31,17 +27,23 @@ public class Character : MonoBehaviour {
 
 		traitMan = GetComponent<TraitManager>();
 		rb2d = GetComponent<Rigidbody2D> ();
-
-		// Get original Gravity Scale for reference.
 		gravityScale = rb2d.gravityScale;
-		//startScale = transform.localScale;
-		// Start the endless barrage of traits loop. (With a delay provided of X)
-		//StartCoroutine (playerTrait(10));
+		StartCoroutine (playerTrait(10));
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if (Input.GetKeyDown(KeyCode.P))
+		{
+			if (traitMan.noTrait == false) {
+				traitMan.noTrait = true;
+				Debug.Log ("PAUSED TRAITS");
+			}
+			else if (traitMan.noTrait == true) {
+				traitMan.noTrait = false;
+				Debug.Log ("UNPAUSED TRAITS");
+			}
+		}
 	}
 
 	public void Move(Vector2 movement) {
@@ -52,68 +54,48 @@ public class Character : MonoBehaviour {
 		// TODO: Do Attack.
 	}
 
-	// PICK UPS (Not needed if we do random-time trait deployment)
-	public IEnumerator OnTriggerEnter2D(Collider2D other)
-	{
-		if (other.gameObject.CompareTag("Pickup - Trait") )
-		{
-			countdown = 15;
-			other.gameObject.SetActive (false);
-			traitMan.isInvert = true;
-			yield return new WaitForSeconds (15);
-			traitMan.isInvert = false;
-		}
-	}
-
 	// The Main PlayerTrait Thread
 	public IEnumerator playerTrait(int delay)
 	{
-		while (true) 
+		// RESET TRAITS
+		traitMan.isInvert = false;
+		traitMan.isHeavy = false;
+		traitMan.isBouncy = false;
+
+		// Deciding which trait to use.
+		Random rand = new Random ();
+		int traitChoice = Random.Range (0, 3);
+		if (traitChoice == 0) {Debug.Log ("Current Trait = INVERTED ID: " + traitChoice);}
+		if (traitChoice == 1) {Debug.Log ("Current Trait = HEAVY ID: " + traitChoice);}
+		if (traitChoice == 2) {Debug.Log ("Current Trait = LIGHT ID: " + traitChoice);}
+			
+		switch (traitChoice) 
 		{
-			// Deciding which trait to use.
-			Random rand = new Random ();
-			int traitChoice = Random.Range (0, 3);
-			if (traitChoice == 0) {Debug.Log ("Current Trait = INVERTED ID: " + traitChoice);}
-			if (traitChoice == 1) {Debug.Log ("Current Trait = HEAVY ID: " + traitChoice);}
-			if (traitChoice == 2) {Debug.Log ("Current Trait = LIGHT ID: " + traitChoice);}
-			switch (traitChoice) 
-			{
-			// Case 0 is INVERTED CONTROLS.
-			case 0:
-				displayMessage = true;
-				yield return new WaitForSeconds (delay);
-				traitMan.isInvert = true;
-				SetGravityScale (1.0f);
-				yield return new WaitForSeconds (delay);
-				traitMan.isInvert = false;
-				displayMessage = false;
-				break;
-				// CASE 1 is HEAVY (Increased Gravity)
-			case 1:
-				yield return new WaitForSeconds (delay);
-				traitMan.isHeavy = true;
-				SetGravityScale (3.0f);
-				yield return new WaitForSeconds (delay);
-				traitMan.isHeavy = false;
-				break;
-				/// CASE 2 is BOUNCY (Decreased Gravity)
-			case 2:
-				yield return new WaitForSeconds (delay);
-				traitMan.isBouncy = true;
-				SetGravityScale (0.5f);
-				yield return new WaitForSeconds (delay);
-				traitMan.isBouncy = false;
-				break;
-			case 3:
-				yield return new WaitForSeconds (delay);
-				traitMan.isShort = true;
-				SetGravityScale (3.0f);
-				yield return new WaitForSeconds (delay);
-				traitMan.isShort = false;
-				break;
-			}
+		// Case 0 is INVERTED CONTROLS.
+		case 0:
+			yield return new WaitForSeconds (5);
+			traitMan.isInvert = true;
+			SetGravityScale (1.0f);
+			break;
+			// CASE 1 is HEAVY (Increased Gravity)
+		case 1:
+			yield return new WaitForSeconds (5);
+			traitMan.isHeavy = true;
+			SetGravityScale (3.0f);
+			break;
+			/// CASE 2 is BOUNCY (Decreased Gravity)
+		case 2:
+			yield return new WaitForSeconds (5);
+			traitMan.isBouncy = true;
+			SetGravityScale (0.5f);
+			break;
+		}
+		if (traitMan.noTrait == false) {
+			yield return new WaitForSeconds (10);
+			StartCoroutine (playerTrait (10));
 		}
 	}
+		
 
 	void SetGravityScale(float scale)
 	{
