@@ -208,7 +208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  jumpModifier: 0.83
+  jumpModifier: 0.85
   climbSpeed: 0.25
 --- !u!124 &124852433304797192
 Behaviour:
