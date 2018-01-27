@@ -506,5 +506,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fecdc81e33ed8e74fb590324b7950548, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: {x: 0, y: 0, z: 0}
+  offset: {x: 0, y: 0, z: -2}
   maxDistance: 10
