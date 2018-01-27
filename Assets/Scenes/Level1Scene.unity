@@ -249,7 +249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fd1da3b844e1d94ba4fe743872e070b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LevelMap: {fileID: 2800000, guid: 084eb95bca34af04781e0a5d0710d728, type: 3}
+  LevelMap: {fileID: 2800000, guid: 802b789f222b56a449a04be841502e3b, type: 3}
   colorToPrefab:
   - color:
       serializedVersion: 2
