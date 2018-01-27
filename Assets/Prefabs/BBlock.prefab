@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4693739186726052}
   - component: {fileID: 212286833840556708}
   - component: {fileID: 61564174924652936}
+  - component: {fileID: 114457014818436268}
   m_Layer: 0
   m_Name: BBlock
   m_TagString: Untagged
@@ -35,7 +36,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1859790323956836}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.2668219, y: 11.038944, z: 0}
+  m_LocalPosition: {x: 17.816504, y: -4.66788, z: 0}
   m_LocalScale: {x: 1.45, y: 1.45, z: 1.45}
   m_Children: []
   m_Father: {fileID: 0}
@@ -49,8 +50,8 @@ BoxCollider2D:
   m_GameObject: {fileID: 1859790323956836}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 16d87ebe0a3139241b3a72fe3501f492, type: 2}
-  m_IsTrigger: 0
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -66,6 +67,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.7, y: 0.7}
   m_EdgeRadius: 0
+--- !u!114 &114457014818436268
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1859790323956836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75f69699b3f39c34c94e153e60dbac11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212286833840556708
 SpriteRenderer:
   m_ObjectHideFlags: 1

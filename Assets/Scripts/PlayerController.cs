@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using XInputDotNetPure; // Required in C#
 
 public class PlayerController : MonoBehaviour {
 
@@ -9,7 +10,7 @@ public class PlayerController : MonoBehaviour {
 
     Animator ani;
     float aniSpeed;
-    bool land = true;
+    int jumping = 0;
 
     // Use this for initialization
     void Start () {
@@ -31,31 +32,30 @@ public class PlayerController : MonoBehaviour {
         }
         
 		character.Move (movement * Time.deltaTime);
-        
-        // Add vertical velocity for jump
-        if (Input.GetButtonDown ("Jump") && Mathf.Abs(rb2d.velocity.y) < 0.01f) {
-			rb2d.velocity += Physics2D.gravity * -1f * character.jumpModifier;
-           
-        }
+
+		// Add vertical velocity for jump
+		if (Input.GetButtonDown ("Jump") && jumping < (character.maxJumps-1)) {
+			jumping += 1;
+			rb2d.velocity += Physics2D.gravity * -1f * (character.jumpModifier/jumping);
+		}
 
 		// Trigger Attack
 		if (Input.GetButtonDown ("Fire1")) {
 			character.Attack ();
 		}
-
-        if (rb2d.velocity.y == 0)
-            land = true;
-        else
-            land = false;
     }
 
     private void FixedUpdate()
     {
+  
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1f, LayerMask.GetMask("Ground"));
+        if (hit.collider != null)
+        {
+            jumping = 0;
+        }
+
         ani.SetFloat("speed", aniSpeed);
         ani.SetFloat("velocity", rb2d.velocity.y);
-        ani.SetBool("land", land);
+        ani.SetBool("land", jumping > 0);
     }
-
-
-
 }

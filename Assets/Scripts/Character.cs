@@ -11,6 +11,10 @@ public class Character : MonoBehaviour {
 	[Range(0.1f, 2.0f)]
 	public float climbSpeed = 0.25f;
 
+	public int maxJumps = 2;
+
+    public int PlayerHealth = 3;
+
 	Rigidbody2D rb2d;
 
 	// Use this for initialization
