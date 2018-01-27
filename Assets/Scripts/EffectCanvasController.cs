@@ -5,23 +5,25 @@ using UnityEngine.UI;
 
 public class EffectCanvasController : MonoBehaviour {
 
-    public bool isSwitchedLeftandRight;
     public GameObject LR;
-    public bool isGravityUp;
     public GameObject GU;
-    public bool isGravityDown;
     public GameObject GD;
 
+	private TraitManager traitManager;
 
 	// Use this for initialization
 	void Start () {
-		
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        LR.SetActive(isSwitchedLeftandRight);
-        GU.SetActive(isGravityUp);
-        GD.SetActive(isGravityDown);		
+		if (traitManager == null && GameObject.FindGameObjectWithTag ("Player")) {
+			traitManager = GameObject.FindGameObjectWithTag ("Player").GetComponent<TraitManager> ();
+		}
+		if (traitManager != null) {
+			LR.SetActive (traitManager.isInvert);
+			GU.SetActive (traitManager.isHeavy);
+			GD.SetActive (traitManager.isBouncy);
+		}
 	}
 }
