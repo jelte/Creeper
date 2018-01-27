@@ -13,6 +13,8 @@ public class Character : MonoBehaviour {
 
 	public int maxJumps = 2;
 
+    public int PlayerHealth = 3;
+
 	Rigidbody2D rb2d;
 
 	// Use this for initialization
