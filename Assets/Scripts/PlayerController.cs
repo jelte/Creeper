@@ -5,13 +5,18 @@ using XInputDotNetPure; // Required in C#
 
 public class PlayerController : MonoBehaviour {
 
+    //for movement
 	Rigidbody2D rb2d;
 	Character character;
 
+    //for animation use
     Animator ani;
     float aniSpeed;
-	int jumping = 0;
-	public bool climbable = false;
+    bool attackPressed = false;
+    bool canAttack = true;
+    bool faceRight = true;
+    int jumping = 0;
+    public bool climbable = false;
 
     // Use this for initialization
     void Start () {
@@ -39,11 +44,28 @@ public class PlayerController : MonoBehaviour {
 			rb2d.velocity += Physics2D.gravity * -1f * (character.jumpModifier/jumping);
 		}
 
-		// Trigger Attack
-		if (Input.GetButtonDown ("Fire1")) {
-			character.Attack ();
+        // Trigger Attack
+        if (aniSpeed > 0)
+            faceRight = true;
+        if (aniSpeed < 0)
+            faceRight = false;
+		if (Input.GetButtonDown ("Fire1")&&canAttack) {			
+            StartCoroutine(Attack(0.5f));
 		}
+        Debug.Log(attackPressed);
     }
+
+    IEnumerator Attack(float waitTime)
+    {
+        
+        canAttack = false;
+        attackPressed = true;
+        character.Attack();
+        yield return new WaitForSeconds(waitTime); ;
+        attackPressed = false;
+        canAttack = true;
+    }
+
 
 	void FixedUpdate()
 	{
@@ -68,9 +90,11 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		// Animation parameters
-		ani.SetFloat("speed", aniSpeed);
-		ani.SetFloat("velocity", rb2d.velocity.y);
-		ani.SetBool("land", jumping > 0);
+		   ani.SetFloat("speed", aniSpeed);
+        ani.SetFloat("velocity", rb2d.velocity.y);
+        ani.SetBool("land", jumping > 0);
+        ani.SetBool("faceRight", faceRight);
+        ani.SetBool("attack", attackPressed);
 	}
 
 	void StopClimbing()
