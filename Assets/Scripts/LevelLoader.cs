@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+//written by poon
+
 [System.Serializable]
 public class ColorToPrefab {
 
@@ -12,8 +14,6 @@ public class ColorToPrefab {
 
 }
 
-
-
 public class LevelLoader : MonoBehaviour {
 
 
@@ -22,16 +22,14 @@ public class LevelLoader : MonoBehaviour {
 
 
 	// Use this for initialization
-	void Start () {
-
+	void Start ()
+    {
         LoadMap();
-        
     }
 	
     public void EmptyMap()
     {
         //find all children and destroy them all.
-
         while(transform.childCount > 0)
         {
             Transform c = transform.GetChild(0);
@@ -61,25 +59,23 @@ public class LevelLoader : MonoBehaviour {
 
     void SpawnTileAt(Color32 c , int x, int y)
     {
-        //transparent tile
+        //transparent tile (do nothing)
         if (c.a == 0)
         {
             return;
         }
 
         //find right color
-
         foreach(ColorToPrefab ctp in colorToPrefab)
         {
-            //if(ctp.color.r == c.r && ctp.color.b == c.b && ctp.color.g == c.g && ctp.color.a == c.a)
+            //if colour is correct, instantiate in right position
             if (c.Equals(ctp.color))
             {
                 GameObject go = Instantiate(ctp.prefab, new Vector3(x, y, 0), Quaternion.identity);
                 return;
             }
         }
-
-
+        //shouldnt be called unless wrong colour
         Debug.Log("No color found");
     }
 
