@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using XInputDotNetPure; // Required in C#
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour {
 
@@ -27,6 +28,14 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+
+        if (character.PlayerHealth <= 0)
+        {
+            Debug.Log("game reloaded");
+            SceneManager.LoadScene(1);
+        }
+
 
 		Vector2 movement = Vector2.zero;
 		movement.x = Input.GetAxis ("Horizontal") * character.speed;
