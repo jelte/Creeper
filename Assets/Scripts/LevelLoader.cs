@@ -7,22 +7,20 @@ using UnityEngine;
 
 [System.Serializable]
 public class ColorToPrefab {
-
     public Color32 color;
     public GameObject prefab;
-
-
 }
 
 public class LevelLoader : MonoBehaviour {
 
-
     public Texture2D LevelMap;
     public ColorToPrefab[] colorToPrefab;
+    public GameObject SpawnPoint;
+    public GameObject PlayerPrefab;
 
-
-	// Use this for initialization
-	void Start ()
+  
+    // Use this for initialization
+    void Start ()
     {
         LoadMap();
     }
@@ -55,6 +53,8 @@ public class LevelLoader : MonoBehaviour {
 
             }
         }
+
+        SpawnPlayer();
     }
 
     void SpawnTileAt(Color32 c , int x, int y)
@@ -79,4 +79,11 @@ public class LevelLoader : MonoBehaviour {
         Debug.Log("No color found");
     }
 
+    void SpawnPlayer()
+    {
+        //find spawn point in map
+        SpawnPoint = GameObject.FindWithTag("SpawnPoint");
+        //spawns player at spawn point dot
+        GameObject PlayerCharacter = Instantiate(PlayerPrefab, SpawnPoint.transform.position, Quaternion.identity);
+    }
 }

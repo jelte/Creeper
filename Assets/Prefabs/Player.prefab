@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 50665464708969890}
   - component: {fileID: 114750083822338666}
   - component: {fileID: 114547410714737286}
-  - component: {fileID: 61152303888506144}
   - component: {fileID: 212754161913966546}
   - component: {fileID: 95535126426526974}
   - component: {fileID: 58390113831095504}
@@ -59,7 +58,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1964330118599530}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.3999996, y: -7.3999996, z: -10}
+  m_LocalPosition: {x: 5.3999996, y: -3.6, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4949395276389984}
@@ -72,7 +71,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1284452750798892}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.09, y: 12.7, z: 0}
+  m_LocalPosition: {x: 5.09, y: 18.97, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4615572215877858}
@@ -150,31 +149,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.8
---- !u!61 &61152303888506144
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1284452750798892}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: 16d87ebe0a3139241b3a72fe3501f492, type: 2}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3, y: 3}
-    newSize: {x: 6, y: 6}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 2, y: 2}
-  m_EdgeRadius: 0
 --- !u!81 &81706370995087414
 AudioListener:
   m_ObjectHideFlags: 1
@@ -233,8 +207,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca67fc6dc22d58b418369e0aaf194fd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  jumpModifier: 0.87
+  speed: 5
+  jumpModifier: 0.83
   climbSpeed: 0.25
 --- !u!124 &124852433304797192
 Behaviour:
