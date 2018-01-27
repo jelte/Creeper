@@ -21,9 +21,9 @@ public class Character : MonoBehaviour {
 	Rigidbody2D rb2d;
 	TraitManager traitMan;
 	int countdown = 0;
-	float startGravityScale;
 	float startScale;
 	public bool displayMessage = false;
+	public float gravityScale = 1.0f;
 
 
 	// Use this for initialization
@@ -33,7 +33,7 @@ public class Character : MonoBehaviour {
 		rb2d = GetComponent<Rigidbody2D> ();
 
 		// Get original Gravity Scale for reference.
-		startGravityScale = rb2d.gravityScale;
+		gravityScale = rb2d.gravityScale;
 		//startScale = transform.localScale;
 		// Start the endless barrage of traits loop. (With a delay provided of X)
 		StartCoroutine (playerTrait(10));
@@ -41,20 +41,7 @@ public class Character : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (traitMan.isHeavy) {rb2d.gravityScale = 3f;} 
-		else {rb2d.gravityScale = startGravityScale;}
-
-		if (traitMan.isBouncy) {rb2d.gravityScale = 0.5f;} 
-		else {rb2d.gravityScale = startGravityScale;}
-
-//		if (traitMan.isShort) 
-//		{
-//			transform.localScale * 0.5f;
-//		} 
-//		else 
-//		{
-//			transform.localScale = (1.0f);
-//		}
+		
 	}
 
 	public void Move(Vector2 movement) {
@@ -96,6 +83,7 @@ public class Character : MonoBehaviour {
 				displayMessage = true;
 				yield return new WaitForSeconds (delay);
 				traitMan.isInvert = true;
+				SetGravityScale (1.0f);
 				yield return new WaitForSeconds (delay);
 				traitMan.isInvert = false;
 				displayMessage = false;
@@ -104,6 +92,7 @@ public class Character : MonoBehaviour {
 			case 1:
 				yield return new WaitForSeconds (delay);
 				traitMan.isHeavy = true;
+				SetGravityScale (3.0f);
 				yield return new WaitForSeconds (delay);
 				traitMan.isHeavy = false;
 				break;
@@ -111,16 +100,24 @@ public class Character : MonoBehaviour {
 			case 2:
 				yield return new WaitForSeconds (delay);
 				traitMan.isBouncy = true;
+				SetGravityScale (0.5f);
 				yield return new WaitForSeconds (delay);
 				traitMan.isBouncy = false;
 				break;
 			case 3:
 				yield return new WaitForSeconds (delay);
 				traitMan.isShort = true;
+				SetGravityScale (3.0f);
 				yield return new WaitForSeconds (delay);
 				traitMan.isShort = false;
 				break;
 			}
 		}
+	}
+
+	void SetGravityScale(float scale)
+	{
+		rb2d.gravityScale = 1f;
+		gravityScale = 1f;
 	}
 }

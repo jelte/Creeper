@@ -284,7 +284,7 @@ MonoBehaviour:
       rgba: 4293000962
     prefab: {fileID: 1189563738263410, guid: d04b372efaafa5e43b527400b8fdef25, type: 2}
   SpawnPoint: {fileID: 1189563738263410, guid: d04b372efaafa5e43b527400b8fdef25, type: 2}
-  PlayerPrefab: {fileID: 1069378132867086, guid: 6d35a0df8c2ab8044bd94878349797c4,
+  PlayerPrefab: {fileID: 1205202883944894, guid: 6d35a0df8c2ab8044bd94878349797c4,
     type: 2}
 --- !u!4 &506495496
 Transform:

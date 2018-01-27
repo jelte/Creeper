@@ -52,7 +52,6 @@ public class PlayerController : MonoBehaviour {
 		if (Input.GetButtonDown ("Fire1")&&canAttack) {			
             StartCoroutine(Attack(0.5f));
 		}
-        Debug.Log(attackPressed);
     }
 
     IEnumerator Attack(float waitTime)
@@ -90,7 +89,7 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		// Animation parameters
-		   ani.SetFloat("speed", aniSpeed);
+		ani.SetFloat("speed", aniSpeed);
         ani.SetFloat("velocity", rb2d.velocity.y);
         ani.SetBool("land", jumping > 0);
         ani.SetBool("faceRight", faceRight);
@@ -100,6 +99,6 @@ public class PlayerController : MonoBehaviour {
 	void StopClimbing()
 	{
 		climbable = false;
-		rb2d.gravityScale = 1;
+		rb2d.gravityScale = character.gravityScale;
 	}
 }
