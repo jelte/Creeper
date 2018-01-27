@@ -14,10 +14,14 @@ public class FollowPlayer : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		transform.position = Vector3.Lerp(
-			transform.position, 
-			character.transform.position + offset,
-			Time.deltaTime
-		);
+		if (character == null) {
+			character = GameObject.FindGameObjectWithTag ("Player");
+		} else {
+			transform.position = Vector3.Lerp (
+				transform.position, 
+				character.transform.position + offset,
+				Time.deltaTime
+			);
+		}
 	}
 }
