@@ -22,9 +22,8 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		// Initialize movement
+
 		Vector2 movement = Vector2.zero;
-		// Add horizontal movement
 		movement.x = Input.GetAxis ("Horizontal") * character.speed;
 		aniSpeed = movement.x * Time.deltaTime;
 		// Add Vertical movement
@@ -33,6 +32,7 @@ public class PlayerController : MonoBehaviour {
 		}
        
 		character.Move (movement * Time.deltaTime);
+
 		// Add vertical velocity for jump
 		if (Input.GetButtonDown ("Jump") && jumping < (character.maxJumps-1)) {
 			jumping += 1;
