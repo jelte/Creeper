@@ -97,6 +97,7 @@ public class PlayerController : MonoBehaviour {
 		RaycastHit2D hit = Physics2D.Raycast (transform.position, Vector2.down, 1f, LayerMask.GetMask ("Ground"));
 		if (hit.collider != null || climbable) {
 			jumping = 0;
+            Debug.Log("hit ground");
 		}
 
 		// Animation parameters
