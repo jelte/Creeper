@@ -71,7 +71,9 @@ public class LevelLoader : MonoBehaviour {
             //if colour is correct, instantiate in right position
             if (c.Equals(ctp.color))
             {
+
                 GameObject go = Instantiate(ctp.prefab, new Vector3(x, y, 0), Quaternion.identity);
+                go.transform.parent = transform;
                 return;
             }
         }
