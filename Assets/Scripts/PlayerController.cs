@@ -32,10 +32,15 @@ public class PlayerController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        
-		if (character.Died()) {
+        if (se == null)
+        {
+            se = GameObject.Find("SoundEffets").GetComponent<SoundsEffects>();
+        }
+
+        if (character.Died()) {
 			return;
         }
+
 
 		Vector2 movement = Vector2.zero;
 		movement.x = Input.GetAxis ("Horizontal") * character.speed;
