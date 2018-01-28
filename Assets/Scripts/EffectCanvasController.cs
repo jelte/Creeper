@@ -8,6 +8,8 @@ public class EffectCanvasController : MonoBehaviour {
     public GameObject LR;
     public GameObject GU;
     public GameObject GD;
+    public GameObject SU;
+    public GameObject SD;
 
 	private TraitManager traitManager;
 	private Character character;
@@ -26,6 +28,9 @@ public class EffectCanvasController : MonoBehaviour {
 			LR.SetActive (traitManager.isInvert && !character.Died());
 			GD.SetActive (traitManager.isHeavy && !character.Died());
 			GU.SetActive (traitManager.isBouncy && !character.Died());
-		}
+            //TODO trigget them
+            //SU.SetActive();
+            //SD.SetActive();
+        }
 	}
 }
