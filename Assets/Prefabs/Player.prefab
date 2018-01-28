@@ -40,7 +40,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1205202883944894}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.5779965, z: 0}
+  m_LocalPosition: {x: 147.27698, y: 1.4628372, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -114,7 +114,6 @@ MonoBehaviour:
   climbSpeed: 5
   maxJumps: 2
   PlayerHealth: 3
-  displayMessage: 0
   gravityScale: 1
 --- !u!114 &114800787838819956
 MonoBehaviour:
@@ -130,10 +129,10 @@ MonoBehaviour:
   isBlind: 0
   isInvert: 0
   isNarrow: 0
-  isShort: 0
-  isTall: 0
   isBouncy: 0
   isHeavy: 0
+  isMegaJump: 0
+  noTrait: 0
 --- !u!114 &114915237091215670
 MonoBehaviour:
   m_ObjectHideFlags: 1

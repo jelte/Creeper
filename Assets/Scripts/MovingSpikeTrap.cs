@@ -4,27 +4,21 @@ using UnityEngine;
 
 public class MovingSpikeTrap : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    public GameObject ObjectToMove;
+    
+     private void OnTriggerEnter2D(Collider2D collision)
     {
-
-        if (collision.CompareTag("Player"))
+        //check for player
+        if(collision.tag == "Player")
         {
-            //reduce player health
-            collision.GetComponent<Character>().PlayerHealth = -1;
 
-            Debug.Log("Player took damage");
+            ObjectToMove.GetComponent<MovignSpike>().MoveTowards = true;
 
         }
+        
     }
+
+
+
 
 }

@@ -11,7 +11,6 @@ public class PlayerController : MonoBehaviour {
 	Character character;
 
     //for animation use
-    public bool isPlayerDied;
     Animator ani;
     float aniSpeed;
     bool attackPressed = false;
@@ -29,10 +28,9 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-
-        if (character.PlayerHealth <= 0)
-            StartCoroutine(Relaod(2f, 1));
+		if (character.Died()) {
+			return;
+        }
 
 		Vector2 movement = Vector2.zero;
 		movement.x = Input.GetAxis ("Horizontal") * character.speed;
@@ -43,8 +41,7 @@ public class PlayerController : MonoBehaviour {
 			movement.y = Input.GetAxis ("Vertical") * character.climbSpeed;
 		}
        
-        if (!isPlayerDied)
-		    character.Move (movement * Time.deltaTime);
+	    character.Move (movement * Time.deltaTime);
 
 		// Add vertical velocity for jump
 		if (Input.GetButtonDown ("Jump") && jumping < (character.maxJumps-1)) {
@@ -75,15 +72,6 @@ public class PlayerController : MonoBehaviour {
         canAttack = true;
     }
 
-    IEnumerator Relaod(float waitTime, int scenesNumber)
-    {
-
-        yield return new WaitForSeconds(waitTime);
-        Debug.Log("game reloaded");
-        SceneManager.LoadScene(scenesNumber);
-        
-    }
-
 	void FixedUpdate()
 	{
 		// Check if any surface is climbable ( left , right, down & up )
@@ -105,12 +93,10 @@ public class PlayerController : MonoBehaviour {
 		RaycastHit2D hit = Physics2D.Raycast (transform.position, Vector2.down, 1f, LayerMask.GetMask ("Ground"));
 		if (hit.collider != null || climbable) {
 			jumping = 0;
-            //Debug.Log("hit ground");
 		}
 
         // Animation parameters
-        isPlayerDied = (character.PlayerHealth <= 0);
-        ani.SetBool("died", isPlayerDied);        
+		ani.SetBool("died", character.Died()); 
         ani.SetFloat("speed", aniSpeed);
         ani.SetFloat("velocity", rb2d.velocity.y);
         ani.SetBool("land", jumping == 0);
