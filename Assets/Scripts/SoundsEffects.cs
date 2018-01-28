@@ -12,7 +12,7 @@ public class SoundsEffects : MonoBehaviour {
 
     private void MakeSound(AudioClip originalClip)
     {
-        GetComponent<AudioSource>().volume = 0.8f;
+        GetComponent<AudioSource>().volume = 1f;
         AudioSource.PlayClipAtPoint(originalClip, transform.position);
     }               
 
