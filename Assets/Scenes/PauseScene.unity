@@ -182,6 +182,46 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 294977474}
+--- !u!1 &427260766
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 427260768}
+  - component: {fileID: 427260767}
+  m_Layer: 0
+  m_Name: PauseMenuLoader
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &427260767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 427260766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 104465f39fa3fed4fb6605387cf6d2fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &427260768
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 427260766}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 967.01056, y: 538.2097, z: 16.875}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &855139472
 GameObject:
   m_ObjectHideFlags: 0
@@ -355,23 +395,23 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Write some thing here for player information
+  m_Text: 'GAME - PAUSED
 
-    maybe thanks them play it
+    While you''re here, thanks for playing:
 
-    or motivate them
+    PROJECT FTP
 
-    or hurt them :)
-
-
-    keep playing or back to menu?
+    We hope you''re having fun, even if you''re dying a lot.
 
 
-    Y/  Keep playing
+    To go back to the game:
 
-    N/ Back to menu
+    Press (ESCAPE/START)
 
-    Esc/ Cancel'
+
+    To go back to the menu:
+
+    To quit press (RETURN/XBOX BACK)'
 --- !u!222 &1503117594
 CanvasRenderer:
   m_ObjectHideFlags: 0
