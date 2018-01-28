@@ -10,6 +10,7 @@ public class EffectCanvasController : MonoBehaviour {
     public GameObject GD;
 
 	private TraitManager traitManager;
+	private Character character;
 
 	// Use this for initialization
 	void Start () {
@@ -19,11 +20,12 @@ public class EffectCanvasController : MonoBehaviour {
 	void Update () {
 		if (traitManager == null && GameObject.FindGameObjectWithTag ("Player")) {
 			traitManager = GameObject.FindGameObjectWithTag ("Player").GetComponent<TraitManager> ();
+			character = GameObject.FindGameObjectWithTag ("Player").GetComponent<Character> ();
 		}
 		if (traitManager != null) {
-			LR.SetActive (traitManager.isInvert);
-			GU.SetActive (traitManager.isBouncy);
-			GD.SetActive (traitManager.isHeavy);
+			LR.SetActive (traitManager.isInvert && !character.Died());
+			GU.SetActive (traitManager.isBouncy && !character.Died());
+			GD.SetActive (traitManager.isHeavy && !character.Died());
 		}
 	}
 }

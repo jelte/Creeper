@@ -11,7 +11,6 @@ public class PlayerController : MonoBehaviour {
 	Character character;
 
     //for animation use
-    public bool isPlayerDied;
     Animator ani;
     float aniSpeed;
     bool attackPressed = false;
@@ -29,7 +28,7 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (character.playerHealth <= 0) {
+		if (character.Died()) {
 			return;
         }
 
@@ -94,7 +93,6 @@ public class PlayerController : MonoBehaviour {
 		RaycastHit2D hit = Physics2D.Raycast (transform.position, Vector2.down, 1f, LayerMask.GetMask ("Ground"));
 		if (hit.collider != null || climbable) {
 			jumping = 0;
-            //Debug.Log("hit ground");
 		}
 
         // Animation parameters
