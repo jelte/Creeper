@@ -9,6 +9,11 @@ public class TraitManager : MonoBehaviour
 	public bool isBouncy = false;
 	public bool isZoomedIn = false;
 	public bool isZoomedOut = false;
+	public bool isMegaJumps = false;
+	public bool isNoJump = false;
+	public bool isQuick = false;
+	public bool isSlow = false;
+	public bool isAllSlow = false;
 	public bool noTrait = false;
 
 	//Rigidbody2D rb2d;
