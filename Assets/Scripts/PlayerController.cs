@@ -53,6 +53,8 @@ public class PlayerController : MonoBehaviour {
 			jumping += 1;
             ani.SetTrigger("Jump");
 			rb2d.velocity += Physics2D.gravity * -1f * (character.jumpModifier/jumping);
+            //play sound
+
 		}
 
         // Trigger Attack
