@@ -28,9 +28,8 @@ public class EffectCanvasController : MonoBehaviour {
 			LR.SetActive (traitManager.isInvert && !character.Died());
 			GD.SetActive (traitManager.isHeavy && !character.Died());
 			GU.SetActive (traitManager.isBouncy && !character.Died());
-            //TODO trigget them
-            //SU.SetActive();
-            //SD.SetActive();
+			SU.SetActive(traitManager.isQuick && !character.Died());
+			SD.SetActive(traitManager.isSlow && !character.Died());
         }
 	}
 }
