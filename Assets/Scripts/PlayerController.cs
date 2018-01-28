@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour {
     int jumping = 0;
     public bool climbable = false;
 
+    public SoundsEffects se;
+
     // Use this for initialization
     void Start () {
 		character = GetComponent<Character> (); 
@@ -28,6 +30,14 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+        //sounds effects
+        if (se == null)
+        {
+            se = GameObject.Find("SoundEffects").GetComponent<SoundsEffects>();
+        }
+
+        
 		if (character.Died()) {
 			return;
         }
@@ -49,8 +59,8 @@ public class PlayerController : MonoBehaviour {
             ani.SetTrigger("Jump");
 			rb2d.velocity += Physics2D.gravity * -1f * (character.jumpModifier/jumping);
             //play sound
-
-		}
+            se.MakeJumpSound();
+        }
 
         // Trigger Attack
         if (aniSpeed > 0)
@@ -104,7 +114,20 @@ public class PlayerController : MonoBehaviour {
         ani.SetBool("attack", attackPressed);
 	}
 
-	void StopClimbing()
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.name == "Ball(Clone)")
+        {
+            se.MakeBallCollisionSound();
+        }
+        if (collision.gameObject.name == "YBlock(Clone)")
+        {
+            se.MakeBoundCollisionSound();
+        }
+
+    }
+
+    void StopClimbing()
 	{
 		climbable = false;
 		rb2d.gravityScale = character.gravityScale;

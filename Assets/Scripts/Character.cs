@@ -23,19 +23,19 @@ public class Character : MonoBehaviour {
 	Camera cam;
 	public float gravityScale = 1.0f;
 
+    // Use this for initialization
+    void Start()
+    {
 
-	// Use this for initialization
-	void Start () {
+        traitMan = GetComponent<TraitManager>();
+        rb2d = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+        cam = Camera.main;
+        gravityScale = rb2d.gravityScale;
+        StartCoroutine(playerTrait(10));
+    }
 
-		traitMan = GetComponent<TraitManager>();
-		rb2d = GetComponent<Rigidbody2D> ();
-		anim = GetComponent<Animator> ();
-		cam = Camera.main;
-		gravityScale = rb2d.gravityScale;
-		StartCoroutine (playerTrait(10));
-	}
-
-	public void Move(Vector2 movement) {
+    public void Move(Vector2 movement) {
 		rb2d.position += movement * (traitMan.isInvert ? -1 : 1);
 	}
 
@@ -94,6 +94,7 @@ public class Character : MonoBehaviour {
 			SetGravityScale (3.0f);
 			break;
 			/// CASE 2 is BOUNCY (Decreased Gravity)
+
 		case 2:
 			yield return new WaitForSeconds (delay);
 			traitMan.isBouncy = true;

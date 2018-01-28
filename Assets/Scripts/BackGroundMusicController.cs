@@ -24,8 +24,7 @@ public class BackGroundMusicController : MonoBehaviour {
         if (Time.timeScale == 0)
             bcmas.volume = 0f;
         else
-            bcmas.volume = 0.6f;
-        
+            bcmas.volume = 0.3f;        
 
         if (character.Died())
             bcmas.pitch = 0.3f;
