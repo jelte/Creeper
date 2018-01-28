@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fd1da3b844e1d94ba4fe743872e070b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LevelMap: {fileID: 2800000, guid: 75a4d6277aebb5d46aa4fc29369b820c, type: 3}
+  LevelMap: {fileID: 2800000, guid: 8ae7214b85d0a6842b9f06fe9e1b3b11, type: 3}
   colorToPrefab:
   - color:
       serializedVersion: 2
@@ -194,6 +194,10 @@ MonoBehaviour:
       serializedVersion: 2
       rgba: 4289963259
     prefab: {fileID: 1281472474642584, guid: ee021169b24023e48a0682f67f39db2b, type: 2}
+  - color:
+      serializedVersion: 2
+      rgba: 4283106076
+    prefab: {fileID: 1099194309326484, guid: 1e801da703864704c9bfe832e08a93cc, type: 2}
   SpawnPoint: {fileID: 1189563738263410, guid: d04b372efaafa5e43b527400b8fdef25, type: 2}
   PlayerPrefab: {fileID: 1205202883944894, guid: 6d35a0df8c2ab8044bd94878349797c4,
     type: 2}
