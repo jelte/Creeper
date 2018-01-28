@@ -26,7 +26,6 @@ public class Character : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-
         traitMan = GetComponent<TraitManager>();
         rb2d = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
@@ -36,7 +35,9 @@ public class Character : MonoBehaviour {
     }
 
     public void Move(Vector2 movement) {
-		rb2d.position += movement * (traitMan.isInvert ? -1 : 1);
+		if (traitMan != null && rb2d != null) {
+			rb2d.position += movement * (traitMan.isInvert ? -1 : 1);
+		}
 	}
 
 	public void Attack() {
