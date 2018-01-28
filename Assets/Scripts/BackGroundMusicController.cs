@@ -5,7 +5,7 @@ using UnityEngine;
 public class BackGroundMusicController : MonoBehaviour {
 
     private TraitManager traitManager;
-    private PlayerController pc;
+    private Character character;
     private AudioSource bcmas;
 
     // Use this for initialization
@@ -15,13 +15,10 @@ public class BackGroundMusicController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (traitManager == null && GameObject.FindGameObjectWithTag("Player"))
+        if (GameObject.FindGameObjectWithTag("Player") && traitManager == null)
         {
             traitManager = GameObject.FindGameObjectWithTag("Player").GetComponent<TraitManager>();
-        }
-        if (pc == null && GameObject.FindGameObjectWithTag("Player"))
-        {
-            pc = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+            character = GameObject.FindGameObjectWithTag("Player").GetComponent<Character>();
         }
 
         if (Time.timeScale == 0)
@@ -29,7 +26,7 @@ public class BackGroundMusicController : MonoBehaviour {
         else
             bcmas.volume = 0.3f;        
 
-        if (pc.isPlayerDied)
+        if (character.Died())
             bcmas.pitch = 0.3f;
         else if (traitManager.isInvert)
             bcmas.pitch = 1.5f;

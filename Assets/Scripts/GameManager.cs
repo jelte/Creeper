@@ -7,32 +7,39 @@ using UnityEngine.PostProcessing;
 public class GameManager : MonoBehaviour {
 
 	public static int deaths = 0;
-	public Character character;
-	public bool end = false;
+	public static float timeTaken = 0f;
+	public static bool end = false;
 	public PostProcessingProfile deathCameraEffect;
 
+	Character character;
+
+	void Start() {
+		end = false;
+	}
+
 	void Update() {
+		if (end) {
+			
+			return;
+		}
+	
 		if (CharacterDied) {
-			if (!end) {
-				GameManager.deaths += 1;
-				end = true;
-				Camera.main.GetComponent<PostProcessingBehaviour> ().enabled = false;
-				Camera.main.GetComponent<PostProcessingBehaviour> ().profile = deathCameraEffect;
-				Camera.main.GetComponent<PostProcessingBehaviour> ().enabled = true;
-				SceneManager.LoadSceneAsync (SceneUtility.GetBuildIndexByScenePath ("Scenes/DeathScene"), LoadSceneMode.Additive);
-			}
+			end = true;
+			deaths += 1;
+			Camera.main.GetComponent<PostProcessingBehaviour> ().enabled = false;
+			Camera.main.GetComponent<PostProcessingBehaviour> ().profile = deathCameraEffect;
+			Camera.main.GetComponent<PostProcessingBehaviour> ().enabled = true;
+			SceneManager.LoadSceneAsync (SceneUtility.GetBuildIndexByScenePath ("Scenes/DeathScene"), LoadSceneMode.Additive);
+
+		} else {
+			timeTaken += Time.deltaTime;
 		}
 	}
 
-	public bool CharacterDied {
+	public static bool CharacterDied {
 		get { 
-			if (character == null) {
-				GameObject player = GameObject.FindGameObjectWithTag ("Player");
-				if (player != null) {
-					character = player.GetComponent<Character> ();
-				}
-			}
-			return character != null ? character.Died () : false;
+			GameObject player = GameObject.FindGameObjectWithTag ("Player");
+			return player != null ? player.GetComponent<Character>().Died () : false;
 		}
 	}
 
