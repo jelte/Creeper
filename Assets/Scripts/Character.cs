@@ -30,24 +30,9 @@ public class Character : MonoBehaviour {
 		traitMan = GetComponent<TraitManager>();
 		rb2d = GetComponent<Rigidbody2D> ();
 		anim = GetComponent<Animator> ();
-		cam = GameObject.Find("Main Camera").GetComponent<Camera> ();
+		cam = Camera.main;
 		gravityScale = rb2d.gravityScale;
 		StartCoroutine (playerTrait(10));
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		if (Input.GetKeyDown(KeyCode.P))
-		{
-			if (traitMan.noTrait == false) {
-				traitMan.noTrait = true;
-				Debug.Log ("PAUSED TRAITS");
-			}
-			else if (traitMan.noTrait == true) {
-				traitMan.noTrait = false;
-				Debug.Log ("UNPAUSED TRAITS");
-			}
-		}
 	}
 
 	public void Move(Vector2 movement) {
