@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SoundsEffects : MonoBehaviour {
-
-    public GameObject player;
+	
     public AudioClip jump;
     public AudioClip ballCollision;
     public AudioClip boundCollision;
@@ -29,14 +28,5 @@ public class SoundsEffects : MonoBehaviour {
     public void MakeBoundCollisionSound()
     {
         MakeSound(boundCollision);
-    }
-   
-    // Update is called once per frame
-    void Update () {
-        if (player == null && GameObject.FindGameObjectWithTag("Player"))
-        {
-            player = GameObject.FindGameObjectWithTag("Player");
-        }
-        transform.position = player.transform.position;
     }
 }

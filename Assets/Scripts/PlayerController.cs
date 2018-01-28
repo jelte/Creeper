@@ -25,17 +25,12 @@ public class PlayerController : MonoBehaviour {
     void Start () {
 		character = GetComponent<Character> (); 
 		rb2d = GetComponent<Rigidbody2D> ();
-        ani = gameObject.GetComponent<Animator>();
+		ani = gameObject.GetComponent<Animator>();
+		se = GetComponent<SoundsEffects>();
     }
 	
 	// Update is called once per frame
 	void Update () {
-
-        //sounds effects
-        if (se == null)
-        {
-            se = GameObject.Find("SoundEffects").GetComponent<SoundsEffects>();
-        }
 
         
 		if (character.Died()) {
