@@ -19,6 +19,8 @@ public class Character : MonoBehaviour {
 	// Various Variables or references.
 	Rigidbody2D rb2d;
 	TraitManager traitMan;
+	Animator anim;
+	Camera cam;
 	public float gravityScale = 1.0f;
 
 
@@ -27,6 +29,8 @@ public class Character : MonoBehaviour {
 
 		traitMan = GetComponent<TraitManager>();
 		rb2d = GetComponent<Rigidbody2D> ();
+		anim = GetComponent<Animator> ();
+		cam = GameObject.Find("Main Camera").GetComponent<Camera> ();
 		gravityScale = rb2d.gravityScale;
 		StartCoroutine (playerTrait(10));
 	}
@@ -61,34 +65,49 @@ public class Character : MonoBehaviour {
 		traitMan.isInvert = false;
 		traitMan.isHeavy = false;
 		traitMan.isBouncy = false;
+		traitMan.isZoomedIn = false;
+		cam.orthographicSize = 7;
 
 		// Deciding which trait to use.
 		Random rand = new Random ();
-		int traitChoice = Random.Range (0, 3);
+		int traitChoice = Random.Range (0, 5);
 		if (traitChoice == 0) {Debug.Log ("Current Trait = INVERTED ID: " + traitChoice);}
 		if (traitChoice == 1) {Debug.Log ("Current Trait = HEAVY ID: " + traitChoice);}
 		if (traitChoice == 2) {Debug.Log ("Current Trait = LIGHT ID: " + traitChoice);}
+		if (traitChoice == 3) {Debug.Log ("Current Trait = ZOOMED IN ID: " + traitChoice);}
+		if (traitChoice == 4) {Debug.Log ("Current Trait = ZOOMED OUT ID: " + traitChoice);}
 			
 		switch (traitChoice) 
 		{
 		// Case 0 is INVERTED CONTROLS.
 		case 0:
-			yield return new WaitForSeconds (5);
+			yield return new WaitForSeconds (delay);
 			traitMan.isInvert = true;
 			SetGravityScale (1.0f);
 			break;
 			// CASE 1 is HEAVY (Increased Gravity)
 		case 1:
-			yield return new WaitForSeconds (5);
+			yield return new WaitForSeconds (delay);
 			traitMan.isHeavy = true;
 			SetGravityScale (3.0f);
 			break;
 			/// CASE 2 is BOUNCY (Decreased Gravity)
 		case 2:
-			yield return new WaitForSeconds (5);
+			yield return new WaitForSeconds (delay);
 			traitMan.isBouncy = true;
 			SetGravityScale (0.5f);
 			break;
+		case 3:
+			yield return new WaitForSeconds (delay);
+			traitMan.isZoomedOut = true;
+			SetCameraOrthSize (10);
+			break;
+		case 4:
+			yield return new WaitForSeconds (delay);
+			traitMan.isZoomedIn = true;
+			SetCameraOrthSize (3);
+			break;
+
 		}
 		if (traitMan.noTrait == false) {
 			yield return new WaitForSeconds (10);
@@ -101,5 +120,10 @@ public class Character : MonoBehaviour {
 	{
 		rb2d.gravityScale = 1f;
 		gravityScale = 1f;
+	}
+
+	void SetCameraOrthSize(float size)
+	{
+		cam.orthographicSize = size;
 	}
 }
