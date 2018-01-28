@@ -11,7 +11,9 @@ public class MovingSpikeTrap : MonoBehaviour {
         //check for player
         if(collision.tag == "Player")
         {
+
             ObjectToMove.GetComponent<MovignSpike>().MoveTowards = true;
+
         }
         
     }
