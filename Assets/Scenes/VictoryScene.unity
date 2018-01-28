@@ -310,7 +310,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 8e8a432b9ccc7da419d5cfb5e68ba7fa, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
@@ -385,6 +385,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2933e46ac19399143be07e51836d441d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  label: {fileID: 244847061}
+  postProcessingProfile: {fileID: 11400000, guid: 1c51860201fdad84caf890576f5a14ad,
+    type: 2}
 --- !u!114 &1556488512
 MonoBehaviour:
   m_ObjectHideFlags: 0

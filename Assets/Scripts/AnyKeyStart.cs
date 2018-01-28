@@ -10,7 +10,7 @@ public class AnyKeyStart : MonoBehaviour {
 		
         if(Input.anyKey)
         {
-			SceneManager.LoadScene(SceneManager.GetSceneByName("Level1Scene").buildIndex);
+			SceneManager.LoadScene(SceneUtility.GetBuildIndexByScenePath("Scenes/Level1Scene"));
         }
 	}
 }

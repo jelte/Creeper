@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 public class VictoryTrigger : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D collider) {
 		if (collider.tag == "Player") {
+			GameManager.end = true;
 			SceneManager.LoadScene (SceneUtility.GetBuildIndexByScenePath ("Scenes/VictoryScene"), LoadSceneMode.Additive);
 		}
 	}
