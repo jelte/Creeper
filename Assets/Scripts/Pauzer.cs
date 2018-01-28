@@ -6,9 +6,10 @@ using UnityEngine.SceneManagement;
 public class Pauzer : MonoBehaviour {
 
 	int pauseSceneBuildIndex;
-
+    
 	void Start() {
 		pauseSceneBuildIndex = SceneUtility.GetBuildIndexByScenePath ("Scenes/PauseScene");
+        
 	}
 
 	// Update is called once per frame
@@ -21,7 +22,7 @@ public class Pauzer : MonoBehaviour {
 				SceneManager.GetSceneByBuildIndex (pauseSceneBuildIndex).GetRootGameObjects () [0].GetComponentInChildren<Animator> ().SetTrigger ("hide");
 				StartCoroutine (Continue ());
 			}
-		}
+		}        
 	}
 
 	IEnumerator Continue()

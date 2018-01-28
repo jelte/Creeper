@@ -94,7 +94,7 @@ public class Character : MonoBehaviour {
 			SetGravityScale (0.5f);
 			break;
 		}
-		if (traitMan.noTrait == false) {
+		if (traitMan.noTrait == false && !Died()) {
 			yield return new WaitForSeconds (10);
 			StartCoroutine (playerTrait (10));
 		}

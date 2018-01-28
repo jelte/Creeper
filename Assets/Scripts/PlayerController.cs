@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour {
 	Character character;
 
     //for animation use
+    public bool isPlayerDied;
     Animator ani;
     float aniSpeed;
     bool attackPressed = false;
@@ -41,13 +42,15 @@ public class PlayerController : MonoBehaviour {
 			movement.y = Input.GetAxis ("Vertical") * character.climbSpeed;
 		}
        
-		character.Move (movement * Time.deltaTime);
+	    character.Move (movement * Time.deltaTime);
 
 		// Add vertical velocity for jump
 		if (Input.GetButtonDown ("Jump") && jumping < (character.maxJumps-1)) {
 			jumping += 1;
             ani.SetTrigger("Jump");
 			rb2d.velocity += Physics2D.gravity * -1f * (character.jumpModifier/jumping);
+            //play sound
+
 		}
 
         // Trigger Attack
@@ -69,7 +72,6 @@ public class PlayerController : MonoBehaviour {
         attackPressed = false;
         canAttack = true;
     }
-
 
 	void FixedUpdate()
 	{
@@ -95,8 +97,9 @@ public class PlayerController : MonoBehaviour {
             //Debug.Log("hit ground");
 		}
 
-		// Animation parameters
-		ani.SetFloat("speed", aniSpeed);
+        // Animation parameters
+		ani.SetBool("died", character.Died()); 
+        ani.SetFloat("speed", aniSpeed);
         ani.SetFloat("velocity", rb2d.velocity.y);
         ani.SetBool("land", jumping == 0);
         ani.SetBool("faceRight", faceRight);
