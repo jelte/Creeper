@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour {
 	Character character;
 
     //for animation use
-    bool isPlayerDied;
+    public bool isPlayerDied;
     Animator ani;
     float aniSpeed;
     bool attackPressed = false;
