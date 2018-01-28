@@ -24,6 +24,10 @@ public class BackGroundMusicController : MonoBehaviour {
             pc = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         }
 
+        if (Time.timeScale == 0)
+            bcmas.volume = 0f;
+        else
+            bcmas.volume = 0.6f;
         
 
         if (pc.isPlayerDied)

@@ -98,7 +98,8 @@ public class PlayerController : MonoBehaviour {
 		}
 
         // Animation parameters
-		ani.SetBool("died", character.Died()); 
+        isPlayerDied = character.Died();
+        ani.SetBool("died", isPlayerDied); 
         ani.SetFloat("speed", aniSpeed);
         ani.SetFloat("velocity", rb2d.velocity.y);
         ani.SetBool("land", jumping == 0);
