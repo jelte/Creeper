@@ -6,14 +6,17 @@ using UnityEngine.SceneManagement;
 public class Pauzer : MonoBehaviour {
 
 	bool hiding = false;
+	float timer = 0.5f;
+	AsyncOperation loadOperation;
+
 
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetButtonDown("Pause") && !GameManager.CharacterDied) {
 			if (Time.timeScale > 0f) {
 				Time.timeScale = 0f;
-				SceneManager.LoadSceneAsync (SceneUtility.GetBuildIndexByScenePath ("Scenes/PauseScene"), LoadSceneMode.Additive);
-			} else if (!hiding) {
+				loadOperation = SceneManager.LoadSceneAsync (SceneUtility.GetBuildIndexByScenePath ("Scenes/PauseScene"), LoadSceneMode.Additive);
+			} else if (!hiding && loadOperation != null && loadOperation.isDone) {
 				hiding = true;
 				if (SceneManager.GetSceneByBuildIndex (SceneUtility.GetBuildIndexByScenePath ("Scenes/PauseScene")).GetRootGameObjects ().Length > 0) {
 					SceneManager.GetSceneByBuildIndex (SceneUtility.GetBuildIndexByScenePath ("Scenes/PauseScene")).GetRootGameObjects () [0].GetComponentInChildren<Animator> ().SetTrigger ("hide");
