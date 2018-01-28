@@ -14,7 +14,7 @@ public class MovignSpike : MonoBehaviour {
     private void Start()
     {
         tempPosition = TargetReference.transform.position;
-        moveSpeed = 10.0f;
+        moveSpeed = 5.0f;
     }
 
 
