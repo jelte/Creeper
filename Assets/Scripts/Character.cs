@@ -21,7 +21,6 @@ public class Character : MonoBehaviour {
 	TraitManager traitMan;
 	public float gravityScale = 1.0f;
 
-
 	// Use this for initialization
 	void Start () {
 
@@ -44,9 +43,12 @@ public class Character : MonoBehaviour {
 				Debug.Log ("UNPAUSED TRAITS");
 			}
 		}
-	}
 
-	public void Move(Vector2 movement) {
+        
+
+    }
+
+    public void Move(Vector2 movement) {
 		rb2d.position += movement * (traitMan.isInvert ? -1 : 1);
 	}
 
@@ -57,6 +59,9 @@ public class Character : MonoBehaviour {
 	public bool Died() {
 		return playerHealth <= 0;
 	}
+
+    
+    
 
 	// The Main PlayerTrait Thread
 	public IEnumerator playerTrait(int delay)
@@ -88,9 +93,9 @@ public class Character : MonoBehaviour {
 			SetGravityScale (3.0f);
 			break;
 			/// CASE 2 is BOUNCY (Decreased Gravity)
-		case 2:
-			yield return new WaitForSeconds (5);
-			traitMan.isBouncy = true;
+		case 2:            
+            yield return new WaitForSeconds (5);
+			traitMan.isBouncy = true;            
 			SetGravityScale (0.5f);
 			break;
 		}
