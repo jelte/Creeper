@@ -24,6 +24,8 @@ public class BackGroundMusicController : MonoBehaviour {
             pc = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         }
 
+        
+
         if (pc.isPlayerDied)
             bcmas.pitch = 0.3f;
         else if (traitManager.isInvert)

@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 257273086}
   - component: {fileID: 257273089}
   - component: {fileID: 257273088}
-  - component: {fileID: 257273089}
+  - component: {fileID: 257273090}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -250,6 +250,17 @@ MonoBehaviour:
   character: {fileID: 0}
   end: 0
   deathCameraEffect: {fileID: 11400000, guid: 270f86cdcb8890d42a2cf97d9c63d32d, type: 2}
+--- !u!114 &257273090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 257273085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9a55132a9057f045bfca54d0fffd927, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &506495494
 GameObject:
   m_ObjectHideFlags: 0
