@@ -66,7 +66,7 @@ public class Character : MonoBehaviour {
 
 		// Deciding which trait to use.
 		Random rand = new Random ();
-		int traitChoice = Random.Range (0, 6);
+		int traitChoice = Random.Range (0, 7);
 		if (traitChoice == 0) {Debug.Log ("Current Trait = INVERTED ID: " + traitChoice + " TIME UNTIL: " + delay);}
 		if (traitChoice == 1) {Debug.Log ("Current Trait = HEAVY ID: " + traitChoice + " TIME UNTIL: " + delay);}
 		if (traitChoice == 2) {Debug.Log ("Current Trait = LIGHT ID: " + traitChoice + " TIME UNTIL: " + delay);}
