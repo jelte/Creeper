@@ -8,21 +8,29 @@ public class GameManager : MonoBehaviour {
 
 	public static int deaths = 0;
 	public static float timeTaken = 0f;
+	public static bool end = false;
 	public PostProcessingProfile deathCameraEffect;
 
 	Character character;
-	bool end = false;
+
+	void Start() {
+		end = false;
+	}
 
 	void Update() {
+		if (end) {
+			
+			return;
+		}
+	
 		if (CharacterDied) {
-			if (!end) {
-				GameManager.deaths += 1;
-				end = true;
-				Camera.main.GetComponent<PostProcessingBehaviour> ().enabled = false;
-				Camera.main.GetComponent<PostProcessingBehaviour> ().profile = deathCameraEffect;
-				Camera.main.GetComponent<PostProcessingBehaviour> ().enabled = true;
-				SceneManager.LoadSceneAsync (SceneUtility.GetBuildIndexByScenePath ("Scenes/DeathScene"), LoadSceneMode.Additive);
-			}
+			end = true;
+			deaths += 1;
+			Camera.main.GetComponent<PostProcessingBehaviour> ().enabled = false;
+			Camera.main.GetComponent<PostProcessingBehaviour> ().profile = deathCameraEffect;
+			Camera.main.GetComponent<PostProcessingBehaviour> ().enabled = true;
+			SceneManager.LoadSceneAsync (SceneUtility.GetBuildIndexByScenePath ("Scenes/DeathScene"), LoadSceneMode.Additive);
+
 		} else {
 			timeTaken += Time.deltaTime;
 		}
