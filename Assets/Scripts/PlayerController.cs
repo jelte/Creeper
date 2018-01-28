@@ -28,14 +28,9 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-
-        if (character.PlayerHealth <= 0)
-        {
-            Debug.Log("game reloaded");
-            SceneManager.LoadScene(1);
+        if (character.playerHealth <= 0) {
+			return;
         }
-
 
 		Vector2 movement = Vector2.zero;
 		movement.x = Input.GetAxis ("Horizontal") * character.speed;

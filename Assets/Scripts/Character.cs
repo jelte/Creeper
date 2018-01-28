@@ -14,7 +14,7 @@ public class Character : MonoBehaviour {
 
 	public int maxJumps = 2;
 
-    public int PlayerHealth = 3;
+	public int playerHealth = 3;
 
 	// Various Variables or references.
 	Rigidbody2D rb2d;
@@ -52,6 +52,10 @@ public class Character : MonoBehaviour {
 
 	public void Attack() {
 		// TODO: Do Attack.
+	}
+
+	public bool Died() {
+		return playerHealth <= 0;
 	}
 
 	// The Main PlayerTrait Thread
