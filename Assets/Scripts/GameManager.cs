@@ -7,9 +7,11 @@ using UnityEngine.PostProcessing;
 public class GameManager : MonoBehaviour {
 
 	public static int deaths = 0;
-	public Character character;
-	public bool end = false;
+	public static float timeTaken = 0f;
 	public PostProcessingProfile deathCameraEffect;
+
+	Character character;
+	bool end = false;
 
 	void Update() {
 		if (CharacterDied) {
@@ -21,18 +23,15 @@ public class GameManager : MonoBehaviour {
 				Camera.main.GetComponent<PostProcessingBehaviour> ().enabled = true;
 				SceneManager.LoadSceneAsync (SceneUtility.GetBuildIndexByScenePath ("Scenes/DeathScene"), LoadSceneMode.Additive);
 			}
+		} else {
+			timeTaken += Time.deltaTime;
 		}
 	}
 
-	public bool CharacterDied {
+	public static bool CharacterDied {
 		get { 
-			if (character == null) {
-				GameObject player = GameObject.FindGameObjectWithTag ("Player");
-				if (player != null) {
-					character = player.GetComponent<Character> ();
-				}
-			}
-			return character != null ? character.Died () : false;
+			GameObject player = GameObject.FindGameObjectWithTag ("Player");
+			return player != null ? player.GetComponent<Character>().Died () : false;
 		}
 	}
 

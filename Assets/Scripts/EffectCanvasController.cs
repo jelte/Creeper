@@ -22,8 +22,8 @@ public class EffectCanvasController : MonoBehaviour {
 		}
 		if (traitManager != null) {
 			LR.SetActive (traitManager.isInvert);
-			GU.SetActive (traitManager.isHeavy);
-			GD.SetActive (traitManager.isBouncy);
+			GU.SetActive (traitManager.isBouncy);
+			GD.SetActive (traitManager.isHeavy);
 		}
 	}
 }
