@@ -411,7 +411,7 @@ MonoBehaviour:
 
     To go back to the menu:
 
-    To quit press (RETURN/XBOX BACK)'
+    To quit press (RETURN)'
 --- !u!222 &1503117594
 CanvasRenderer:
   m_ObjectHideFlags: 0

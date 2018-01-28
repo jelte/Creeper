@@ -15,10 +15,12 @@ public class Pauzer : MonoBehaviour {
 				SceneManager.LoadSceneAsync (SceneUtility.GetBuildIndexByScenePath ("Scenes/PauseScene"), LoadSceneMode.Additive);
 			} else if (!hiding) {
 				hiding = true;
-				SceneManager.GetSceneByBuildIndex (SceneUtility.GetBuildIndexByScenePath ("Scenes/PauseScene")).GetRootGameObjects () [0].GetComponentInChildren<Animator> ().SetTrigger ("hide");
+				if (SceneManager.GetSceneByBuildIndex (SceneUtility.GetBuildIndexByScenePath ("Scenes/PauseScene")).GetRootGameObjects ().Length > 0) {
+					SceneManager.GetSceneByBuildIndex (SceneUtility.GetBuildIndexByScenePath ("Scenes/PauseScene")).GetRootGameObjects () [0].GetComponentInChildren<Animator> ().SetTrigger ("hide");
+				}
 				StartCoroutine (Continue ());
 			}
-		}        
+		}
 	}
 
 	IEnumerator Continue()
