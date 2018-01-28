@@ -81,16 +81,16 @@ public class Character : MonoBehaviour {
 
 		// Deciding which trait to use.
 		Random rand = new Random ();
-		int traitChoice = Random.Range (0, 9);
+		int traitChoice = Random.Range (0, 6);
 		if (traitChoice == 0) {Debug.Log ("Current Trait = INVERTED ID: " + traitChoice + " TIME UNTIL: " + delay);}
 		if (traitChoice == 1) {Debug.Log ("Current Trait = HEAVY ID: " + traitChoice + " TIME UNTIL: " + delay);}
 		if (traitChoice == 2) {Debug.Log ("Current Trait = LIGHT ID: " + traitChoice + " TIME UNTIL: " + delay);}
 		if (traitChoice == 3) {Debug.Log ("Current Trait = ZOOMED OUT ID: " + traitChoice + " TIME UNTIL: " + delay);}
 		if (traitChoice == 4) {Debug.Log ("Current Trait = ZOOMED IN ID: " + traitChoice + " TIME UNTIL: " + delay);}
-		if (traitChoice == 5) {Debug.Log ("Current Trait = MEGA JUMPS ID: " + traitChoice + " TIME UNTIL: " + delay);}
-		if (traitChoice == 6) {Debug.Log ("Current Trait = NO JUMPS ID: " + traitChoice + " TIME UNTIL: " + delay);}
-		if (traitChoice == 7) {Debug.Log ("Current Trait = QUICK ID: " + traitChoice + " TIME UNTIL: " + delay);}
-		if (traitChoice == 8) {Debug.Log ("Current Trait = SLOW ID: " + traitChoice + " TIME UNTIL: " + delay);}
+		//if (traitChoice == 5) {Debug.Log ("Current Trait = MEGA JUMPS ID: " + traitChoice + " TIME UNTIL: " + delay);}
+		//if (traitChoice == 6) {Debug.Log ("Current Trait = NO JUMPS ID: " + traitChoice + " TIME UNTIL: " + delay);}
+		if (traitChoice == 5) {Debug.Log ("Current Trait = QUICK ID: " + traitChoice + " TIME UNTIL: " + delay);}
+		if (traitChoice == 6) {Debug.Log ("Current Trait = SLOW ID: " + traitChoice + " TIME UNTIL: " + delay);}
 			
 		switch (traitChoice) 
 		{
@@ -127,7 +127,7 @@ public class Character : MonoBehaviour {
 			Debug.Log ("CURRENTLY ZOOMED IN");
 			SetCameraOrthSize (3);
 			break;
-		case 5:
+		/*case 5:
 			yield return new WaitForSeconds (delay);
 			traitMan.isMegaJumps = true;
 			Debug.Log ("CURRENTLY: MEGA JUMPING");
@@ -138,14 +138,14 @@ public class Character : MonoBehaviour {
 			traitMan.isNoJump = true;
 			Debug.Log ("CURRENTLY: NO JUMPING");
 			SetJumpLimit (0);
-			break;
-		case 7:
+			break;*/
+		case 5:
 			yield return new WaitForSeconds (delay);
 			traitMan.isQuick = true;
 			Debug.Log ("CURRENTLY: QUICK");
 			SetPlayerSpeed (8f);
 			break;
-		case 8:
+		case 6:
 			yield return new WaitForSeconds (delay);
 			traitMan.isSlow = true;
 			Debug.Log ("CURRENTLY: SLOW");
