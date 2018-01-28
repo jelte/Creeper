@@ -70,7 +70,11 @@ public class Character : MonoBehaviour {
 		traitMan.isHeavy = false;
 		traitMan.isBouncy = false;
 		traitMan.isZoomedIn = false;
+		traitMan.isZoomedOut = false;
 		traitMan.isMegaJumps = false;
+		traitMan.isNoJump = false;
+		traitMan.isSlow = false;
+		traitMan.isQuick = false;
 		SetCameraOrthSize (7);
 		SetJumpLimit (2);
 		SetPlayerSpeed (5f);
