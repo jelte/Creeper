@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour {
 	Character character;
 
     //for animation use
+    bool isPlayerDied;
     Animator ani;
     float aniSpeed;
     bool attackPressed = false;
@@ -31,11 +32,7 @@ public class PlayerController : MonoBehaviour {
 
 
         if (character.PlayerHealth <= 0)
-        {
-            Debug.Log("game reloaded");
-            SceneManager.LoadScene(1);
-        }
-
+            StartCoroutine(Relaod(2f, 1));
 
 		Vector2 movement = Vector2.zero;
 		movement.x = Input.GetAxis ("Horizontal") * character.speed;
@@ -46,7 +43,8 @@ public class PlayerController : MonoBehaviour {
 			movement.y = Input.GetAxis ("Vertical") * character.climbSpeed;
 		}
        
-		character.Move (movement * Time.deltaTime);
+        if (!isPlayerDied)
+		    character.Move (movement * Time.deltaTime);
 
 		// Add vertical velocity for jump
 		if (Input.GetButtonDown ("Jump") && jumping < (character.maxJumps-1)) {
@@ -75,6 +73,14 @@ public class PlayerController : MonoBehaviour {
         canAttack = true;
     }
 
+    IEnumerator Relaod(float waitTime, int scenesNumber)
+    {
+
+        yield return new WaitForSeconds(waitTime);
+        Debug.Log("game reloaded");
+        SceneManager.LoadScene(scenesNumber);
+        
+    }
 
 	void FixedUpdate()
 	{
@@ -100,8 +106,10 @@ public class PlayerController : MonoBehaviour {
             //Debug.Log("hit ground");
 		}
 
-		// Animation parameters
-		ani.SetFloat("speed", aniSpeed);
+        // Animation parameters
+        isPlayerDied = (character.PlayerHealth <= 0);
+        ani.SetBool("died", isPlayerDied);        
+        ani.SetFloat("speed", aniSpeed);
         ani.SetFloat("velocity", rb2d.velocity.y);
         ani.SetBool("land", jumping == 0);
         ani.SetBool("faceRight", faceRight);
