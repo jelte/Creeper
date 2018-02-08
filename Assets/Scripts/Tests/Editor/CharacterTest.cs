@@ -45,6 +45,15 @@ public class CharacterTest {
 	}
 
 	[Test]
+	public void Can_Double_Jump() {
+		Assert.True (character.Grounded);
+		character.Jump ();
+		Assert.False (character.Grounded);
+		character.Jump ();
+		Assert.AreEqual(Physics2D.gravity * -1.5f * character.jumpModifier, gameObject.GetComponent<Rigidbody2D>().velocity);
+	}
+
+	[Test]
 	public void Can_Attack() {
 		character.Attack ();
 	}
