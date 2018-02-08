@@ -16,6 +16,8 @@ public class Character : MonoBehaviour {
 
 	public int playerHealth = 3;
 
+	private bool climbing = false;
+
 	// Various Variables or references.
 	Rigidbody2D rb2d;
 	TraitManager traitMan;
@@ -27,17 +29,28 @@ public class Character : MonoBehaviour {
     void Start()
     {
         traitMan = GetComponent<TraitManager>();
-        rb2d = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         cam = Camera.main;
-        gravityScale = rb2d.gravityScale;
-        StartCoroutine(playerTrait(10));
+
+		gravityScale = Rigidbody2D.gravityScale;
+       // StartCoroutine(playerTrait(10));
     }
 
-    public void Move(Vector2 movement) {
-		if (traitMan != null && rb2d != null) {
-			rb2d.position += movement * (traitMan.isInvert ? -1 : 1);
+	private Rigidbody2D Rigidbody2D {
+		get {
+			if (rb2d == null) {
+				rb2d = GetComponent<Rigidbody2D> ();
+				if (rb2d == null) {
+					rb2d = gameObject.AddComponent<Rigidbody2D> ();
+				}
+			}
+			return rb2d;
 		}
+	}
+
+    public void Move(Vector2 movement) {
+		Rigidbody2D.MovePosition(movement);
+		Rigidbody2D.AddForce(-Rigidbody2D.velocity);
 	}
 
 	public void Attack() {
@@ -46,6 +59,29 @@ public class Character : MonoBehaviour {
 
 	public bool Died() {
 		return playerHealth <= 0;
+	}
+
+	public void Jump() {
+	}
+
+	public void Climb() {
+		
+	}
+
+	public bool Alive {
+		get { return playerHealth > 0; }
+	}
+
+	public bool Grounded {
+		get { return true; }
+	}
+
+	public bool Climbing {
+		get { return false; }
+	}
+
+	public Vector3 Position {
+		get { return Rigidbody2D.position; }
 	}
 
 	// The Main PlayerTrait Thread
