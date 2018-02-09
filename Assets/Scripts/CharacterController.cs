@@ -32,6 +32,16 @@ namespace ProjectFTP
             {
                 character.Attack();
             }
+
+            // Climb Button pressed
+            if (Input.GetButtonDown("Climb"))
+            {
+                character.Climb();
+            }
+            if (Input.GetButtonUp("Climb"))
+            {
+                character.Climb();
+            }
         }
         #endregion
     }

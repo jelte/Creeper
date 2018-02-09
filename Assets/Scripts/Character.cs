@@ -89,6 +89,7 @@ namespace ProjectFTP {
             climbing = !climbing && IsOnClimbableSurface;
             // Disable gravity while climbing
             if (climbing) {
+                Rigidbody2D.velocity.Scale(Vector2.right);
                 Rigidbody2D.gravityScale = 0.0f;
             }
 		}
@@ -227,6 +228,6 @@ namespace ProjectFTP {
                 Rigidbody2D.gravityScale = 1;
             }
         }
-#endregion
+        #endregion
     }
 }
