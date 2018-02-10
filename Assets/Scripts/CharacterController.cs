@@ -36,10 +36,12 @@ namespace ProjectFTP
             // Climb Button pressed
             if (Input.GetButtonDown("Climb"))
             {
+                Debug.Log("Start climb");
                 character.Climb();
             }
             if (Input.GetButtonUp("Climb"))
             {
+                Debug.Log("Stop climb");
                 character.Climb();
             }
         }

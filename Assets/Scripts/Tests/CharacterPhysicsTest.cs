@@ -26,7 +26,6 @@ namespace ProjectFTP.Tests {
 
             public int GetHashCode(Vector2 obj)
             {
-                Debug.Log(obj);
                 throw new System.NotImplementedException();
             }
         }

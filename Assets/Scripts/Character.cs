@@ -89,8 +89,8 @@ namespace ProjectFTP {
             climbing = !climbing && IsOnClimbableSurface;
             // Disable gravity while climbing
             if (climbing) {
-                Rigidbody2D.velocity.Scale(Vector2.right);
                 Rigidbody2D.gravityScale = 0.0f;
+                Rigidbody2D.velocity = Vector2.zero;
             }
 		}
 
@@ -215,17 +215,27 @@ namespace ProjectFTP {
         void FixedUpdate()
         {
             // Check if the character is grounded.
-            if (IsGrounded) {
-                if (!grounded) {
+            if (IsGrounded)
+            {
+                if (!grounded)
+                {
                     jumps = 0;
                     grounded = true;
                 }
-            } else {
+            } else
+            {
                 grounded = false;
             }
 
-            if (!climbing || (climbing && !IsOnClimbableSurface)) {
+            if (!climbing || (climbing && !IsOnClimbableSurface))
+            {
+                climbing = false;
                 Rigidbody2D.gravityScale = 1;
+            }
+
+            if (climbing)
+            {
+                Rigidbody2D.velocity = Vector2.zero;
             }
         }
         #endregion
