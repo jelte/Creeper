@@ -31,25 +31,34 @@ public class CopyParentsData : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {    
+	void Update () {
         if (copyTransparensy && parent != null)
         {
             float parentTransparency = 0f;
+            float parentTransparensyColor = 255;
             if (parentType == ParentsType.GUIImage)
+            {
                 parentTransparency = parent.GetComponent<Image>().color.a;
+                parentTransparensyColor = parentTransparency;
+            }
             if (parentType == ParentsType.GUItext)
+            {
                 parentTransparency = parent.GetComponent<Text>().color.a;
-
-            Color parentTransparensyColor = new Color(gameObject.GetComponent<Image>().color.r,
-                    gameObject.GetComponent<Image>().color.g,
-                    gameObject.GetComponent<Image>().color.b,
-                    parentTransparency);
+                parentTransparensyColor = parentTransparency;
+            }
 
             if (childType == ChildType.GUIImage)
-                gameObject.GetComponent<Image>().color = parentTransparensyColor;
+                gameObject.GetComponent<Image>().color = new Color( gameObject.GetComponent<Image>().color.r,
+                                                                    gameObject.GetComponent<Image>().color.g,
+                                                                    gameObject.GetComponent<Image>().color.b,
+                                                                    parentTransparensyColor);
             if (childType == ChildType.GUItext)
-                gameObject.GetComponent<Text>().color = parentTransparensyColor;
+
+                gameObject.GetComponent<Text>().color =new Color(   gameObject.GetComponent<Text>().color.r, 
+                                                                    gameObject.GetComponent<Text>().color.g, 
+                                                                    gameObject.GetComponent<Text>().color.b,
+                                                                    parentTransparensyColor);
+
         }
-        
 	}
 }

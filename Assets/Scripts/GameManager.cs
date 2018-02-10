@@ -13,11 +13,34 @@ public class GameManager : MonoBehaviour {
 
 	Character character;
 
-	void Start() {
-		end = false;
-	}
+    //for store background music & sounds effect volume
+    public float backgroundVolume;
+    public float soundEfeectsVolume;
+    public AudioSource bgmas;//back ground music audio source
+    public AudioSource seas; //sound effect audio source
 
-	void Update() {
+
+    void Start() {
+		end = false;
+
+        //for music
+        bgmas = GetComponent<AudioSource>();
+        seas = GameObject.FindGameObjectWithTag("Player").GetComponent<AudioSource>();
+        backgroundVolume = bgmas.volume;
+        soundEfeectsVolume = seas.volume;
+    }
+
+    public void SetBackGroundVolume(float volume)
+    {
+        backgroundVolume = volume;
+    }
+
+    public void SetSoundEffectsVolume(float volume)
+    {
+        soundEfeectsVolume = volume;
+    }
+
+    void Update() {
 		if (end) {
 			
 			return;
@@ -34,7 +57,11 @@ public class GameManager : MonoBehaviour {
 		} else {
 			timeTaken += Time.deltaTime;
 		}
-	}
+
+        //for music 
+        bgmas.volume = backgroundVolume;
+        seas.volume = soundEfeectsVolume;
+    }
 
 	public static bool CharacterDied {
 		get { 

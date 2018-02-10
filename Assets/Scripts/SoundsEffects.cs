@@ -8,11 +8,19 @@ public class SoundsEffects : MonoBehaviour {
     public AudioClip ballCollision;
     public AudioClip boundCollision;
 
-    // Use this for initialization
+    public GameManager gm;
+
+    public void Update()
+    {
+        if (gm == null)
+        {
+            gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+        }
+    }
 
     private void MakeSound(AudioClip originalClip)
     {
-        GetComponent<AudioSource>().volume = 1f;
+        GetComponent<AudioSource>().volume = gm.soundEfeectsVolume;
         AudioSource.PlayClipAtPoint(originalClip, transform.position);
     }               
 
