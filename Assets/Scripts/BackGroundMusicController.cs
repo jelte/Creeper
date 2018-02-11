@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ProjectFTP;
 
 public class BackGroundMusicController : MonoBehaviour {
 
@@ -33,7 +34,7 @@ public class BackGroundMusicController : MonoBehaviour {
         else
             bcmas.volume = gm.backgroundVolume;        
 
-        if (character.Died())
+        if (!character.IsAlive)
             bcmas.pitch = 0.3f;
         else if (traitManager.isInvert)
             bcmas.pitch = 1.5f;

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ProjectFTP;
 
 public class MovignSpike : MonoBehaviour {
 
@@ -41,7 +42,7 @@ public class MovignSpike : MonoBehaviour {
             if (collision.CompareTag("Player"))
             {
                 //reduce player health
-                collision.GetComponent<Character>().playerHealth = -1;
+                collision.GetComponent<Character>().TakeDamage(1);
             }
         }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ProjectFTP;
 
 public class SpikeTrap : MonoBehaviour {
 
@@ -11,7 +12,7 @@ public class SpikeTrap : MonoBehaviour {
 		if(collision.CompareTag("Player")) {
             //reduce player health
 
-            collision.GetComponent<Character>().playerHealth =- 1;
+            collision.GetComponent<Character>().TakeDamage(1);
             
 
             Debug.Log("Player took damage");
