@@ -8,6 +8,8 @@ public class BackGroundMusicController : MonoBehaviour {
     private Character character;
     private AudioSource bcmas;
 
+    public GameManager gm;    
+
     // Use this for initialization
     void Start () {
         bcmas = GetComponent<AudioSource>();
@@ -15,6 +17,11 @@ public class BackGroundMusicController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (gm == null)
+        {
+            gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+        }
+
         if (GameObject.FindGameObjectWithTag("Player") && traitManager == null)
         {
             traitManager = GameObject.FindGameObjectWithTag("Player").GetComponent<TraitManager>();
@@ -24,7 +31,7 @@ public class BackGroundMusicController : MonoBehaviour {
         if (Time.timeScale == 0)
             bcmas.volume = 0f;
         else
-            bcmas.volume = 0.3f;        
+            bcmas.volume = gm.backgroundVolume;        
 
         if (character.Died())
             bcmas.pitch = 0.3f;
