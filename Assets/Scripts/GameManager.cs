@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.PostProcessing;
+using ProjectFTP;
 
 public class GameManager : MonoBehaviour {
-
+    
 	public static int deaths = 0;
 	public static float timeTaken = 0f;
 	public static bool end = false;
@@ -66,7 +67,7 @@ public class GameManager : MonoBehaviour {
 	public static bool CharacterDied {
 		get { 
 			GameObject player = GameObject.FindGameObjectWithTag ("Player");
-			return player != null ? player.GetComponent<Character>().Died () : false;
+			return player != null ? !player.GetComponent<Character>().IsAlive : false;
 		}
 	}
 

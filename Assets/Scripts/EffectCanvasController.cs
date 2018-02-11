@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using ProjectFTP;
 
 public class EffectCanvasController : MonoBehaviour {
 
@@ -25,11 +26,11 @@ public class EffectCanvasController : MonoBehaviour {
 			character = GameObject.FindGameObjectWithTag ("Player").GetComponent<Character> ();
 		}
 		if (traitManager != null) {
-			LR.SetActive (traitManager.isInvert && !character.Died());
-			GD.SetActive (traitManager.isHeavy && !character.Died());
-			GU.SetActive (traitManager.isBouncy && !character.Died());
-			SU.SetActive(traitManager.isQuick && !character.Died());
-			SD.SetActive(traitManager.isSlow && !character.Died());
+			LR.SetActive (traitManager.isInvert && character.IsAlive);
+			GD.SetActive (traitManager.isHeavy && character.IsAlive);
+			GU.SetActive (traitManager.isBouncy && character.IsAlive);
+			SU.SetActive(traitManager.isQuick && character.IsAlive);
+			SD.SetActive(traitManager.isSlow && character.IsAlive);
         }
 	}
 }
