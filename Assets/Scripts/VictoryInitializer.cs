@@ -18,7 +18,7 @@ public class VictoryInitializer : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		label.text = "Time take: " + Mathf.Floor(GameManager.timeTaken/60) + " m " + Mathf.Round(GameManager.timeTaken%60) + " s.\n";
-		label.text += "Deaths: " + GameManager.deaths + "\n";
+		label.text += "Deaths: " + GameManager.deaths;
 		Camera.main.GetComponent<PostProcessingBehaviour> ().profile = postProcessingProfile;
 	}
 	
