@@ -20,6 +20,7 @@ public class CopyParentsData : MonoBehaviour {
     public ChildType childType;
 
     public bool copyTransparensy;
+    public bool copyColor;
     //public bool copyPosition;
 
     // Use this for initialization
@@ -36,16 +37,12 @@ public class CopyParentsData : MonoBehaviour {
         {
             float parentTransparency = 0f;
             float parentTransparensyColor = 255;
+
             if (parentType == ParentsType.GUIImage)
-            {
                 parentTransparency = parent.GetComponent<Image>().color.a;
-                parentTransparensyColor = parentTransparency;
-            }
             if (parentType == ParentsType.GUItext)
-            {
                 parentTransparency = parent.GetComponent<Text>().color.a;
-                parentTransparensyColor = parentTransparency;
-            }
+            parentTransparensyColor = parentTransparency;
 
             if (childType == ChildType.GUIImage)
                 gameObject.GetComponent<Image>().color = new Color( gameObject.GetComponent<Image>().color.r,
@@ -58,6 +55,20 @@ public class CopyParentsData : MonoBehaviour {
                                                                     gameObject.GetComponent<Text>().color.g, 
                                                                     gameObject.GetComponent<Text>().color.b,
                                                                     parentTransparensyColor);
+        }
+
+        if (copyColor && parent != null)
+        {
+            Color parentColor = Color.white;
+            if (parentType == ParentsType.GUIImage)
+                parentColor = parent.GetComponent<Image>().color;
+            if (parentType == ParentsType.GUItext)
+                parentColor = parent.GetComponent<Text>().color;
+
+            if (childType == ChildType.GUIImage)
+                gameObject.GetComponent<Image>().color = parentColor;
+            if (childType == ChildType.GUItext)
+                gameObject.GetComponent<Text>().color = parentColor;
 
         }
 	}
