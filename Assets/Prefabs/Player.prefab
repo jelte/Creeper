@@ -26,7 +26,6 @@ GameObject:
   - component: {fileID: 114628727293586674}
   - component: {fileID: 82670220791618972}
   - component: {fileID: 114630741861524692}
-  - component: {fileID: 114261593620259084}
   m_Layer: 13
   m_Name: Player
   m_TagString: Player
@@ -179,28 +178,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114261593620259084
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1205202883944894}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc2198d963275974d9088bbb079ec0f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isInvert: 0
-  isHeavy: 0
-  isBouncy: 0
-  isZoomedIn: 0
-  isZoomedOut: 0
-  isMegaJumps: 0
-  isNoJump: 0
-  isQuick: 0
-  isSlow: 0
-  isAllSlow: 0
-  noTrait: 0
 --- !u!114 &114628727293586674
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -213,8 +190,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jump: {fileID: 8300000, guid: ecc8cf6d251936242a065fb77e8b57d4, type: 3}
-  ballCollision: {fileID: 8300000, guid: e920d2b760e818f459448477c99f48a7, type: 3}
-  boundCollision: {fileID: 8300000, guid: d336570ed1115144c99da1b3cf2faebc, type: 3}
+  attack: {fileID: 0}
+  audioSource: {fileID: 0}
 --- !u!114 &114630741861524692
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -1,6 +1,6 @@
 ﻿namespace ProjectFTP
 {
-    interface IAttack
+    public interface IAttack
     {
         void Trigger(IActor source);
     }
