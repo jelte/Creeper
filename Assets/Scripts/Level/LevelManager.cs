@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using ProjectFTP.UI;
 using ProjectFTP.Corruptions;
+using ProjectFTP.SceneManagement;
 
 namespace ProjectFTP.Level
 {
