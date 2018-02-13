@@ -2,48 +2,41 @@
 using System.Collections.Generic;
 using UnityEngine;
 using ProjectFTP.Level;
-using ProjectFTP.Events;
 using System;
 
-namespace ProjectFTP {
-	public class Character : MonoBehaviour, IActor {
-
-        public enum Action { JUMP, ATTACK };
+namespace ProjectFTP
+{
+    public class Character : MonoBehaviour, IActor
+    {
+        public enum Action { JUMP, ATTACK, TAKE_DAMAGE, DIE };
 
         #region
-        private static List<Vector2> directions = new List<Vector2>() {
-            Vector2.up,
-            Vector2.left,
-            Vector2.down,
-            Vector2.right
-        };
+        private static List<Vector2> directions = new List<Vector2>() { Vector2.up, Vector2.left, Vector2.down, Vector2.right };
         #endregion
 
         #region event handlers
-        public event EventHandler<CharacterActionEventArgs> ActionHandler;
+        public delegate void OnCharacterEvent(Action action);
+
+        public event OnCharacterEvent ActionHandler;
         #endregion
 
         #region attributes
-        [SerializeField]
         [Range(1f, 10f)]
-        private float runSpeed = 5.0f;
-        [SerializeField]
+        public float runSpeed = 5.0f;
         [Range(1f, 10f)]
-        private float climbSpeed = 2.5f;
-        [SerializeField]
+        public float climbSpeed = 2.5f;
         [Range(0f, 2f)]
-        private float jumpForce = 1.8f;
-        [SerializeField]
-        private IAttack attack;
-        [SerializeField]
+        public float jumpForce = 1.8f;
         [Range(0, 5)]
-        private int maxJumps = 2;
+        public int maxJumps = 2;
+        public IAttack attack;
 
         private int health = 1;
         private bool climbing = false;
         private bool grounded = true;
         private int jumps = 0;
         private Direction facing = Direction.EAST;
+        private Vector2 movement;
         #endregion
 
         #region referenced components
@@ -60,43 +53,54 @@ namespace ProjectFTP {
             // Scale movement with movement speeds.
             movement.Scale(new Vector2(runSpeed, climbing ? climbSpeed : 0f));
 
+            // Store movement for animator
+            this.movement = movement;
+
             // Counterbalance the horizontal force of the character.
             CounterBalanceForces(movement);
 
             // Apply movement.
             Rigidbody2D.position += movement;
-		}
+        }
 
-		public void Attack()
+        public void Attack()
         {
-            if (attack != null) {
+            if (attack != null)
+            {
                 attack.Trigger(this);
-                OnCharacterAction(new CharacterActionEventArgs(Action.ATTACK));
-            }
-		}
-			
-		public void Jump()
-        {
-            if (jumps < maxJumps) {
-                jumps++;
-                Rigidbody2D.velocity = -Physics2D.gravity * jumpForce;
-                OnCharacterAction(new CharacterActionEventArgs(Action.JUMP));
+                OnCharacterAction(Action.ATTACK);
             }
         }
 
-		public void Climb()
+        public void Jump()
+        {
+            if (jumps < maxJumps)
+            {
+                jumps++;
+                Rigidbody2D.velocity = -Physics2D.gravity * jumpForce;
+                OnCharacterAction(Action.JUMP);
+            }
+        }
+
+        public void Climb()
         {
             climbing = !climbing && IsOnClimbableSurface;
             // Disable gravity while climbing
-            if (climbing) {
+            if (climbing)
+            {
                 Rigidbody2D.gravityScale = 0.0f;
                 Rigidbody2D.velocity = Vector2.zero;
             }
-		}
+        }
 
         public void TakeDamage(int amount)
         {
             health -= amount;
+            OnCharacterAction(Action.TAKE_DAMAGE);
+            if (health < 0)
+            {
+                OnCharacterAction(Action.DIE);
+            }
         }
 
         // determine which direction the character is facing.
@@ -129,53 +133,60 @@ namespace ProjectFTP {
             }
         }
 
-        protected virtual void OnCharacterAction(CharacterActionEventArgs e)
+        protected virtual void OnCharacterAction(Action action)
         {
-            EventHandler<CharacterActionEventArgs> handler = ActionHandler;
+            OnCharacterEvent handler = ActionHandler;
             if (handler != null)
-            { 
-                handler(this, e);
+            {
+                handler(action);
             }
         }
         #endregion
 
         #region properties
         // Is the character alive
-        public bool IsAlive {
-			get { return health > 0; }
-		}
+        public bool IsAlive
+        {
+            get { return health > 0; }
+        }
 
-		// Is te character grounded
-		public bool IsGrounded {
-			get {
+        // Is te character grounded
+        public bool IsGrounded
+        {
+            get
+            {
                 RaycastHit2D hit = Physics2D.Raycast(
-                    transform.position, 
-                    Vector2.down, 
-                    1.2f, // TODO Remove magic number
-                    LayerMask.GetMask(
-                        TileType.Ground.ToString()
-                    )
+                transform.position,
+                Vector2.down,
+                1.2f, // TODO Remove magic number
+                LayerMask.GetMask(
+                    TileType.Ground.ToString(),
+                    TileType.Climbable.ToString()
+                )
                 );
                 return hit.collider != null;
             }
-		}
+        }
 
-		// Is the character climbing
-		public bool IsClimbing {
-			get { return climbing; }
-		}
+        // Is the character climbing
+        public bool IsClimbing
+        {
+            get { return climbing; }
+        }
 
-		// Which direction is the character facing
-		public Direction Facing {
-			get { return facing; }
-		}
-        
+        // Which direction is the character facing
+        public Direction Facing
+        {
+            get { return facing; }
+        }
+
         // Helper method to see if character is on climbable surface
         private bool IsOnClimbableSurface
         {
             get
             {
-                Vector2 hit = directions.Find(delegate(Vector2 direction) {
+                Vector2 hit = directions.Find(delegate (Vector2 direction)
+                {
                     RaycastHit2D rayHit = Physics2D.Raycast(transform.position, direction, 1f, LayerMask.GetMask(TileType.Climbable.ToString()));
                     return rayHit.collider != null;
                 });
@@ -184,36 +195,60 @@ namespace ProjectFTP {
         }
 
         // helper property to ensure that the gameObject has a 2D rigidbody
-        private Rigidbody2D Rigidbody2D {
-			get {
-				if (rb2d == null) {
-					rb2d = GetComponent<Rigidbody2D> ();
-					// Ensure the character gameObject has a 2D rigidbody
-					if (rb2d == null) {
-						rb2d = gameObject.AddComponent<Rigidbody2D> ();
-					}
-				}
-				return rb2d;
-			}
-		}
+        private Rigidbody2D Rigidbody2D
+        {
+            get
+            {
+                if (rb2d == null)
+                {
+                    rb2d = GetComponent<Rigidbody2D>();
+                    // Ensure the character gameObject has a 2D rigidbody
+                    if (rb2d == null)
+                    {
+                        rb2d = gameObject.AddComponent<Rigidbody2D>();
+                    }
+                }
+                return rb2d;
+            }
+        }
+
+        public Vector2 Velocity
+        {
+            get { return Rigidbody2D.velocity; }
+        }
+
+        public Vector2 Movement {
+            get { return movement;  }
+        }
         #endregion
 
         #region Unity Runtime methods
         void Start()
         {
+
+            if (GetComponent<CharacterAnimator>() == null)
+            {
+                gameObject.AddComponent<CharacterAnimator>();
+            }
+
             // Add CharacterController if platform is not mobile 
-            #if UNITY_ANDROID
-            #elif UNITY_IOS
-            #else
-                if (GetComponent<CharacterController>() == null)
-                {
-                    gameObject.AddComponent<CharacterController>();
-                }
-            #endif
+#if UNITY_ANDROID
+#elif UNITY_IOS
+#else
+            if (GetComponent<CharacterController>() == null)
+            {
+                gameObject.AddComponent<CharacterController>();
+            }
+#endif
         }
 
         void FixedUpdate()
         {
+            if (!IsAlive)
+            {
+                return;
+            }
+
             // Check if the character is grounded.
             if (IsGrounded)
             {
@@ -222,11 +257,23 @@ namespace ProjectFTP {
                     jumps = 0;
                     grounded = true;
                 }
-            } else
+            }
+            else
             {
                 grounded = false;
             }
 
+            if (IsOnClimbableSurface && !climbing)
+            {
+                climbing = true;
+                Rigidbody2D.gravityScale = 0;
+                Rigidbody2D.velocity = Vector2.zero;
+            } else {
+                climbing = false;
+                Rigidbody2D.gravityScale = 1;
+            }
+            /*
+             * TODO Fix climbing with button?
             if (!climbing || (climbing && !IsOnClimbableSurface))
             {
                 climbing = false;
@@ -237,6 +284,7 @@ namespace ProjectFTP {
             {
                 Rigidbody2D.velocity = Vector2.zero;
             }
+            */
         }
         #endregion
     }

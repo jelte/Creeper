@@ -1,7 +1,7 @@
 ﻿
 namespace ProjectFTP
 {
-    interface IActor
+    public interface IActor
     {
         #region methods
         void TakeDamage(int amount);
