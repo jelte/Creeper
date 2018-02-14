@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.PostProcessing;
 using ProjectFTP.UI;
 using ProjectFTP.Corruptions;
 using ProjectFTP.SceneManagement;
@@ -11,6 +12,7 @@ namespace ProjectFTP.Level
     {
         public List<LevelConfig> zoneConfigs;
         public GameObject characterPrefab;
+        public PostProcessingProfile cameraProfile;
         
         private LevelLoader loader = new LevelLoader();
         private Progression.Level level;
@@ -19,6 +21,7 @@ namespace ProjectFTP.Level
         void Start()
         {
             Progression.Level level = GameManager.Instance.Profile.CurrentStoryModeLevel;
+            Camera.main.GetComponent<PostProcessingBehaviour>().profile = cameraProfile;
 
             LevelConfig zoneConfig = zoneConfigs[0];
             if (level != null)
@@ -42,8 +45,8 @@ namespace ProjectFTP.Level
             Camera.main.gameObject.AddComponent<FollowPlayer>().StartFollow(character, Vector3.back * 10);
 
             GetComponentInChildren<VictoryTrigger>().ActionHandler += OnFinish;
-            
-            gameObject.AddComponent<CorruptionManager>().levelConfig = zoneConfig;
+
+            gameObject.AddComponent<CorruptionManager>().SetUp(zoneConfig);
 
             attempt = level.Attempt;
 
@@ -72,6 +75,7 @@ namespace ProjectFTP.Level
         {
             if (action == Character.Action.DIE)
             {
+                GetComponent<CorruptionManager>().TearDown();
                 StackedSceneManager.LoadScene(SceneName.DeathScene);
             }
         }

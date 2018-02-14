@@ -21,28 +21,31 @@ namespace ProjectFTP.UI
         // Use this for initialization
         void Start()
         {
-            GameManager.Instance.Profile.CurrentStoryModeLevel.Attempt.Victory();
+            Time.timeScale = 0;
             if (label)
             {
+                GameManager.Instance.Profile.CurrentStoryModeLevel.Attempt.Victory();
                 float timeTaken = GameManager.Instance.Profile.CurrentStoryModeLevel.TimeTaken;
                 int attempts = GameManager.Instance.Profile.CurrentStoryModeLevel.Attempts;
                 label.text = "Time take: " + Mathf.Floor(timeTaken / 60) + " m " + Mathf.Round(timeTaken % 60) + " s.\n";
                 label.text += "Attempts: " + attempts + "\n";
+            } else
+            {
+
+                GameManager.Instance.Profile.CurrentStoryModeLevel.Attempt.Dead();
             }
 
             Camera.main.GetComponent<PostProcessingBehaviour>().profile = postProcessingProfile;
         }
-
-        // Update is called once per frame
-        void Update()
+        
+        public void Retry()
         {
-            Time.timeScale = 0;
-            if (Input.anyKey && timeDelay < 0.0f)
-            {
-                Time.timeScale = 1;
-                StackedSceneManager.LoadScene(SceneName.MainMenu);
-            }
-            timeDelay -= Time.unscaledDeltaTime;
+            StackedSceneManager.ReloadScene();
+        }
+
+        public void MainMenu()
+        {
+            StackedSceneManager.LoadScene(SceneName.MainMenu);
         }
     }
 }
