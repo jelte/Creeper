@@ -5,37 +5,32 @@ using UnityEngine.UI;
 
 namespace ProjectFTP.UI
 {
-    public class AlphaSync : MonoBehaviour
+    public class ColourSync : MonoBehaviour
     {
         private Graphic graphic;
-        private float alpha;
+        private Color colour;
 
         // Use this for initialization
         void Start()
         {
             graphic = GetComponent<Graphic>();
-            SyncAlpha();
+            SyncColour();
         }
 
         // Update is called once per frame
         void Update()
         {
-            SyncAlpha();
+            SyncColour();
         }
 
-        void SyncAlpha()
+        void SyncColour()
         {
-            if (this.alpha != graphic.color.a)
+            if (this.colour != graphic.color)
             {
-                this.alpha = graphic.color.a;
+                this.colour = graphic.color;
                 foreach (Graphic g in GetComponentsInChildren<Graphic>())
                 {
-                    g.color = new Color(    
-                        g.color.r,
-                        g.color.g,
-                        g.color.b,
-                        this.alpha
-                    );
+                    g.color = colour;
                 }
             }
         }

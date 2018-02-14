@@ -103,10 +103,12 @@ namespace ProjectFTP.SceneManagement
             UnloadRange(sceneIndex);
         }
 
-        public void Reload(SceneName sceneName)
+        public void Reload()
         {
-            Unload(sceneName);
-            Load(sceneName);
+            // Find the current Main Scene
+            StackedScene scene = stack.FindLast(delegate (StackedScene entry) { return mainScenes.Any(delegate (SceneName name) { return name == entry.Name; }); });
+            Unload(scene.Name);
+            Load(scene.Name);
         }
         
         private void UnloadRange(int index)
@@ -142,9 +144,9 @@ namespace ProjectFTP.SceneManagement
             Instance.Unload(name);
         }
 
-        public static void ReloadScene(SceneName name)
+        public static void ReloadScene()
         {
-            Instance.Reload(name);
+            Instance.Reload();
         }
 
         private static StackedSceneManager Instance {

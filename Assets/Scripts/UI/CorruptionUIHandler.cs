@@ -32,7 +32,7 @@ namespace ProjectFTP.UI
                     if (corruptions.TryGetValue(corruption, out uiGameObject))
                     {
                         corruptions.Remove(corruption);
-                        DestroyImmediate(uiGameObject);
+                        Destroy(uiGameObject);
                     }
                     break;
             }
