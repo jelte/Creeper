@@ -11,5 +11,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 718abb4d0e3f16245bd649affc8df3cb, type: 3}
   m_Name: Camera Zoom IN
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 320f93b5594acc2498691499b14927c2, type: 3}
   modifier: 0.5

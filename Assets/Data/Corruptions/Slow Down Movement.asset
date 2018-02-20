@@ -11,5 +11,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3417fda3cc73f0f44b9ecb597d5f6144, type: 3}
   m_Name: Slow Down Movement
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: f22868e8f69304b48b7f0a53db7835e5, type: 3}
+  icon: {fileID: 21300000, guid: 006630eb2c45bbf48a750d4d58dacb31, type: 3}
   modifier: 0.5

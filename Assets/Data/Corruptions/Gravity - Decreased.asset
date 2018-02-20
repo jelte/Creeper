@@ -11,5 +11,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e25941e9ee6b984eb2ac53fd60266d5, type: 3}
   m_Name: Gravity - Decreased
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: fbcf5f5a99386234b93cf96c520f57d6, type: 3}
+  icon: {fileID: 21300000, guid: f12e8da67942d4046b2e60b33b2b4722, type: 3}
   modifier: 0.5
