@@ -38,8 +38,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4113631358976670}
   - component: {fileID: 61465494126364350}
-  - component: {fileID: 114314529961702222}
   - component: {fileID: 212870147784437646}
+  - component: {fileID: 114304246961250472}
   m_Layer: 11
   m_Name: MoveTowardsTrigger
   m_TagString: Untagged
@@ -124,7 +124,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.6, y: 0.7}
   m_EdgeRadius: 0
---- !u!114 &114314529961702222
+--- !u!114 &114304246961250472
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -132,10 +132,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1281472474642584}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8902a450fb32f7046b6af2628741851c, type: 3}
+  m_Script: {fileID: 11500000, guid: 3ab77a03da576bc4896e29bf1e46da6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ObjectToMove: {fileID: 1151718512614500}
+  TriggerPosition: {x: 0, y: 0}
 --- !u!114 &114750492324051434
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -149,6 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoveTowards: 0
   TargetReference: {fileID: 1281472474642584}
+  tempPosition: {x: 0, y: 0, z: 0}
   moveSpeed: 0
 --- !u!212 &212693400213047908
 SpriteRenderer:

@@ -21,8 +21,7 @@ GameObject:
   - component: {fileID: 4522065891453874}
   - component: {fileID: 212176175045471664}
   - component: {fileID: 61362490890663176}
-  - component: {fileID: 114995308755825084}
-  - component: {fileID: 61538668487367252}
+  - component: {fileID: 114866867224649054}
   m_Layer: 0
   m_Name: TrapBlock
   m_TagString: Untagged
@@ -68,32 +67,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.7, y: 0.7}
   m_EdgeRadius: 0
---- !u!61 &61538668487367252
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1891536733409136}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.7, y: 0.7}
-    newSize: {x: 0.1, y: 0.1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.7, y: 0.7}
-  m_EdgeRadius: 0
---- !u!114 &114995308755825084
+--- !u!114 &114866867224649054
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -101,7 +75,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1891536733409136}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7c183931922084479790131614552a8, type: 3}
+  m_Script: {fileID: 11500000, guid: e28cbefaadafa6e4c854cbcf4d6713d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!212 &212176175045471664

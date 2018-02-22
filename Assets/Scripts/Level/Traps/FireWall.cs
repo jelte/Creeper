@@ -1,10 +1,9 @@
-﻿using ProjectFTP;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-namespace ProjectFTP.Level
+
+namespace ProjectFTP.Level.Traps
 {
     public class FireWall : MonoBehaviour
     {
@@ -39,14 +38,14 @@ namespace ProjectFTP.Level
         {
             //fire here
             GameObject BallInstance = Instantiate(BallToSpawn, ShootFromHere.transform.position, Quaternion.identity);
-            BallInstance.transform.parent = gameObject.transform;
             Vector3 shoot = (Target.transform.position - BallInstance.transform.position).normalized;
             BallInstance.GetComponent<Rigidbody2D>().AddForce(shoot * 500.0f);
 
             GameObject BallInstance2 = Instantiate(BallToSpawn, ShootFromHere2.transform.position, Quaternion.identity);
-            BallInstance2.transform.parent = gameObject.transform;
             Vector3 shoot2 = (Target2.transform.position - BallInstance2.transform.position).normalized;
             BallInstance2.GetComponent<Rigidbody2D>().AddForce(shoot2 * 500.0f);
         }
+
+
     }
 }
