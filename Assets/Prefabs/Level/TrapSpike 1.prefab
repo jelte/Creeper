@@ -21,8 +21,8 @@ GameObject:
   - component: {fileID: 4565179846730568}
   - component: {fileID: 212490648054763552}
   - component: {fileID: 61635632824727042}
-  - component: {fileID: 114513314779785434}
   - component: {fileID: 50482221122549218}
+  - component: {fileID: 114946604984006256}
   m_Layer: 0
   m_Name: TrapSpike 1
   m_TagString: Untagged
@@ -88,7 +88,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.6, y: 0.7}
   m_EdgeRadius: 0
---- !u!114 &114513314779785434
+--- !u!114 &114946604984006256
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -96,7 +96,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1070146137177596}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7c183931922084479790131614552a8, type: 3}
+  m_Script: {fileID: 11500000, guid: e28cbefaadafa6e4c854cbcf4d6713d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!212 &212490648054763552
