@@ -11,5 +11,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3417fda3cc73f0f44b9ecb597d5f6144, type: 3}
   m_Name: Speed Up Movement
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 5cb711406b84d4d41b80c76d7ad570ae, type: 3}
+  icon: {fileID: 21300000, guid: 887267d7b4c6d234eb4a81f11c87e668, type: 3}
   modifier: 2

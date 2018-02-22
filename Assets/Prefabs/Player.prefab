@@ -172,7 +172,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 67d4adcce25520a4991cee924cc29150, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
@@ -191,6 +191,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jump: {fileID: 8300000, guid: ecc8cf6d251936242a065fb77e8b57d4, type: 3}
   attack: {fileID: 0}
+  damageTaken: {fileID: 0}
   audioSource: {fileID: 0}
 --- !u!114 &114630741861524692
 MonoBehaviour:
