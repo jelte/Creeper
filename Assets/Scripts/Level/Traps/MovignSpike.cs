@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using ProjectFTP;
 
-namespace ProjectFTP.Level
+
+namespace ProjectFTP.Level.Traps
 {
     public class MovignSpike : MonoBehaviour
     {
@@ -14,14 +15,13 @@ namespace ProjectFTP.Level
         private Vector3 tempPosition;
         public float moveSpeed;
 
-
         private void Start()
         {
             tempPosition = TargetReference.transform.position;
             moveSpeed = 5.0f;
         }
 
-
+        //move object to player
         private void Update()
         {
             if (MoveTowards == true)
@@ -38,7 +38,7 @@ namespace ProjectFTP.Level
             }
         }
 
-
+        //kill player
         private void OnTriggerEnter2D(Collider2D collision)
         {
             //on trigger hit kill player
