@@ -18,7 +18,12 @@ namespace ProjectFTP.Corruptions
         {
             get { return corruption.Icon; }
         }
-        
+
+        public Sprite SmallIcon
+        {
+            get { return corruption.SmallIcon; }
+        }
+
         public bool Active {
             get { return active; }
         }
