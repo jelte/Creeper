@@ -21,7 +21,8 @@ GameObject:
   - component: {fileID: 4341263006117356}
   - component: {fileID: 212693400213047908}
   - component: {fileID: 61718272592062186}
-  - component: {fileID: 114750492324051434}
+  - component: {fileID: 114173239967259422}
+  - component: {fileID: 114293991655980324}
   m_Layer: 0
   m_Name: TrapSpike 1
   m_TagString: Untagged
@@ -54,7 +55,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1281472474642584}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 20.4998, y: 4.4975, z: -0.072265625}
+  m_LocalPosition: {x: 20.158339, y: 5.8326907, z: -0.072265625}
   m_LocalScale: {x: 1.447112, y: 1.4305518, z: 1}
   m_Children:
   - {fileID: 4341263006117356}
@@ -124,6 +125,32 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.6, y: 0.7}
   m_EdgeRadius: 0
+--- !u!114 &114173239967259422
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1151718512614500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e28cbefaadafa6e4c854cbcf4d6713d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114293991655980324
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1151718512614500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f70ab7679d607847965431b822f4792, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MoveTowards: 0
+  TargetReference: {fileID: 1281472474642584}
+  tempPosition: {x: 0, y: 0, z: 0}
+  moveSpeed: 0
 --- !u!114 &114304246961250472
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -137,21 +164,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ObjectToMove: {fileID: 1151718512614500}
   TriggerPosition: {x: 0, y: 0}
---- !u!114 &114750492324051434
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1151718512614500}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad3d51c423446a849a235ebccd664f37, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MoveTowards: 0
-  TargetReference: {fileID: 1281472474642584}
-  tempPosition: {x: 0, y: 0, z: 0}
-  moveSpeed: 0
 --- !u!212 &212693400213047908
 SpriteRenderer:
   m_ObjectHideFlags: 1
