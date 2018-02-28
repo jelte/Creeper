@@ -20,7 +20,7 @@ namespace ProjectFTP.Sound
         {
             if (clip)
             {
-                audioSource.PlayOneShot(clip, GameManager.Instance.Profile.Settings.SoundEffectsVolume);
+                audioSource.PlayOneShot(clip, GameManager.SoundEffectsVolume);
             }
         }
 
