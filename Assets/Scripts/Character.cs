@@ -252,7 +252,7 @@ namespace ProjectFTP
             // Check if the character is grounded.
             if (IsGrounded)
             {
-                if (!grounded)
+                if (!grounded || jumps > 1)
                 {
                     jumps = 0;
                     grounded = true;
@@ -263,12 +263,14 @@ namespace ProjectFTP
                 grounded = false;
             }
 
-            if (IsOnClimbableSurface && !climbing)
+            if (IsOnClimbableSurface)
             {
-                climbing = true;
                 Rigidbody2D.gravityScale = 0;
+                // Stick to surface while climbing
                 Rigidbody2D.velocity = Vector2.zero;
-            } else {
+                climbing = true;
+
+            } else if (climbing) {
                 climbing = false;
                 Rigidbody2D.gravityScale = 1;
             }

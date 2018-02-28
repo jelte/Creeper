@@ -23,10 +23,16 @@ namespace ProjectFTP.Sound
             audioSource.Play();
         }
 
+        public void UpdateVolume()
+        {
+            audioSource.volume = GameManager.BackgroundMusicVolume;
+        }
+
+  
         public void Restore()
         {
-            audioSource.volume = GameManager.Instance.Profile.Settings.BackgroundMusicVolume;
             audioSource.pitch = 1f;
+            UpdateVolume();
         }
 
         public void AdjustPitch(float pitch)
