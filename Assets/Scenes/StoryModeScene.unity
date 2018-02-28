@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zoneConfigs:
-  - {fileID: 11400000, guid: 1dce951227ef603468aa5922bb810c14, type: 2}
+  - {fileID: 11400000, guid: 45c0304cda4a6474ca99ee6d9775d65c, type: 2}
   - {fileID: 11400000, guid: 45c0304cda4a6474ca99ee6d9775d65c, type: 2}
   characterPrefab: {fileID: 1205202883944894, guid: 6d35a0df8c2ab8044bd94878349797c4,
     type: 2}

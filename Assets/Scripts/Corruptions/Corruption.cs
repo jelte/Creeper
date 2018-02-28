@@ -6,10 +6,17 @@ namespace ProjectFTP.Corruptions
     {
         [SerializeField]
         private Sprite icon;
+        [SerializeField]
+        private Sprite iconSmall;
 
         public Sprite Icon
         {
             get { return icon; }
+        }
+
+        public Sprite SmallIcon
+        {
+            get { return iconSmall; }
         }
 
         public abstract void SetUp();
