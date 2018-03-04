@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.PostProcessing;
 using ProjectFTP.SceneManagement;
+using ProjectFTP.Level;
 
 namespace ProjectFTP.UI
 {
@@ -37,7 +38,14 @@ namespace ProjectFTP.UI
 
             Camera.main.GetComponent<PostProcessingBehaviour>().profile = postProcessingProfile;
         }
-        
+
+        public void Next()
+        {
+            StackedSceneManager.LoadScene(SceneName.WorldScene, new Dictionary<SceneParameter, object>() {
+                {SceneParameter.WORLD, StackedSceneManager.Active.Get<WorldConfig>(SceneParameter.WORLD) }
+            });
+        }
+
         public void Retry()
         {
             StackedSceneManager.ReloadScene();

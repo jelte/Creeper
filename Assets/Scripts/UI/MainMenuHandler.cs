@@ -16,10 +16,7 @@ namespace ProjectFTP.UI
 
         public void StoryMode()
         {
-            StackedSceneManager.LoadScene(SceneName.WorldScene, new Dictionary<SceneParameter, object>
-            {
-                { SceneParameter.WORLD, 0 }
-            });
+            StackedSceneManager.LoadScene(SceneName.WorldScene);
         }
 
         public void Settings()

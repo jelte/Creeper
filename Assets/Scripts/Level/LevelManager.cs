@@ -41,7 +41,7 @@ namespace ProjectFTP.Level
 
             gameObject.AddComponent<CorruptionManager>().SetUp(levelConfig);
 
-            attempt = level.Attempt;
+            //attempt = level.Attempt;
 
             // Ensure time is on
             Time.timeScale = 1.0f;
@@ -56,7 +56,7 @@ namespace ProjectFTP.Level
 
         void Update()
         {
-            attempt.Tick(Time.deltaTime);
+            //attempt.Tick(Time.deltaTime);
             if (Input.GetButtonDown("Pause"))
             {
                 StackedSceneManager.LoadScene(SceneName.PauseScene);

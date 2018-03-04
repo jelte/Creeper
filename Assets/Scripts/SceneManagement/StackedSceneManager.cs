@@ -28,6 +28,11 @@ namespace ProjectFTP.SceneManagement
             get { return name; }
         }
 
+        public IDictionary<SceneParameter, object> Parameters
+        {
+            get { return parameters; }
+        }
+
         public int BuildIndex
         {
             get { return buildIndex; }
@@ -35,7 +40,13 @@ namespace ProjectFTP.SceneManagement
 
         public T Get<T>(SceneParameter key)
         {
-            return (T) parameters[key];
+            object value = null;
+            if (parameters.TryGetValue(key, out value))
+            {
+                return (T)value;
+            }
+
+            return (T) value;
         }
 
         public Scene Scene
@@ -80,7 +91,7 @@ namespace ProjectFTP.SceneManagement
         private static StackedSceneManager instance;
         private List<StackedScene> stack = new List<StackedScene>();
 
-        private static SceneName[] mainScenes = { SceneName.MainMenu, SceneName.StoryModeScene, SceneName.WorldScene };
+        private static SceneName[] mainScenes = { SceneName.MainMenu, SceneName.LevelScene, SceneName.WorldScene };
 
         public AsyncOperation Load(SceneName sceneName)
         {
@@ -122,7 +133,7 @@ namespace ProjectFTP.SceneManagement
             // Find the current Main Scene
             StackedScene scene = stack.FindLast(delegate (StackedScene entry) { return mainScenes.Any(delegate (SceneName name) { return name == entry.Name; }); });
             Unload(scene.Name);
-            Load(scene.Name);
+            Load(scene.Name, scene.Parameters);
         }
         
         private void UnloadRange(int index)

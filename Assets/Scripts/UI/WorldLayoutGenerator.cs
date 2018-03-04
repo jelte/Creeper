@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjectFTP.UI;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -75,6 +76,8 @@ namespace ProjectFTP.Level
             levelTransform.SetParent(clusterTransform);
             levelTransform.anchoredPosition = position;
             level.transform.Find("Icon").GetComponent<Image>().sprite = levelConfig.icon;
+            level.GetComponent<LevelButtonHandler>().world = world;
+            level.GetComponent<LevelButtonHandler>().level = levelConfig;
         }
 
         private void CreateConnection(LevelConfig a, LevelConfig b)

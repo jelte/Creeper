@@ -50,7 +50,16 @@ namespace ProjectFTP.UI
 
             transform.Find("Next").transform.SetAsLastSibling();
             transform.Find("Previous").transform.SetAsLastSibling();
-            // worldIndex = StackedSceneManager.Active.Get<int>(SceneParameter.WORLD);
+            
+            WorldConfig currentWorld = StackedSceneManager.Active != null ? StackedSceneManager.Active.Get<WorldConfig>(SceneParameter.WORLD) : null;
+            if (currentWorld != null)
+            {
+                worldIndex = worlds.FindIndex(delegate (WorldConfig w)
+                {
+                    return w.Equals(currentWorld);
+                });
+            }
+            
         }
 
         // Update is called once per frame
