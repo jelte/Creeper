@@ -8,15 +8,19 @@ using UnityEngine.SceneManagement;
 
 namespace ProjectFTP.SceneManagement
 {
-    internal class StackedScene
+    public enum SceneParameter { WORLD, LEVEL };
+
+    public class StackedScene
     {
         private SceneName name;
         private int buildIndex;
+        private IDictionary<SceneParameter, object> parameters = new Dictionary<SceneParameter, object>();
 
-        public StackedScene(SceneName name)
+        public StackedScene(SceneName name, IDictionary<SceneParameter, object> parameters)
         {
             this.name = name;
             buildIndex = SceneUtility.GetBuildIndexByScenePath("Scenes/" + name.ToString());
+            this.parameters = parameters;
         }
         
         public SceneName Name
@@ -27,6 +31,11 @@ namespace ProjectFTP.SceneManagement
         public int BuildIndex
         {
             get { return buildIndex; }
+        }
+
+        public T Get<T>(SceneParameter key)
+        {
+            return (T) parameters[key];
         }
 
         public Scene Scene
@@ -71,9 +80,14 @@ namespace ProjectFTP.SceneManagement
         private static StackedSceneManager instance;
         private List<StackedScene> stack = new List<StackedScene>();
 
-        private static SceneName[] mainScenes = { SceneName.MainMenu, SceneName.StoryModeScene };
+        private static SceneName[] mainScenes = { SceneName.MainMenu, SceneName.StoryModeScene, SceneName.WorldScene };
 
         public AsyncOperation Load(SceneName sceneName)
+        {
+            return Load(sceneName, new Dictionary<SceneParameter, object>());
+        }
+
+        public AsyncOperation Load(SceneName sceneName, IDictionary<SceneParameter, object> parameters)
         {
             if (stack.Exists(delegate(StackedScene entry) { return entry.Name == sceneName; }))
             {
@@ -89,7 +103,7 @@ namespace ProjectFTP.SceneManagement
 
             StackedScene scene = stack.Find(delegate (StackedScene entry) { return entry.Name == sceneName; });
             if (scene == null) {
-                scene = new StackedScene(sceneName);
+                scene = new StackedScene(sceneName, parameters);
             }
 
             stack.Add(scene);
@@ -126,17 +140,22 @@ namespace ProjectFTP.SceneManagement
             stack.RemoveRange(index, stack.Count - index);
         }
     
-        public static Scene Active
+        public static StackedScene Active
         {
             get
             {
-                return Instance.stack.Last().Scene;
+                return Instance.stack.Last();
             }
         }
 
         public static AsyncOperation LoadScene(SceneName name)
         {
             return Instance.Load(name);
+        }
+
+        public static AsyncOperation LoadScene(SceneName name, IDictionary<SceneParameter, object> parameters)
+        {
+            return Instance.Load(name, parameters);
         }
 
         public static void UnloadScene(SceneName name)

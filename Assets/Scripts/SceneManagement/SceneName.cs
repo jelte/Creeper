@@ -5,5 +5,5 @@ using System.Text;
 
 namespace ProjectFTP.SceneManagement
 {
-    public enum SceneName { MainMenu, StoryModeScene, PauseScene, DeathScene, VictoryScene, SettingsScene }
+    public enum SceneName { MainMenu, StoryModeScene, PauseScene, DeathScene, VictoryScene, SettingsScene, WorldScene }
 }

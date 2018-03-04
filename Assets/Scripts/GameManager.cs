@@ -11,6 +11,8 @@ namespace ProjectFTP
         private const string SETTINGS_SOUND_EFFECTS_VOLUME = "sfx_volume";
         static private GameManager instance;
         ProfileLoader profileLoader;
+        private int world = 0;
+        private int level = 0;
 
         public void Start()
         {
@@ -18,7 +20,7 @@ namespace ProjectFTP
             profileLoader = new ProfileLoader(Application.persistentDataPath + "/profiles.dat");
 
             StackedSceneManager.LoadScene(SceneName.MainMenu);
-        }   
+        }
         
         public Profile Profile
         {

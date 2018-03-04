@@ -42,6 +42,7 @@ namespace ProjectFTP.Progression
         public bool Current
         {
             get { return current; }
+            set { current = value; }
         }
 
         public bool Completed

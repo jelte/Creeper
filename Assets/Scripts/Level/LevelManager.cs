@@ -20,33 +20,26 @@ namespace ProjectFTP.Level
 
         void Start()
         {
-            Progression.Level level = GameManager.Instance.Profile.CurrentStoryModeLevel;
+            LevelConfig levelConfig = StackedSceneManager.Active.Get<LevelConfig>(SceneParameter.LEVEL);
+
             Camera.main.GetComponent<PostProcessingBehaviour>().profile = cameraProfile;
 
-            LevelConfig zoneConfig = zoneConfigs[0];
-            if (level != null)
-            {
-                int index = zoneConfigs.FindLastIndex(delegate (LevelConfig config) { return config.world == level.World && config.zone == level.Zone; });
-                if (index + 1 < zoneConfigs.Count) { 
-                    zoneConfig = zoneConfigs[index + 1];
-                }
-            }
-            loader.LoadLevel(zoneConfig.layout, zoneConfig.imageConversionScheme, gameObject.transform);
+            loader.LoadLevel(levelConfig.layout, levelConfig.imageConversionScheme, gameObject.transform);
 
             GameObject spawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint");
             GameObject character = Instantiate(characterPrefab, spawnPoint.transform.position, Quaternion.identity);
             character.GetComponent<Character>().ActionHandler += OnDie;
-            SceneManager.MoveGameObjectToScene(character, StackedSceneManager.Active);
+            SceneManager.MoveGameObjectToScene(character, StackedSceneManager.Active.Scene);
 
             GameObject background = CreateNewObject("Background");
-            background.AddComponent<SpriteRenderer>().sprite = zoneConfig.background;
+            background.AddComponent<SpriteRenderer>().sprite = levelConfig.background;
             background.AddComponent<FollowPlayer>().StartFollow(character, Vector3.forward * 2);
 
             Camera.main.gameObject.AddComponent<FollowPlayer>().StartFollow(character, Vector3.back * 10);
 
             GetComponentInChildren<VictoryTrigger>().ActionHandler += OnFinish;
 
-            gameObject.AddComponent<CorruptionManager>().SetUp(zoneConfig);
+            gameObject.AddComponent<CorruptionManager>().SetUp(levelConfig);
 
             attempt = level.Attempt;
 
@@ -57,7 +50,7 @@ namespace ProjectFTP.Level
         private GameObject CreateNewObject(string name)
         {
             GameObject gameObject = new GameObject(name);
-            SceneManager.MoveGameObjectToScene(gameObject, StackedSceneManager.Active);
+            SceneManager.MoveGameObjectToScene(gameObject, StackedSceneManager.Active.Scene);
             return gameObject;
         }
 

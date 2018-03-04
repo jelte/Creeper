@@ -43,8 +43,8 @@ namespace ProjectFTP.Level
 
         private GameObject SpawnTileAt(ImageConversionScheme conversionScheme, Color32 c, int x, int y)
         {
-            //transparent tile (do nothing)
-            if (c.a == 0)
+            //transparent tile or white (do nothing)
+			if (c.a == 0 || (c.r == 255 && c.b == 255 && c.g == 255))
             {
                 return null;
             }
