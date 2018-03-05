@@ -1,4 +1,5 @@
-﻿using ProjectFTP.Level;
+﻿ using ProjectFTP.Level;
+using ProjectFTP.Player;
 using ProjectFTP.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
@@ -26,7 +27,7 @@ namespace ProjectFTP.UI
         {
             Vector2 canvasSize = GetComponent<CanvasScaler>().referenceResolution;
             float scaleFactor = GetComponent<CanvasScaler>().scaleFactor;
-            
+
             foreach (WorldConfig world in worlds)
             {
                 Vector2 position = new Vector2(canvasSize.x * (worldPanels.Count), 0f);
@@ -42,7 +43,7 @@ namespace ProjectFTP.UI
                 background.GetComponent<Image>().sprite = world.background;
                 backgrounds.Add(background);
             }
-            
+
             foreach (GameObject worldPanel in worldPanels)
             {
                 worldPanel.GetComponentInChildren<WorldLayoutGenerator>().InitConnections(connectionPrefab);
@@ -50,7 +51,7 @@ namespace ProjectFTP.UI
 
             transform.Find("Next").transform.SetAsLastSibling();
             transform.Find("Previous").transform.SetAsLastSibling();
-            
+
             WorldConfig currentWorld = StackedSceneManager.Active != null ? StackedSceneManager.Active.Get<WorldConfig>(SceneParameter.WORLD) : null;
             if (currentWorld != null)
             {
@@ -59,7 +60,24 @@ namespace ProjectFTP.UI
                     return w.Equals(currentWorld);
                 });
             }
-            
+
+            Profile profile = GameManager.Instance.Profile;
+            bool first = true;
+            foreach (WorldConfig world in worlds)
+            {
+                foreach (LevelConfig level in world.levels)
+                {
+                    if (first || profile.Completed(world, level))
+                    {
+                        first = false;
+                        GameObject.Find(level.name).GetComponent<Button>().interactable = true;
+                        foreach (LevelConfig connection in level.connections)
+                        {
+                            GameObject.Find(connection.name).GetComponent<Button>().interactable = true;
+                        }
+                    }
+                }
+            }
         }
 
         // Update is called once per frame

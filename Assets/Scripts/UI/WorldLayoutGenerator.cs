@@ -71,6 +71,7 @@ namespace ProjectFTP.Level
         private void CreateLevelButton(RectTransform clusterTransform, Vector2 position, LevelConfig levelConfig)
         {
             GameObject level = Instantiate(levelPrefab);
+            level.GetComponent<Button>().interactable = false;
             level.name = levelConfig.name;
             RectTransform levelTransform = level.GetComponent<RectTransform>();
             levelTransform.SetParent(clusterTransform);

@@ -1,24 +1,29 @@
-﻿using System;
+﻿using ProjectFTP.Level;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ProjectFTP.Progression
+namespace ProjectFTP.Player
 {
     [Serializable]
     public class Attempt
     {
-        private float time = 0.0f;
-        private bool success = false;
         private bool finished = false;
         
+        public Attempt(WorldConfig world, LevelConfig level)
+        {
+            World = world.name;
+            Level = level.name;
+        }
+
         public void Tick(float deltaTime)
         {
             if (finished)
             {
                 return;
             }
-            time += deltaTime;
+            Time += deltaTime;
         }
 
         private void Finish(bool success)
@@ -28,7 +33,7 @@ namespace ProjectFTP.Progression
                 return;
             }
             finished = true;
-            this.success = success;
+            Success = success;
         }
 
         public void Victory()
@@ -41,14 +46,9 @@ namespace ProjectFTP.Progression
             Finish(false);
         }
 
-        public float Time
-        {
-            get { return time;  }
-        }
-
-        public bool Success
-        {
-            get { return success;  }
-        }
+        public float Time { get; internal set; }
+        public bool Success { get; internal set; }
+        public string World { get; internal set; }
+        public string Level { get; internal set; }
     }
 }

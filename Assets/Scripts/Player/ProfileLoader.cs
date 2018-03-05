@@ -27,7 +27,9 @@ namespace ProjectFTP.Player
                 try
                 {
                     profiles = (List<Profile>)formatter.Deserialize(file);
-                } catch (Exception e) {}
+                } catch (Exception e) {
+                    Debug.Log(e.Message);
+                }
                 file.Close();
             }
         }

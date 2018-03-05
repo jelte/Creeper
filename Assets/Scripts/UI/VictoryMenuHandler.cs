@@ -1,11 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using UnityEngine.PostProcessing;
 using ProjectFTP.SceneManagement;
 using ProjectFTP.Level;
+using ProjectFTP.Player;
 
 namespace ProjectFTP.UI
 {
@@ -22,19 +21,22 @@ namespace ProjectFTP.UI
         // Use this for initialization
         void Start()
         {
+            Attempt attempt = StackedSceneManager.Active.Get<Attempt>(SceneParameter.ATTEMPT);
             Time.timeScale = 0;
             if (label)
             {
-                GameManager.Instance.Profile.CurrentStoryModeLevel.Attempt.Victory();
-                float timeTaken = GameManager.Instance.Profile.CurrentStoryModeLevel.TimeTaken;
-                int attempts = GameManager.Instance.Profile.CurrentStoryModeLevel.Attempts;
-                label.text = "Time take: " + Mathf.Floor(timeTaken / 60) + " m " + Mathf.Round(timeTaken % 60) + " s.\n";
-                label.text += "Attempts: " + attempts + "\n";
+                attempt.Victory();
+                LevelStats stats = GameManager.Instance.Profile.GetLevelStats(
+                    StackedSceneManager.Active.Get<WorldConfig>(SceneParameter.WORLD),
+                    StackedSceneManager.Active.Get<LevelConfig>(SceneParameter.LEVEL)
+                );
+                label.text = "Time take: " + stats.Minutes + " m " + stats.Seconds + " s.\n";
+                label.text += "Attempts: " + stats.Attempts + "\n";
             } else
             {
-
-                GameManager.Instance.Profile.CurrentStoryModeLevel.Attempt.Dead();
+                attempt.Dead();
             }
+            GameManager.SaveAttempt(attempt);
 
             Camera.main.GetComponent<PostProcessingBehaviour>().profile = postProcessingProfile;
         }

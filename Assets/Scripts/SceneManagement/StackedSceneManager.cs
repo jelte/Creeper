@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 
 namespace ProjectFTP.SceneManagement
 {
-    public enum SceneParameter { WORLD, LEVEL };
+    public enum SceneParameter { WORLD, LEVEL, ATTEMPT };
 
     public class StackedScene
     {
