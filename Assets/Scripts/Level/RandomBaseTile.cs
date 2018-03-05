@@ -11,7 +11,7 @@ public class RandomBaseTile : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-        RandomTile = Random.Range(1, 26);
+        RandomTile = Random.Range(1, 34);
         this.GetComponent<SpriteRenderer>().sprite = SpriteArray[RandomTile];
     }
 	
