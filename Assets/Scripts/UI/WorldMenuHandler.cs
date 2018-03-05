@@ -99,6 +99,11 @@ namespace ProjectFTP.UI
                     panel.GetComponent<RectTransform>().anchoredPosition += displacement;
                 }
             }
+            // Check if the pause button was hit
+            if (Input.GetButtonDown("Pause"))
+            {
+                StackedSceneManager.LoadScene(SceneName.PauseScene);
+            }
         }
 
         public void SlideTo(int worldIndex)

@@ -16,9 +16,6 @@ namespace ProjectFTP.UI
         public Text label;
         public PostProcessingProfile postProcessingProfile;
 
-        private float timeDelay = 1.0f;
-
-        // Use this for initialization
         void Start()
         {
             Attempt attempt = StackedSceneManager.Active.Get<Attempt>(SceneParameter.ATTEMPT);

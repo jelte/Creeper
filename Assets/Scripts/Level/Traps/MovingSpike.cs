@@ -1,29 +1,24 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using ProjectFTP;
-
+﻿using UnityEngine;
 
 namespace ProjectFTP.Level.Traps
 {
-    public class MovignSpike : MonoBehaviour
+    public class MovingSpike : MonoBehaviour
     {
-
-
+        public int damage = 1;
         public bool MoveTowards = false;
         public GameObject TargetReference;
         private Vector3 tempPosition;
-        public float moveSpeed;
+        public float moveSpeed = 5.0f;
 
-        private void Start()
+        void Start()
         {
+            gameObject.AddComponent<DamagePlayerTrigger>().amount = damage;
             tempPosition = TargetReference.transform.position;
-            moveSpeed = 5.0f;
         }
 
-        //move object to player
-        private void Update()
+        void Update()
         {
+            //move object to player
             if (MoveTowards == true)
             {
                 //move
@@ -35,17 +30,6 @@ namespace ProjectFTP.Level.Traps
                 {
                     MoveTowards = false;
                 }
-            }
-        }
-
-        //kill player
-        private void OnTriggerEnter2D(Collider2D collision)
-        {
-            //on trigger hit kill player
-            if (collision.CompareTag("Player"))
-            {
-                //reduce player health
-                collision.GetComponent<Character>().TakeDamage(1);
             }
         }
     }

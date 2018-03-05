@@ -106,7 +106,7 @@ namespace ProjectFTP.Level
             float angle = Mathf.Atan2(vector.y, vector.x);
             
             connectionTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, vectorPos.magnitude);
-            connectionTransform.SetPositionAndRotation(aRectTransform.position, Quaternion.EulerAngles(0f, 0f, angle));
+            connectionTransform.SetPositionAndRotation(aRectTransform.position, Quaternion.Euler(0f, 0f, Mathf.Rad2Deg * angle));
             connectionTransform.localScale = new Vector3(1f, connectionTransform.localScale.y, connectionTransform.localScale.z);
         }
 

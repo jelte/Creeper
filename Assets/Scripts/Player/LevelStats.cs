@@ -11,7 +11,6 @@ namespace ProjectFTP.Player
         public LevelStats(List<Attempt> list)
         {
             int lastSuccess = list.GetRange(0, list.Count - 1).FindLastIndex(delegate (Attempt attempt) { return attempt.Success; });
-            Debug.Log(lastSuccess);
             this.list = lastSuccess == -1 ? list : list.GetRange(lastSuccess + 1, list.Count - (lastSuccess + 1));
             Attempts = this.list.Count;
             

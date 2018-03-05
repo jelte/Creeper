@@ -7,19 +7,15 @@ namespace ProjectFTP.Player
     [Serializable]
     public class Profile
     {
-        private DateTime createdOn;
-        private DateTime lastUpdatedOn;
-        private bool active = false;
         private Dictionary<string, Dictionary<string, List<Attempt>>> progression = new Dictionary<string, Dictionary<string, List<Attempt>>>();
 
         public Profile()
         {
-            this.createdOn = DateTime.Now;
+            CreatedOn = DateTime.Now;
         }
 
-        public DateTime CreateOn { get; internal set; }
+        public DateTime CreatedOn { get; internal set; }
         public DateTime LastUpdatedOn { get; internal set; }
-
         public bool Active { get; set; }
 
         public void AddAttempt(Attempt attempt)
@@ -46,45 +42,51 @@ namespace ProjectFTP.Player
                 // if not add attempt
                 level.Add(attempt);
             }
+            LastUpdatedOn = DateTime.Now;
         }
 
         public LevelStats GetLevelStats(WorldConfig world, LevelConfig level)
         {
-            // Check if world exists in progress
-            Dictionary<string, List<Attempt>> worldProgress;
-            if (!progression.TryGetValue(world.name, out worldProgress))
-            {
-                return null;
-            }
-
             // Check if level exists in progress
-            List<Attempt> levelProgress;
-            if (!worldProgress.TryGetValue(level.name, out levelProgress))
+            List<Attempt> levelProgress = GetLevelProgress(world, level);
+            if (levelProgress == null)
             {
-                return null;
+                levelProgress = new List<Attempt>();
             }
 
-            return new LevelStats(levelProgress);
+            return new LevelStats(GetLevelProgress(world, level));
         }
 
         public bool Completed(WorldConfig world, LevelConfig level)
         {
-            // Check if world exists in progress
-            Dictionary<string, List<Attempt>> worldProgress;
-            if (!progression.TryGetValue(world.name, out worldProgress))
-            {
-                return false;
-            }
-
             // Check if level exists in progress
-            List<Attempt> levelProgress;
-            if (!worldProgress.TryGetValue(level.name, out levelProgress))
+            List<Attempt> levelProgress = GetLevelProgress(world, level);
+            if (levelProgress == null)
             {
                 return false;
             }
 
             // Check if level has been completed
             return levelProgress.Find(delegate (Attempt attempt) { return attempt.Success; }) != null;
+        }
+
+        private List<Attempt> GetLevelProgress(WorldConfig world, LevelConfig level)
+        {
+            // Check if world exists in progress
+            Dictionary<string, List<Attempt>> worldProgress;
+            if (!progression.TryGetValue(world.name, out worldProgress))
+            {
+                return null;
+            }
+
+            // Check if level exists in progress
+            List<Attempt> levelProgress;
+            if (!worldProgress.TryGetValue(level.name, out levelProgress))
+            {
+                return null;
+            }
+
+            return levelProgress;
         }
     }
 }

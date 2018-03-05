@@ -97,7 +97,7 @@ namespace ProjectFTP
         {
             health -= amount;
             OnCharacterAction(Action.TAKE_DAMAGE);
-            if (health < 0)
+            if (health <= 0)
             {
                 OnCharacterAction(Action.DIE);
             }
