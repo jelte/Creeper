@@ -1,51 +1,57 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿using UnityEngine;
 
 namespace ProjectFTP.Level.Traps
 {
     public class FireWall : MonoBehaviour
     {
-        public GameObject Target;
-        public GameObject Target2;
-        public GameObject ShootFromHere;
-        public GameObject ShootFromHere2;
         public GameObject BallToSpawn;
+        public float delay = 1;
+        public float repeatRate = 2;
+        public float speed = 1000.0f;
+        public float maxDistance = 200.0f;
+        public int amount = 2;
+
+        private GameObject player;
 
         void Start()
         {
-            InvokeRepeating("Fire", 1, 2); //after 1 second fire every 5
-        }
-
-        private void Update()
-        {
-            //check player position
-            float Range = Vector3.Distance(GameObject.FindWithTag("Player").transform.position, gameObject.transform.position);
-            if (Range < 200)
-            {
-                Target = GameObject.FindWithTag("Player");
-                Target2 = GameObject.FindWithTag("Player");
-            }
-            else
-            {
-                Target = ShootFromHere;
-                Target2 = ShootFromHere2;
-            }
+            player = GameObject.FindGameObjectWithTag("Player");
+            InvokeRepeating("Fire", delay, repeatRate);
         }
 
         void Fire()
         {
-            //fire here
-            GameObject BallInstance = Instantiate(BallToSpawn, ShootFromHere.transform.position, Quaternion.identity);
-            Vector3 shoot = (Target.transform.position - BallInstance.transform.position).normalized;
-            BallInstance.GetComponent<Rigidbody2D>().AddForce(shoot * 500.0f);
+            float offSetDirection = Random.Range(0.0f, 360.0f);
 
-            GameObject BallInstance2 = Instantiate(BallToSpawn, ShootFromHere2.transform.position, Quaternion.identity);
-            Vector3 shoot2 = (Target2.transform.position - BallInstance2.transform.position).normalized;
-            BallInstance2.GetComponent<Rigidbody2D>().AddForce(shoot2 * 500.0f);
+            if (player != null)
+            {
+                float distance = (player.transform.position - transform.position).magnitude;
+                if (distance <= maxDistance)
+                {
+                    // HACK: Disable box collider
+                    gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                    RaycastHit2D hit = Physics2D.Raycast(transform.position, player.transform.position, distance);
+                    // HACK: Enable box collider
+                    gameObject.GetComponent<BoxCollider2D>().enabled = true;
+                    if (hit.collider == null)
+                    {
+                        offSetDirection = Vector2.Angle(transform.position, player.transform.position) / Mathf.Rad2Deg;
+                    }
+                }
+            }
+
+            //fire here
+            float angle = 360 / amount;
+            for (float arc = 0; arc < 360; arc += angle)
+            {
+                Vector2 direction = GetDirection(offSetDirection + arc);
+                Instantiate(BallToSpawn, transform.position + (Vector3)direction, Quaternion.identity).GetComponent<Rigidbody2D>().AddForce(direction.normalized * speed);
+            }
         }
 
-
+        Vector2 GetDirection(float angle)
+        {
+            return new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad));
+        }
     }
 }
