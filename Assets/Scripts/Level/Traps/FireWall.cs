@@ -45,7 +45,9 @@ namespace ProjectFTP.Level.Traps
             for (float arc = 0; arc < 360; arc += angle)
             {
                 Vector2 direction = GetDirection(offSetDirection + arc);
-                Instantiate(BallToSpawn, transform.position + (Vector3)direction, Quaternion.identity).GetComponent<Rigidbody2D>().AddForce(direction.normalized * speed);
+                GameObject ballGameObject = Instantiate(BallToSpawn, transform.position + (Vector3)direction, Quaternion.identity);
+                ballGameObject.GetComponent<Rigidbody2D>().AddForce(direction.normalized * speed);
+                Destroy(ballGameObject, 3.0f);
             }
         }
 
