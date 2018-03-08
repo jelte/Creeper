@@ -14,8 +14,8 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: dcdba42bf23c03844aa7f4dade107054, type: 3}
   connections:
   - {fileID: 11400000, guid: 1dce951227ef603468aa5922bb810c14, type: 2}
-  layout: {fileID: 2800000, guid: aef2633aacd0c034bb990e9553537738, type: 3}
-  background: {fileID: 21300000, guid: 2b0dc9232b593254592730af146e755b, type: 3}
+  layout: {fileID: 2800000, guid: 8ba7d60d87df08748b16fe6a46f5225f, type: 3}
+  background: {fileID: 21300000, guid: 2b7ab488620d8e0439b63f4ea5f0c5f0, type: 3}
   imageConversionScheme: {fileID: 11400000, guid: c4db7d4073e2570498557e36e42f5d2f,
     type: 2}
   corruptions:

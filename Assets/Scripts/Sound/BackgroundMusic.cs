@@ -10,16 +10,25 @@ namespace ProjectFTP.Sound
         
         private AudioSource audioSource;
 
-
         public AudioClip audioClip;
+        public AudioClip audioClip2;
 
         // Use this for initialization
         void Start()
         {
+            int random = Random.Range(0, 2);
             instance = this;
             audioSource = gameObject.AddComponent<AudioSource>();
             audioSource.loop = true;
-            audioSource.clip = audioClip;
+            if (random == 0)
+            {
+                audioSource.clip = audioClip;
+            }
+            else
+            {
+                audioSource.clip = audioClip2;
+            }
+                
             audioSource.Play();
         }
 
