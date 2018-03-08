@@ -9,7 +9,7 @@ namespace ProjectFTP.Corruptions
     [CreateAssetMenu(menuName = "Corruptions/CameraZoom")]
     class CameraZoomCorruption : Corruption
     {
-        public float modifier;
+        public float modifier = 1.0f;
 
         public override void SetUp()
         {

@@ -24,7 +24,12 @@ namespace ProjectFTP.Player
             if (File.Exists(filename))
             {
                 FileStream file = File.Open(filename, FileMode.Open);
-                profiles = (List<Profile>)formatter.Deserialize(file);
+                try
+                {
+                    profiles = (List<Profile>)formatter.Deserialize(file);
+                } catch (Exception e) {
+                    Debug.Log(e.Message);
+                }
                 file.Close();
             }
         }

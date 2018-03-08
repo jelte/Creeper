@@ -22,8 +22,8 @@ namespace ProjectFTP.Level.Traps
             if (collision.tag == "Player")
             {
                 Debug.Log("Triggered!");
-                ObjectToMove.GetComponent<MovignSpike>().TargetReference = collision.gameObject;
-                ObjectToMove.GetComponent<MovignSpike>().MoveTowards = true;
+                ObjectToMove.GetComponent<MovingSpike>().TargetReference = collision.gameObject;
+                ObjectToMove.GetComponent<MovingSpike>().MoveTowards = true;
 
             }
 

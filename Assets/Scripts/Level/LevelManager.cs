@@ -5,6 +5,7 @@ using UnityEngine.PostProcessing;
 using ProjectFTP.UI;
 using ProjectFTP.Corruptions;
 using ProjectFTP.SceneManagement;
+using ProjectFTP.Player;
 
 namespace ProjectFTP.Level
 {
@@ -13,57 +14,62 @@ namespace ProjectFTP.Level
         public List<LevelConfig> zoneConfigs;
         public GameObject characterPrefab;
         public PostProcessingProfile cameraProfile;
+        public float saveTimer = 10.0f;
         
         private LevelLoader loader = new LevelLoader();
-        private Progression.Level level;
-        private Progression.Attempt attempt;
+        private Attempt attempt;
 
+        private float lastSave = 10.0f;
+
+        private GameObject CreateNewObject(string name)
+        {
+            GameObject gameObject = new GameObject(name);
+            SceneManager.MoveGameObjectToScene(gameObject, StackedSceneManager.Active.Scene);
+            return gameObject;
+        }
+        
         void Start()
         {
-            Progression.Level level = GameManager.Instance.Profile.CurrentStoryModeLevel;
+            LevelConfig levelConfig = StackedSceneManager.Active.Get<LevelConfig>(SceneParameter.LEVEL);
+            attempt = new Attempt(StackedSceneManager.Active.Get<WorldConfig>(SceneParameter.WORLD), levelConfig);
+
             Camera.main.GetComponent<PostProcessingBehaviour>().profile = cameraProfile;
 
-            LevelConfig zoneConfig = zoneConfigs[0];
-            if (level != null)
-            {
-                int index = zoneConfigs.FindLastIndex(delegate (LevelConfig config) { return config.world == level.World && config.zone == level.Zone; });
-                if (index + 1 < zoneConfigs.Count) { 
-                    zoneConfig = zoneConfigs[index + 1];
-                }
-            }
-            loader.LoadLevel(zoneConfig.layout, zoneConfig.imageConversionScheme, gameObject.transform);
+            loader.LoadLevel(levelConfig.layout, levelConfig.imageConversionScheme, gameObject.transform);
 
             GameObject spawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint");
             GameObject character = Instantiate(characterPrefab, spawnPoint.transform.position, Quaternion.identity);
             character.GetComponent<Character>().ActionHandler += OnDie;
-            SceneManager.MoveGameObjectToScene(character, StackedSceneManager.Active);
+            SceneManager.MoveGameObjectToScene(character, StackedSceneManager.Active.Scene);
 
             GameObject background = CreateNewObject("Background");
-            background.AddComponent<SpriteRenderer>().sprite = zoneConfig.background;
+            background.AddComponent<SpriteRenderer>().sprite = levelConfig.background;
             background.AddComponent<FollowPlayer>().StartFollow(character, Vector3.forward * 2);
 
             Camera.main.gameObject.AddComponent<FollowPlayer>().StartFollow(character, Vector3.back * 10);
 
             GetComponentInChildren<VictoryTrigger>().ActionHandler += OnFinish;
 
-            gameObject.AddComponent<CorruptionManager>().SetUp(zoneConfig);
-
-            attempt = level.Attempt;
+            gameObject.AddComponent<CorruptionManager>().SetUp(levelConfig);
 
             // Ensure time is on
             Time.timeScale = 1.0f;
+            GameManager.SaveAttempt(attempt);
         }
         
-        private GameObject CreateNewObject(string name)
-        {
-            GameObject gameObject = new GameObject(name);
-            SceneManager.MoveGameObjectToScene(gameObject, StackedSceneManager.Active);
-            return gameObject;
-        }
-
         void Update()
         {
+            // Update attempt time
             attempt.Tick(Time.deltaTime);
+            // Update last save counter
+            lastSave -= Time.deltaTime;
+            // Save attempt when interval has been exceeded.
+            if (lastSave < 0.0f)
+            {
+                GameManager.SaveAttempt(attempt);
+                lastSave = Time.deltaTime;
+            }
+            // Check if the pause button was hit
             if (Input.GetButtonDown("Pause"))
             {
                 StackedSceneManager.LoadScene(SceneName.PauseScene);
@@ -76,13 +82,22 @@ namespace ProjectFTP.Level
             if (action == Character.Action.DIE)
             {
                 GetComponent<CorruptionManager>().TearDown();
-                StackedSceneManager.LoadScene(SceneName.DeathScene);
+                StackedSceneManager.LoadScene(SceneName.DeathScene, new Dictionary<SceneParameter, object>() {
+                    { SceneParameter.WORLD, StackedSceneManager.Active.Get<WorldConfig>(SceneParameter.WORLD)},
+                    { SceneParameter.LEVEL, StackedSceneManager.Active.Get<LevelConfig>(SceneParameter.LEVEL)},
+                    { SceneParameter.ATTEMPT, attempt}
+                });
             }
         }
 
         void OnFinish()
         {
-            StackedSceneManager.LoadScene(SceneName.VictoryScene);
+            GetComponent<CorruptionManager>().TearDown();
+            StackedSceneManager.LoadScene(SceneName.VictoryScene, new Dictionary<SceneParameter, object>() {
+                { SceneParameter.WORLD, StackedSceneManager.Active.Get<WorldConfig>(SceneParameter.WORLD)},
+                { SceneParameter.LEVEL, StackedSceneManager.Active.Get<LevelConfig>(SceneParameter.LEVEL)},
+                { SceneParameter.ATTEMPT, attempt}
+            });
         }
     }
 

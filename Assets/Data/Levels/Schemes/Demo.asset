@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 002a0fd03ab69e04f8d4bb1053d639b3, type: 3}
+  m_Name: Demo
+  m_EditorClassIdentifier: 
+  colorsToPrefab:
+  - color:
+      serializedVersion: 2
+      rgba: 4278190080
+    prefab: {fileID: 1856362643228220, guid: 5e22ae1f520f3484ab0bdfe50792660a, type: 2}
+  - color:
+      serializedVersion: 2
+      rgba: 4278255360
+    prefab: {fileID: 1189563738263410, guid: d04b372efaafa5e43b527400b8fdef25, type: 2}
+  - color:
+      serializedVersion: 2
+      rgba: 4294901760
+    prefab: {fileID: 1830616874528742, guid: 151abbbd19bded449809a8af39972ad2, type: 2}
+  - color:
+      serializedVersion: 2
+      rgba: 4278190335
+    prefab: {fileID: 1891536733409136, guid: a5b37979fa814e340a23bf8bd7c0e04f, type: 2}

@@ -12,11 +12,7 @@ namespace ProjectFTP.UI
     class CorruptionUIHandler : MonoBehaviour
     {
         private Dictionary<ActiveCorruption, GameObject> corruptions = new Dictionary<ActiveCorruption, GameObject>();
-        public GameObject uiPrefab;
-
-        float timer = 0f;
-        float maxTime = 2f;
-        GameObject uiGameObject;
+        public GameObject uiPrefab = null;
 
         public void Start()
         {
@@ -25,47 +21,38 @@ namespace ProjectFTP.UI
 
         void OnCorruption(ActiveCorruption corruption, CorruptionState state)
         {
-            
             switch (state)
             {
                 case CorruptionState.START:
-                    
-                    uiGameObject = GameObject.Instantiate(uiPrefab, gameObject.transform);
-                    uiGameObject.GetComponent<Image>().sprite = corruption.Icon;
-                    corruptions.Add(corruption, uiGameObject);
-                    initialCanvas(corruption);
-                    StartCoroutine(ChangetoSmallIcon(corruption, 3f));
+                    corruptions.Add(corruption, GameObject.Instantiate(uiPrefab, gameObject.transform));
+                    StartCoroutine(Minimize(corruption, 3f));
                     break;
                 case CorruptionState.END:
+                    GameObject uiGameObject;
                     if (corruptions.TryGetValue(corruption, out uiGameObject))
                     {
                         corruptions.Remove(corruption);
                         Destroy(uiGameObject);
                     }
-                    timer = 0;
                     break;
             }
         }
 
-        IEnumerator ChangetoSmallIcon(ActiveCorruption corruption,float time)
+        IEnumerator Minimize(ActiveCorruption corruption, float time)
         {
-            Canvas c = uiGameObject.GetComponent<Transform>().parent.GetComponent<Canvas>();
+            GameObject uiGameObject = corruptions[corruption];
+            Image image = uiGameObject.GetComponent<Image>();
+            // Show in banner
+            image.sprite = corruption.Icon;
+            GridLayoutGroup gridLayoutGroup = uiGameObject.GetComponent<GridLayoutGroup>();
+            gridLayoutGroup.childAlignment = TextAnchor.UpperCenter;
+            gridLayoutGroup.cellSize = new Vector2(1920, 180);
+            // Wait for <time>
             yield return new WaitForSeconds(time);
-            c.GetComponent<GridLayoutGroup>().cellSize = new Vector2(180,180);
-            c.GetComponent<GridLayoutGroup>().childAlignment = TextAnchor.UpperLeft;
-            uiGameObject.GetComponent<Image>().sprite = corruption.SmallIcon;
-        }
-
-        void initialCanvas(ActiveCorruption corruption)
-        {
-            Canvas c = uiGameObject.GetComponent<Transform>().parent.GetComponent<Canvas>();
-            c.GetComponent<GridLayoutGroup>().childAlignment = TextAnchor.UpperCenter;
-            c.GetComponent<GridLayoutGroup>().cellSize = new Vector2(1920, 180);
-
-        }
-        
-        private void Update()
-        {
+            // Minize
+            gridLayoutGroup.cellSize = new Vector2(180,180);
+            gridLayoutGroup.childAlignment = TextAnchor.UpperLeft;
+            image.sprite = corruption.SmallIcon;
         }
     }
 }

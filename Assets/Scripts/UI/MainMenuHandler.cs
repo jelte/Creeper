@@ -1,4 +1,5 @@
 ﻿using ProjectFTP.SceneManagement;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.PostProcessing;
 
@@ -8,14 +9,14 @@ namespace ProjectFTP.UI
     {
         public PostProcessingProfile postProcessingProfile;
 
-        void Update()
+        void Awake()
         {
             Camera.main.GetComponent<PostProcessingBehaviour>().profile = postProcessingProfile;
         }
 
         public void StoryMode()
         {
-            StackedSceneManager.LoadScene(SceneName.StoryModeScene);
+            StackedSceneManager.LoadScene(SceneName.WorldScene);
         }
 
         public void Settings()

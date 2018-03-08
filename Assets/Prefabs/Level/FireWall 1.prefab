@@ -136,12 +136,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e6f77c471b31354cafae30b792a88f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Target: {fileID: 0}
-  Target2: {fileID: 0}
-  ShootFromHere: {fileID: 1280692754121212}
-  ShootFromHere2: {fileID: 1879086113648998}
   BallToSpawn: {fileID: 1151237158683954, guid: 683509d1925b9c3449168273bf984553,
     type: 2}
+  delay: 1
+  repeatRate: 2
+  speed: 1000
+  maxDistance: 200
+  amount: 2
 --- !u!212 &212189216345893016
 SpriteRenderer:
   m_ObjectHideFlags: 1

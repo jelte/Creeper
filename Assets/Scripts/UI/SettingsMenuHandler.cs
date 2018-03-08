@@ -7,11 +7,9 @@ namespace ProjectFTP.UI
 {
     public class SettingsMenuHandler : MonoBehaviour
     {
-        Settings settings;
-
         public void Awake()
         {
-            Debug.Log(GameManager.BackgroundMusicVolume);
+            // Set the current value for each slider
             foreach (Slider slider in GetComponentsInChildren<Slider>())
             {
                 switch (slider.gameObject.transform.parent.gameObject.name)
@@ -33,6 +31,7 @@ namespace ProjectFTP.UI
         
         public void Apply()
         {
+            // Save each slider value
             foreach (Slider slider in GetComponentsInChildren<Slider>())
             {
                 switch (slider.gameObject.transform.parent.gameObject.name)
@@ -45,14 +44,13 @@ namespace ProjectFTP.UI
                         break;
                 }
             }
-
-            Debug.Log(
-                        GameManager.BackgroundMusicVolume);
+            // Close the settings window
             Close();
         }
 
         private void Close()
         {
+            // Unload the settings scene
             StackedSceneManager.UnloadScene(SceneName.SettingsScene);
         }
     }
