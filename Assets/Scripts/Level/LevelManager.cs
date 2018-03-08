@@ -11,7 +11,6 @@ namespace ProjectFTP.Level
 {
     public class LevelManager : MonoBehaviour
     {
-        public List<LevelConfig> zoneConfigs;
         public GameObject characterPrefab;
         public PostProcessingProfile cameraProfile;
         public float saveTimer = 10.0f;

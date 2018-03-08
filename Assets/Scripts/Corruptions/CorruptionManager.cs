@@ -64,5 +64,10 @@ namespace ProjectFTP.Corruptions
         {
             this.levelConfig = levelConfig;
         }
+
+        void OnDestroy()
+        {
+            TearDown();    
+        }
     }
 }
