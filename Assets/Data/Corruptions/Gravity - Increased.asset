@@ -13,4 +13,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 6b749ef10bf343445940b674ccc81fc2, type: 3}
   iconSmall: {fileID: 21300000, guid: 2239d4d92695f854f9a7698d8566bfbb, type: 3}
-  modifier: 2
+  modifier: 1.5
