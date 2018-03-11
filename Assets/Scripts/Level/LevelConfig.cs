@@ -1,8 +1,5 @@
 ﻿using ProjectFTP.Corruptions;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using UnityEngine;
 
 namespace ProjectFTP.Level
@@ -16,6 +13,7 @@ namespace ProjectFTP.Level
         public Sprite background;
         public ImageConversionScheme imageConversionScheme;
         public List<Corruption> corruptions = new List<Corruption>();
-        public int numberOfActiveCorruptions;        
+        public int numberOfActiveCorruptions;
+        public List<SpeechBubble> speechTriggers = new List<SpeechBubble>();
     }
 }
