@@ -6,12 +6,11 @@ namespace ProjectFTP.Corruptions
     public class ActiveCorruption
     {
         private readonly Corruption corruption;
-        private bool active = true;
+        private bool active;
 
         public ActiveCorruption(Corruption corruption)
         {
             this.corruption = corruption;
-            corruption.SetUp();
         }
 
         public Sprite Icon
@@ -19,13 +18,19 @@ namespace ProjectFTP.Corruptions
             get { return corruption.Icon; }
         }
 
-        public Sprite SmallIcon
+        public string Name
         {
-            get { return corruption.SmallIcon; }
+            get { return corruption.name;  }
         }
 
         public bool Active {
             get { return active; }
+        }
+
+        internal void SetUp()
+        {
+            active = true;
+            corruption.SetUp();
         }
 
         internal void TearDown()

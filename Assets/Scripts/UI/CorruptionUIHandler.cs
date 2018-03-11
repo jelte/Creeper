@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using ProjectFTP.Corruptions;
@@ -24,35 +21,31 @@ namespace ProjectFTP.UI
             switch (state)
             {
                 case CorruptionState.START:
-                    corruptions.Add(corruption, GameObject.Instantiate(uiPrefab, gameObject.transform));
-                    StartCoroutine(Minimize(corruption, 3f));
-                    break;
-                case CorruptionState.END:
-                    GameObject uiGameObject;
-                    if (corruptions.TryGetValue(corruption, out uiGameObject))
                     {
-                        corruptions.Remove(corruption);
-                        Destroy(uiGameObject);
+                        GameObject uiGameObject = GameObject.Instantiate(uiPrefab, gameObject.transform);
+                        uiGameObject.transform.GetChild(0).GetComponentInChildren<Image>().sprite = corruption.Icon;
+                        uiGameObject.GetComponentInChildren<Text>().text = corruption.Name;
+                        corruptions.Add(corruption, uiGameObject);
+                        StartCoroutine(Minimize(uiGameObject));
+                        break;
+                    } 
+                case CorruptionState.END:
+                    {
+                        GameObject uiGameObject;
+                        if (corruptions.TryGetValue(corruption, out uiGameObject))
+                        {
+                            corruptions.Remove(corruption);
+                            Destroy(uiGameObject);
+                        }
+                        break;
                     }
-                    break;
             }
         }
 
-        IEnumerator Minimize(ActiveCorruption corruption, float time)
+        IEnumerator Minimize(GameObject uiGameObject)
         {
-            GameObject uiGameObject = corruptions[corruption];
-            Image image = uiGameObject.GetComponent<Image>();
-            // Show in banner
-            image.sprite = corruption.Icon;
-            GridLayoutGroup gridLayoutGroup = uiGameObject.GetComponent<GridLayoutGroup>();
-            gridLayoutGroup.childAlignment = TextAnchor.UpperCenter;
-            gridLayoutGroup.cellSize = new Vector2(1920, 180);
-            // Wait for <time>
-            yield return new WaitForSeconds(time);
-            // Minize
-            gridLayoutGroup.cellSize = new Vector2(180,180);
-            gridLayoutGroup.childAlignment = TextAnchor.UpperLeft;
-            image.sprite = corruption.SmallIcon;
+            yield return new WaitForSeconds(3f);
+            uiGameObject.GetComponent<Animation>().Play();
         }
     }
 }

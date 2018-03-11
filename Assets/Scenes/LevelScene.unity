@@ -730,8 +730,8 @@ GameObject:
   - component: {fileID: 1895573470}
   - component: {fileID: 1895573469}
   - component: {fileID: 1895573468}
-  - component: {fileID: 1895573473}
   - component: {fileID: 1895573472}
+  - component: {fileID: 1895573473}
   m_Layer: 5
   m_Name: Corruption Canvas
   m_TagString: Untagged
@@ -825,7 +825,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bed782401e3f1084b8ac39f034d0df57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiPrefab: {fileID: 1125272576983872, guid: 638197d661d562a4583ae90a775b05db, type: 2}
+  uiPrefab: {fileID: 1621658237389768, guid: 9816748a39005454db68ca946ce14259, type: 2}
 --- !u!114 &1895573473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -834,18 +834,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1895573467}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -2095666955, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 1297475563, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 10
+    m_Left: 0
     m_Right: 0
-    m_Top: 10
+    m_Top: 20
     m_Bottom: 0
-  m_ChildAlignment: 1
-  m_StartCorner: 0
-  m_StartAxis: 1
-  m_CellSize: {x: 1920, y: 180}
-  m_Spacing: {x: 10, y: 10}
-  m_Constraint: 1
-  m_ConstraintCount: 4
+  m_ChildAlignment: 0
+  m_Spacing: 5
+  m_ChildForceExpandWidth: 0
+  m_ChildForceExpandHeight: 0
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
