@@ -21,3 +21,10 @@ MonoBehaviour:
     type: 2}
   corruptions: []
   numberOfActiveCorruptions: 0
+  speechTriggers:
+  - position: {x: 5, y: 53, z: 0}
+    Radius: 2
+    text: Ok lets see how well you can infect this system...
+  - position: {x: 20, y: 53, z: 0}
+    Radius: 2
+    text: Best to jump over these pits, remember you can jump more than ones...

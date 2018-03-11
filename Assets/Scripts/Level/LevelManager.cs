@@ -51,6 +51,12 @@ namespace ProjectFTP.Level
 
             gameObject.AddComponent<CorruptionManager>().SetUp(levelConfig);
 
+            levelConfig.speechTriggers.ForEach(delegate(SpeechBubble speechBubble) {
+                GameObject trigger = new GameObject();
+                trigger.transform.parent = transform;
+                trigger.AddComponent<SpeechBubbleTrigger>().speechBubble = speechBubble;
+            });
+
             // Ensure time is on
             Time.timeScale = 1.0f;
             GameManager.SaveAttempt(attempt);
