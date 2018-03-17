@@ -1,24 +1,28 @@
 ﻿using ProjectFTP.UI;
 using UnityEngine;
 
-public class SpeechBubbleTrigger : MonoBehaviour {
-
-    public SpeechBubble speechBubble;
-
-    private void Start()
+namespace ProjectFTP.Level
+{
+    public class SpeechBubbleTrigger : MonoBehaviour
     {
-        transform.position = speechBubble.position;
-        CircleCollider2D collider = gameObject.AddComponent<CircleCollider2D>();
-        collider.radius = speechBubble.Radius;
-        collider.isTrigger = true;
-    }
+        public SpeechBubble speechBubble;
 
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        GetComponent<CircleCollider2D>().enabled = false;
-        TypeOut text = GameObject.FindObjectOfType<TypeOut>();
-   
-        text.AnimateText(speechBubble.text);
-        text.GetComponentInParent<Canvas>().enabled = true;
+        private void Start()
+        {
+            transform.position = speechBubble.position;
+            CircleCollider2D collider = gameObject.AddComponent<CircleCollider2D>();
+            collider.radius = speechBubble.Radius;
+            collider.isTrigger = true;
+        }
+
+        void OnTriggerEnter2D(Collider2D collision)
+        {
+            GetComponent<CircleCollider2D>().enabled = false;
+            TypeOut text = GameObject.FindObjectOfType<TypeOut>();
+
+            text.AnimateText(speechBubble.text);
+            text.GetComponentInParent<Canvas>().enabled = true;
+        }
     }
 }
+

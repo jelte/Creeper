@@ -44,7 +44,7 @@ namespace ProjectFTP.Level
             GameObject background = CreateNewObject("Background");
             background.AddComponent<SpriteRenderer>().sprite = levelConfig.background;
             background.AddComponent<FollowPlayer>().StartFollow(character, Vector3.forward * 2);
-
+            
             Camera.main.gameObject.AddComponent<FollowPlayer>().StartFollow(character, Vector3.back * 10);
 
             GetComponentInChildren<VictoryTrigger>().ActionHandler += OnFinish;
@@ -103,6 +103,11 @@ namespace ProjectFTP.Level
                 { SceneParameter.LEVEL, StackedSceneManager.Active.Get<LevelConfig>(SceneParameter.LEVEL)},
                 { SceneParameter.ATTEMPT, attempt}
             });
+        }
+
+        void OnDestroy()
+        {
+            Destroy(Camera.main.gameObject.GetComponent<FollowPlayer>());
         }
     }
 

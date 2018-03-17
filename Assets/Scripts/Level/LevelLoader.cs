@@ -1,10 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-
-//written by poon
-
+﻿using UnityEngine;
 
 namespace ProjectFTP.Level
 {
