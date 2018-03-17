@@ -11,7 +11,6 @@ namespace ProjectFTP
         private const string SETTINGS_SOUND_EFFECTS_VOLUME = "sfx_volume";
         static private GameManager instance;
         private ProfileLoader profileLoader;
-        private Attempt activeAttempt;
 
         void Start()
         {

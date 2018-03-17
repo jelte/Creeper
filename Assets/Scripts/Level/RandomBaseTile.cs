@@ -1,18 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class RandomBaseTile : MonoBehaviour {
-
-
-    public Sprite[] SpriteArray;
-    public int RandomTile;
-
-    // Use this for initialization
-    void Start ()
+namespace ProjectFTP.Level
+{
+    public class RandomBaseTile : MonoBehaviour
     {
-        RandomTile = Random.Range(1, 34);
-        this.GetComponent<SpriteRenderer>().sprite = SpriteArray[RandomTile];
+        public Sprite[] SpriteArray;
+        public int RandomTile;
+        
+        void Start()
+        {
+            this.GetComponent<SpriteRenderer>().sprite = SpriteArray[Random.Range(0, SpriteArray.Length)];
+        }
     }
-	
 }

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace ProjectFTP
 {
@@ -31,18 +29,6 @@ namespace ProjectFTP
             if (Input.GetButtonDown("Attack"))
             {
                 character.Attack();
-            }
-
-            // Climb Button pressed
-            if (Input.GetButtonDown("Climb"))
-            {
-                Debug.Log("Start climb");
-                character.Climb();
-            }
-            if (Input.GetButtonUp("Climb"))
-            {
-                Debug.Log("Stop climb");
-                character.Climb();
             }
         }
         #endregion

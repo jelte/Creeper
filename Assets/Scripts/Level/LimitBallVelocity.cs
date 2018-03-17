@@ -1,27 +1,26 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class LimitBallVelocity : MonoBehaviour {
-
-    private Rigidbody2D rg;
-    public float MaxballSpeed;
-
-    private void Start()
+namespace ProjectFTP.Level.Traps
+{
+    public class LimitBallVelocity : MonoBehaviour
     {
-        rg = this.GetComponent<Rigidbody2D>();
-        MaxballSpeed = 20.0f;
-    }
+        private Rigidbody2D rg;
+        public float maxballSpeed = 20.0f;
 
-
-    void FixedUpdate()
-    {
-        if (Mathf.Abs(rg.velocity.x) > MaxballSpeed || Mathf.Abs(rg.velocity.y) > MaxballSpeed)
+        void Start()
         {
-            // clamp velocity:
-            Vector3 newVelocity = rg.velocity.normalized;
-            newVelocity *= MaxballSpeed;
-            rg.velocity = newVelocity;
+            rg = this.GetComponent<Rigidbody2D>();
+        }
+        
+        void FixedUpdate()
+        {
+            if (Mathf.Abs(rg.velocity.x) > maxballSpeed || Mathf.Abs(rg.velocity.y) > maxballSpeed)
+            {
+                // clamp velocity:
+                Vector3 newVelocity = rg.velocity.normalized;
+                newVelocity *= maxballSpeed;
+                rg.velocity = newVelocity;
+            }
         }
     }
 }

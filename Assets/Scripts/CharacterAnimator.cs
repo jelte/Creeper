@@ -13,6 +13,7 @@ namespace ProjectFTP
         {
             animator = GetComponent<Animator>();
 
+
             character = GetComponent<Character>();
 
             character.ActionHandler += OnCharacterAction;
@@ -20,19 +21,28 @@ namespace ProjectFTP
         
         void Update()
         {
-            animator.SetFloat("MovementX", character.Movement.x);
-            animator.SetFloat("MovementY", character.Movement.y);
+            if (animator != null)
+            {
+                animator.SetFloat("MovementX", character.Movement.x);
+                animator.SetFloat("MovementY", character.Movement.y);
+            }
         }
 
-        private void FixedUpdate()
+        void FixedUpdate()
         {
-            animator.SetFloat("VelocityX", character.Velocity.x);
-            animator.SetFloat("VelocityY", character.Velocity.y);
+            if (animator != null)
+            {
+                animator.SetFloat("VelocityX", character.Velocity.x);
+                animator.SetFloat("VelocityY", character.Velocity.y);
+            }
         }
 
         void OnCharacterAction(Character.Action action)
         {
-            animator.SetTrigger(action.ToString().ToLower());
+            if (animator != null)
+            {
+                animator.SetTrigger(action.ToString().ToLower());
+            }
         }
     }
 }
