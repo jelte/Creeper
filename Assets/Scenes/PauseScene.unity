@@ -123,6 +123,7 @@ GameObject:
   - component: {fileID: 128145883}
   - component: {fileID: 128145885}
   - component: {fileID: 128145884}
+  - component: {fileID: 128145886}
   m_Layer: 5
   m_Name: TipsPanel
   m_TagString: Untagged
@@ -146,8 +147,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -40.155}
-  m_SizeDelta: {x: 0, y: -80.31}
+  m_AnchoredPosition: {x: 0, y: -43.907547}
+  m_SizeDelta: {x: 0, y: 552.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &128145884
 MonoBehaviour:
@@ -182,6 +183,42 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 128145882}
+--- !u!114 &128145886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 128145882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e22d3890da5ae243a411a4bdc113ef2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  messages:
+  - 'Don''t worry, be happy :) '
+  - Please keep your device safe please :p
+  - If you can overcome this issue, then you can start to overcome the next issue
+    :)
+  - "\u201CThe Pessimist Sees Difficulty In Every Opportunity. The Optimist Sees Opportunity
+    In Every Difficulty.\u201D -Winston Churchill"
+  - "\u201CDon\u2019t Let Yesterday Take Up Too Much Of Today.\u201D -Will Rogers"
+  - "\u201CYou Learn More From Failure Than From Success. Don\u2019t Let It Stop You.
+    Failure Builds Character.\u201D- Unknown"
+  - "\u201CIt\u2019s Not Whether You Get Knocked Down, It\u2019s Whether You Get Up.\u201D
+    \u2013 Inspirational Quote By Vince Lombardi"
+  - "\u201CIf You Are Working On Something That You Really Care About, You Don\u2019t
+    Have To Be Pushed. The Vision Pulls You.\u201D- Steve Jobs"
+  - "\u201CFailure Will Never Overtake Me If My Determination To Succeed Is Strong
+    Enough.\u201D- Og Mandino"
+  - "\u201CWe May Encounter Many Defeats But We Must Not Be Defeated.\u201D- Maya
+    Angelou"
+  - "\u201CImagine Your Life Is Perfect In Every Respect; What Would It Look Like?\u201D-
+    Brian Tracy"
+  - "\u201CSecurity Is Mostly A Superstition. Life Is Either A Daring Adventure Or
+    Nothing.\u201D- Helen Keller"
+  - "\u201CYou Are Never Too Old To Set Another Goal Or To Dream A New Dream.\u201D-
+    C.S. Lewis"
+  showingText: {fileID: 1730666748}
 --- !u!1 &270596510
 GameObject:
   m_ObjectHideFlags: 0
@@ -887,8 +924,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1920, y: 100}
+  m_AnchoredPosition: {x: 0, y: -0.0062561}
+  m_SizeDelta: {x: 1588.9, y: 123.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1730666748
 MonoBehaviour:
