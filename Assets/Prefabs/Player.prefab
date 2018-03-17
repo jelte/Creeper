@@ -189,7 +189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8a712db0dc3b2444bbb519e49ec9249, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jump: {fileID: 8300000, guid: ecc8cf6d251936242a065fb77e8b57d4, type: 3}
+  jump: {fileID: 8300000, guid: 21d4ec620c1bb874dac09d67d6164320, type: 3}
   attack: {fileID: 0}
   damageTaken: {fileID: 0}
   audioSource: {fileID: 0}

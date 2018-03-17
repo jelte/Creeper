@@ -11,5 +11,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e25941e9ee6b984eb2ac53fd60266d5, type: 3}
   m_Name: Gravity - Flip
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 96ceba64233534944b8c9b1f42ad1d1e, type: 3}
   modifier: -1
