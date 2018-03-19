@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.TestTools;
-using UnityEngine.TestTools.Utils;
 using NUnit.Framework;
 
 using System.Collections;
 using System.Collections.Generic;
+using ProjectFTP.Player;
 
 namespace ProjectFTP.Tests {
     [TestFixture]

@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using ProjectFTP.Level;
-using System;
 
-namespace ProjectFTP
+namespace ProjectFTP.Player
 {
     public class Character : MonoBehaviour, IActor
     {
@@ -63,15 +61,6 @@ namespace ProjectFTP
             Rigidbody2D.position += movement;
         }
 
-        public void Attack()
-        {
-            if (attack != null)
-            {
-                attack.Trigger(this);
-                OnCharacterAction(Action.ATTACK);
-            }
-        }
-
         public void Jump()
         {
             if (jumps < maxJumps)
@@ -79,6 +68,15 @@ namespace ProjectFTP
                 jumps++;
                 Rigidbody2D.velocity = -Physics2D.gravity * jumpForce;
                 OnCharacterAction(Action.JUMP);
+            }
+        }
+
+        public void Attack()
+        {
+            if (attack != null)
+            {
+                attack.Trigger(this);
+                OnCharacterAction(Action.ATTACK);
             }
         }
 
@@ -133,6 +131,7 @@ namespace ProjectFTP
             }
         }
 
+        // Action Event Trigger
         protected virtual void OnCharacterAction(Action action)
         {
             OnCharacterEvent handler = ActionHandler;
@@ -150,7 +149,7 @@ namespace ProjectFTP
             get { return health > 0; }
         }
 
-        // Is te character grounded
+        // Is the character grounded
         public bool IsGrounded
         {
             get
@@ -225,20 +224,16 @@ namespace ProjectFTP
         #region Unity Runtime methods
         void Start()
         {
-
             if (GetComponent<CharacterAnimator>() == null)
             {
                 gameObject.AddComponent<CharacterAnimator>();
             }
 
-            // Add CharacterController if platform is not mobile 
 #if UNITY_ANDROID
 #elif UNITY_IOS
 #else
-            if (GetComponent<CharacterController>() == null)
-            {
-                gameObject.AddComponent<CharacterController>();
-            }
+            // Add CharacterController if platform is not mobile 
+            gameObject.AddComponent<CharacterController>();
 #endif
         }
 

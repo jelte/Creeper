@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace ProjectFTP.Sound
+namespace ProjectFTP
 {
     public class BackgroundMusic : MonoBehaviour
     {

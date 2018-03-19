@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace ProjectFTP.Sound
+namespace ProjectFTP.Player
 {
     public class SoundsEffects : MonoBehaviour
     {
@@ -8,11 +8,12 @@ namespace ProjectFTP.Sound
         public AudioClip attack;
         public AudioClip damageTaken;
 
-        public AudioSource audioSource;
+        private AudioSource audioSource;
 
         public void Start()
         {
             audioSource = GetComponent<AudioSource>();
+            // Listing to character events
             GetComponent<Character>().ActionHandler += OnCharacterAction;
         }    
     
@@ -20,12 +21,14 @@ namespace ProjectFTP.Sound
         {
             if (clip)
             {
+                // play the sound clip at the current location
                 audioSource.PlayOneShot(clip, GameManager.SoundEffectsVolume);
             }
         }
 
         private void OnCharacterAction(Character.Action action)
         {
+            // Depending on action, play the corresponding audio clip
             switch (action)
             {
                 case Character.Action.JUMP:

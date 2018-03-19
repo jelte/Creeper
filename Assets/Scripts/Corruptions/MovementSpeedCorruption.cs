@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using ProjectFTP.Player;
 using UnityEngine;
 
 namespace ProjectFTP.Corruptions

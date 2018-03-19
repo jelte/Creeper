@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace ProjectFTP
+namespace ProjectFTP.Player
 {
     public class CharacterController : MonoBehaviour
     {

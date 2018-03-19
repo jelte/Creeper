@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using ProjectFTP;
-
+using ProjectFTP.Player;
 
 namespace ProjectFTP.Level.Traps
 {

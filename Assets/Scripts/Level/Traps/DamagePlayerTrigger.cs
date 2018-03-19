@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using ProjectFTP.Player;
+using UnityEngine;
 
 namespace ProjectFTP.Level.Traps
 {

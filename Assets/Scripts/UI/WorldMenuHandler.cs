@@ -22,12 +22,12 @@ namespace ProjectFTP.UI
         private List<GameObject> backgrounds = new List<GameObject>();
         private Vector2 expectedPosition;
 
-        // Use this for initialization
         void Start()
         {
             Vector2 canvasSize = GetComponent<CanvasScaler>().referenceResolution;
             float scaleFactor = GetComponent<CanvasScaler>().scaleFactor;
 
+            // Initialize each world panel.
             foreach (WorldConfig world in worlds)
             {
                 Vector2 position = new Vector2(canvasSize.x * (worldPanels.Count), 0f);
@@ -44,14 +44,17 @@ namespace ProjectFTP.UI
                 backgrounds.Add(background);
             }
 
+            // Initialize the connections between each world.
             foreach (GameObject worldPanel in worldPanels)
             {
                 worldPanel.GetComponentInChildren<WorldLayoutGenerator>().InitConnections(connectionPrefab);
             }
 
+            // Set buttons as last so they render on top of everything else.
             transform.Find("Next").transform.SetAsLastSibling();
             transform.Find("Previous").transform.SetAsLastSibling();
-
+            
+            // Initialize the first world to be show.
             WorldConfig currentWorld = StackedSceneManager.Active != null ? StackedSceneManager.Active.Get<WorldConfig>(SceneParameter.WORLD) : null;
             if (currentWorld != null)
             {
@@ -61,15 +64,20 @@ namespace ProjectFTP.UI
                 });
             }
 
+            // Enable levels based on the progression in the profile.
             Profile profile = GameManager.Instance.Profile;
             bool first = true;
             foreach (WorldConfig world in worlds)
             {
                 foreach (LevelConfig level in world.levels)
                 {
-                    if (first || profile.Completed(world, level))
+                    if (first)
                     {
                         first = false;
+                        GameObject.Find(level.name).GetComponent<Button>().interactable = true;
+                    }
+                    else if (profile.Completed(world, level))
+                    {
                         GameObject.Find(level.name).GetComponent<Button>().interactable = true;
                         foreach (LevelConfig connection in level.connections)
                         {
@@ -79,10 +87,10 @@ namespace ProjectFTP.UI
                 }
             }
         }
-
-        // Update is called once per frame
+        
         void Update()
         {
+            // Slide to the selected world if it is not in view.
             this.expectedPosition = ExpectedPosition(worldIndex);
             RectTransform world0RectTransform = worldPanels[0].GetComponent<RectTransform>();
             if (world0RectTransform.anchoredPosition.x != expectedPosition.x)

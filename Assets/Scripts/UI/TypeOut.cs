@@ -26,7 +26,7 @@ namespace ProjectFTP.UI
                 enabled = true;
             } else
             {
-                finalText += value;
+                finalText += "\n" + value;
             }
             CancelInvoke("Hide");
             InvokeRepeating("RandomizeCharacter", 0.0f, RandomCharacterChangeRate);
@@ -56,12 +56,12 @@ namespace ProjectFTP.UI
 
         void OnGUI()
         {
-            if (i == -1)
+            if (i == -1 && finalText.Length > 0)
             {
                 return;
             }
 
-            text.text = finalText.Substring(0, i) + currentRandomCharacter;
+            text.text = (i > 0 ? (i > finalText.Length ? finalText : finalText.Substring(0, i)): "") + currentRandomCharacter;
 
             if (text.text.Length == finalText.Length + 1)
             {
