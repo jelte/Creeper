@@ -1,5 +1,4 @@
 ﻿using ProjectFTP.UI;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -70,22 +69,29 @@ namespace ProjectFTP.Level
          */
         private void CreateLevelButton(RectTransform clusterTransform, Vector2 position, LevelConfig levelConfig)
         {
+            // Instantiate game object
             GameObject level = Instantiate(levelPrefab);
+            // Disable the button
             level.GetComponent<Button>().interactable = false;
             level.name = levelConfig.name;
+            // Place in canvas
             RectTransform levelTransform = level.GetComponent<RectTransform>();
             levelTransform.SetParent(clusterTransform);
             levelTransform.anchoredPosition = position;
+            // Set icon
             level.transform.Find("Icon").GetComponent<Image>().sprite = levelConfig.icon;
+            // config world and level variables.
             level.GetComponent<LevelButtonHandler>().world = world;
             level.GetComponent<LevelButtonHandler>().level = levelConfig;
         }
 
         private void CreateConnection(LevelConfig a, LevelConfig b)
         {
+            // Create the connection game object.
             GameObject connection = Instantiate(connectionPrefab, this.transform);
             connection.transform.SetSiblingIndex(0);
             RectTransform connectionTransform = connection.GetComponent<RectTransform>();
+
             GameObject aGameObject = GameObject.Find(a.name);
             GameObject bGameObject = GameObject.Find(b.name);
             
@@ -93,6 +99,8 @@ namespace ProjectFTP.Level
             RectTransform bRectTransform = bGameObject.GetComponent<RectTransform>();
             Vector2 vector = bRectTransform.position - aRectTransform.position;
             Vector2 vectorPos = bRectTransform.anchoredPosition - aRectTransform.anchoredPosition;
+
+            // when the connection is cross world it needs to be offset.
             if (aGameObject.transform.parent != bGameObject.transform.parent)
             {
                 Vector2 aPosition = aRectTransform.anchoredPosition 
@@ -103,6 +111,7 @@ namespace ProjectFTP.Level
                     + bRectTransform.parent.parent.GetComponent<RectTransform>().anchoredPosition;
                 vectorPos = bPosition - aPosition;
             }
+            // Determin angle
             float angle = Mathf.Atan2(vector.y, vector.x);
             
             connectionTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, vectorPos.magnitude);

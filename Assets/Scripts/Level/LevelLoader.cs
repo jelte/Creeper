@@ -6,12 +6,15 @@ namespace ProjectFTP.Level
     {
         public void LoadLevel(Texture2D map, ImageConversionScheme conversionScheme, Transform parent)
         {
+            // Clear the entire level.
             EmptyMap(parent);
 
+            // Load all pixels.
             Color32[] allPixels = map.GetPixels32();
             int width = map.width;
             int height = map.height;
 
+            // Loop through each pixel and spawn the corresponding tile.
             for (int x = 0; x < width; x++)
             {
                 for (int y = 0; y < height; y++)
@@ -19,6 +22,7 @@ namespace ProjectFTP.Level
                     GameObject tile = SpawnTileAt(conversionScheme, allPixels[(y * width) + x], x, y);
                     if (tile != null)
                     {
+                        // make sure the new tile is attached to the level game object.
                         tile.transform.parent = parent;
                     }
                 }

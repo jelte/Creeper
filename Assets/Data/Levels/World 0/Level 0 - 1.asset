@@ -22,9 +22,38 @@ MonoBehaviour:
   corruptions: []
   numberOfActiveCorruptions: 0
   speechTriggers:
-  - position: {x: 5, y: 53, z: 0}
-    Radius: 2
+  - position: {x: 5, y: 58, z: 0}
+    Radius: 1
     text: Ok lets see how well you can infect this system...
-  - position: {x: 20, y: 53, z: 0}
+  - position: {x: 14.5, y: 58, z: 0}
     Radius: 2
-    text: Best to jump over these pits, remember you can jump more than ones...
+    text: Best to jump over these pits, unless you want to be a failure...
+  - position: {x: 46.5, y: 59, z: 0}
+    Radius: 2
+    text: Watch your step!
+  - position: {x: 58, y: 40, z: 0}
+    Radius: 2
+    text: Remember, to get the most out of a mid-air jump you need to time it just
+      right...
+  - position: {x: 45, y: 53, z: 0}
+    Radius: 2
+    text: Don't be to eager, especially when you don't know what's on top...
+  - position: {x: 40, y: 53, z: 0}
+    Radius: 2
+    text: Just blindly dropping down might not be a good idea...
+  - position: {x: 30, y: 37, z: 0}
+    Radius: 5
+    text: Ow, time your jump just right to get the most out of it...
+  - position: {x: 31, y: 30, z: 0}
+    Radius: 2
+    text: Common... use the circuits to climb back up there..
+  - position: {x: 22, y: 44, z: 0}
+    Radius: 1
+    text: Watch those spikes... they really are nasty...
+  - position: {x: 6, y: 45, z: 0}
+    Radius: 2
+    text: Almost there, just a little bit more... you can use the circuits to navigate
+      vertically.
+  - position: {x: 7, y: 52, z: 0}
+    Radius: 1
+    text: Well that wasn't so bad,... let's see what more you can do...

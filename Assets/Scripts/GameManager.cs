@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using ProjectFTP.Player;
 using ProjectFTP.SceneManagement;
-using ProjectFTP.Sound;
 
 namespace ProjectFTP
 {
@@ -15,8 +14,9 @@ namespace ProjectFTP
         void Start()
         {
             instance = this;
+            // Instantiate the profile loader
             profileLoader = new ProfileLoader(Application.persistentDataPath + "/profiles.dat");
-
+            // Load the main scene
             StackedSceneManager.LoadScene(SceneName.MainMenu);
         }
 
@@ -27,7 +27,7 @@ namespace ProjectFTP
 
         public static float BackgroundMusicVolume
         {
-            get { return PlayerPrefs.GetFloat(SETTINGS_BACKGROUND_MUSIC_VOLUME); }
+            get { return PlayerPrefs.GetFloat(SETTINGS_BACKGROUND_MUSIC_VOLUME, 0.5f); }
             set {
                 PlayerPrefs.SetFloat(SETTINGS_BACKGROUND_MUSIC_VOLUME, value);
                 BackgroundMusic.Instance.UpdateVolume();
@@ -36,7 +36,7 @@ namespace ProjectFTP
 
         public static float SoundEffectsVolume
         {
-            get { return PlayerPrefs.GetFloat(SETTINGS_SOUND_EFFECTS_VOLUME); }
+            get { return PlayerPrefs.GetFloat(SETTINGS_SOUND_EFFECTS_VOLUME, 1f); }
             set { PlayerPrefs.SetFloat(SETTINGS_SOUND_EFFECTS_VOLUME, value); }
         }
 
@@ -54,7 +54,9 @@ namespace ProjectFTP
 
         public static void SaveAttempt(Attempt attempt)
         {
+            // Add the attempt to the profile
             Instance.Profile.AddAttempt(attempt);
+            // Save the profile
             Instance.profileLoader.Update();
         }
     }

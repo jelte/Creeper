@@ -9,6 +9,8 @@ using ProjectFTP.Player;
 
 namespace ProjectFTP.Level
 {
+    public enum Action { FINISH }
+
     public class LevelManager : MonoBehaviour
     {
         public GameObject characterPrefab;
@@ -29,28 +31,41 @@ namespace ProjectFTP.Level
         
         void Start()
         {
+            // Get the level config from the active scene parameters.
             LevelConfig levelConfig = StackedSceneManager.Active.Get<LevelConfig>(SceneParameter.LEVEL);
+
+            // Create a new attempt.
             attempt = new Attempt(StackedSceneManager.Active.Get<WorldConfig>(SceneParameter.WORLD), levelConfig);
-
-            Camera.main.GetComponent<PostProcessingBehaviour>().profile = cameraProfile;
-
+        
+            // Load the level layout.
             loader.LoadLevel(levelConfig.layout, levelConfig.imageConversionScheme, gameObject.transform);
 
+            // Find the spawnpoint.
             GameObject spawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint");
+
+            // Spawn the character at the spawnpoint.
             GameObject character = Instantiate(characterPrefab, spawnPoint.transform.position, Quaternion.identity);
+            // Add the listener for when the character dies.
             character.GetComponent<Character>().ActionHandler += OnDie;
+            // make sure the character is attached to the active scene.
             SceneManager.MoveGameObjectToScene(character, StackedSceneManager.Active.Scene);
 
+            // Instantiate the background
             GameObject background = CreateNewObject("Background");
             background.AddComponent<SpriteRenderer>().sprite = levelConfig.background;
             background.AddComponent<FollowPlayer>().StartFollow(character, Vector3.forward * 2);
-            
+
+            // Reset the camera post processing effects and make it follow the character.
+            Camera.main.GetComponent<PostProcessingBehaviour>().profile = cameraProfile;
             Camera.main.gameObject.AddComponent<FollowPlayer>().StartFollow(character, Vector3.back * 10);
 
+            // Add a listener for when the level is completed
             GetComponentInChildren<VictoryTrigger>().ActionHandler += OnFinish;
 
+            // Set up the corruptions
             gameObject.AddComponent<CorruptionManager>().SetUp(levelConfig);
 
+            // Set up the speech triggers
             levelConfig.speechTriggers.ForEach(delegate(SpeechBubble speechBubble) {
                 GameObject trigger = new GameObject();
                 trigger.transform.parent = transform;
@@ -59,6 +74,8 @@ namespace ProjectFTP.Level
 
             // Ensure time is on
             Time.timeScale = 1.0f;
+
+            // Save the attempt
             GameManager.SaveAttempt(attempt);
         }
         
@@ -79,37 +96,48 @@ namespace ProjectFTP.Level
             {
                 StackedSceneManager.LoadScene(SceneName.PauseScene);
             }
-
         }
 
-        void OnDie(Character.Action action)
+        void Transition(SceneName scene)
         {
-            if (action == Character.Action.DIE)
+            // Hide all UI
+            foreach (Canvas canvas in FindObjectsOfType<Canvas>())
             {
-                GetComponent<CorruptionManager>().TearDown();
-                StackedSceneManager.LoadScene(SceneName.DeathScene, new Dictionary<SceneParameter, object>() {
-                    { SceneParameter.WORLD, StackedSceneManager.Active.Get<WorldConfig>(SceneParameter.WORLD)},
-                    { SceneParameter.LEVEL, StackedSceneManager.Active.Get<LevelConfig>(SceneParameter.LEVEL)},
-                    { SceneParameter.ATTEMPT, attempt}
-                });
+                if (canvas.gameObject.name != "Canvas")
+                {
+                    canvas.enabled = false;
+                }
             }
-        }
-
-        void OnFinish()
-        {
+            // Stop all corruptions
             GetComponent<CorruptionManager>().TearDown();
-            StackedSceneManager.LoadScene(SceneName.VictoryScene, new Dictionary<SceneParameter, object>() {
+            // Load the death scene
+            StackedSceneManager.LoadScene(scene, new Dictionary<SceneParameter, object>() {
                 { SceneParameter.WORLD, StackedSceneManager.Active.Get<WorldConfig>(SceneParameter.WORLD)},
                 { SceneParameter.LEVEL, StackedSceneManager.Active.Get<LevelConfig>(SceneParameter.LEVEL)},
                 { SceneParameter.ATTEMPT, attempt}
             });
         }
 
+        void OnDie(Character.Action action)
+        {
+            if (action == Character.Action.DIE)
+            {
+                Transition(SceneName.DeathScene);
+            }
+        }
+
+        void OnFinish()
+        {
+            Transition(SceneName.VictoryScene);
+        }
+
         void OnDestroy()
         {
-            Destroy(Camera.main.gameObject.GetComponent<FollowPlayer>());
+            // do some clean up when the level manager gets destroyed.
+            if (Camera.main != null && Camera.main.gameObject != null && Camera.main.gameObject.GetComponent<FollowPlayer>() != null)
+            {
+                Destroy(Camera.main.gameObject.GetComponent<FollowPlayer>());
+            }
         }
     }
-
-    public enum Action { FINISH }
 }

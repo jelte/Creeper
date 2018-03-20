@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace ProjectFTP
+namespace ProjectFTP.Player
 {
     public class CharacterAnimator : MonoBehaviour
     {
@@ -12,10 +10,9 @@ namespace ProjectFTP
         void Start()
         {
             animator = GetComponent<Animator>();
-
-
             character = GetComponent<Character>();
 
+            // Listing to character events
             character.ActionHandler += OnCharacterAction;
         }
         
@@ -41,6 +38,7 @@ namespace ProjectFTP
         {
             if (animator != null)
             {
+                // Trigger the corresponding animation
                 animator.SetTrigger(action.ToString().ToLower());
             }
         }

@@ -15,6 +15,7 @@ namespace ProjectFTP.SceneManagement
         public StackedScene(SceneName name, IDictionary<SceneParameter, object> parameters)
         {
             this.name = name;
+            // Determine the buildIndex.
             buildIndex = SceneUtility.GetBuildIndexByScenePath("Scenes/" + name.ToString());
             this.parameters = parameters;
         }
@@ -52,6 +53,7 @@ namespace ProjectFTP.SceneManagement
 
         public AsyncOperation Load()
         {
+            // Load the scene Additively
             return SceneManager.LoadSceneAsync(BuildIndex, LoadSceneMode.Additive);
         }
 
@@ -59,19 +61,25 @@ namespace ProjectFTP.SceneManagement
         {
             try
             {
+                // Before Unloading the scene check if any animation should happen.
                 GameObject animator = Scene.GetRootGameObjects()[0];
                 if (animator != null && animator.GetComponent<SceneAnimator>() != null)
                 {
+                    // add the callback from when the animation is finished
                     animator.GetComponent<SceneAnimator>().ActionHandler += delegate (SceneAnimator.State state) {
                         if (state == SceneAnimator.State.FINISHED)
                         {
+                            // Unload the scene.
                             SceneManager.UnloadSceneAsync(buildIndex);
                         }
                     };
+
+                    // trigger the animation.
                     animator.GetComponent<SceneAnimator>().Hide();
                 }
                 else
                 {
+                    // No animation, just unload the scene.
                     SceneManager.UnloadSceneAsync(buildIndex);
                 }
             }

@@ -4,8 +4,6 @@ namespace ProjectFTP.UI
 {
     public class MobileDetector : MonoBehaviour
     {
-
-        // Use this for initialization
         void Start()
         {
 #if UNITY_IPHONE

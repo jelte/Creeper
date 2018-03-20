@@ -218,7 +218,6 @@ MonoBehaviour:
     Nothing.\u201D- Helen Keller"
   - "\u201CYou Are Never Too Old To Set Another Goal Or To Dream A New Dream.\u201D-
     C.S. Lewis"
-  showingText: {fileID: 1730666748}
 --- !u!1 &270596510
 GameObject:
   m_ObjectHideFlags: 0
@@ -902,6 +901,7 @@ GameObject:
   - component: {fileID: 1730666747}
   - component: {fileID: 1730666749}
   - component: {fileID: 1730666748}
+  - component: {fileID: 1730666750}
   m_Layer: 5
   m_Name: Tip of the day
   m_TagString: Untagged
@@ -950,7 +950,7 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 38
     m_FontStyle: 1
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 2
     m_MaxSize: 44
     m_Alignment: 4
@@ -966,6 +966,42 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1730666746}
+--- !u!114 &1730666750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1730666746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e22d3890da5ae243a411a4bdc113ef2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  messages:
+  - 'Don''t worry, be happy :) '
+  - Please keep your device safe :p
+  - If you can overcome this issue, then you can start to overcome the next issue
+    :)
+  - No mather how frustrated, don't throw your controller at the screen.
+  - "\u201CThe Pessimist Sees Difficulty In Every Opportunity.\nThe Optimist Sees
+    Opportunity In Every Difficulty.\u201D\nWinston Churchill"
+  - "\u201CDon\u2019t Let Yesterday Take Up Too Much Of Today.\u201D\n-Will Rogers"
+  - "\u201CYou Learn More From Failure Than From Success.\nDon\u2019t Let It Stop
+    You. Failure Builds Character.\u201D"
+  - "\u201CIt\u2019s Not Whether You Get Knocked Down,\nIt\u2019s Whether You Get
+    Up.\u201D\nVince Lombardi"
+  - "\u201CIf You Are Working On Something That You Really Care About,\nYou Don\u2019t
+    Have To Be Pushed. The Vision Pulls You.\u201D\nSteve Jobs"
+  - "\u201CFailure Will Never Overtake Me If My Determination To Succeed Is Strong
+    Enough.\u201D\n-Og Mandino"
+  - "\u201CWe May Encounter Many Defeats But We Must Not Be Defeated.\u201D\n-Maya
+    Angelou"
+  - "\u201CImagine Your Life Is Perfect In Every Respect;\nWhat Would It Look Like?\u201D\n-Brian
+    Tracy"
+  - "\u201CSecurity Is Mostly A Superstition.\nLife Is Either A Daring Adventure Or
+    Nothing.\u201D\n-Helen Keller"
+  - "\u201CYou Are Never Too Old To Set Another Goal Or To Dream A New Dream.\u201D\n-C.S.
+    Lewis"
 --- !u!1 &1853388213
 GameObject:
   m_ObjectHideFlags: 0

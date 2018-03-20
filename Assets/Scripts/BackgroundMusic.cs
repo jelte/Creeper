@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace ProjectFTP.Sound
+namespace ProjectFTP
 {
     public class BackgroundMusic : MonoBehaviour
     {
@@ -12,6 +12,7 @@ namespace ProjectFTP.Sound
         {
             instance = this;
             audioSource = gameObject.AddComponent<AudioSource>();
+            audioSource.volume = GameManager.BackgroundMusicVolume;
             audioSource.loop = true;
             audioSource.clip = audioClips[Random.Range(0, audioClips.Length)];
             audioSource.Play();
