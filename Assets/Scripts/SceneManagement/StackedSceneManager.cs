@@ -91,7 +91,13 @@ namespace ProjectFTP.SceneManagement
 
         public static StackedScene Active
         {
-            get { return Instance.stack.Last(); }
+            get {
+                if (Instance.stack.Count == 0)
+                {
+                    return null;
+                }
+                return Instance.stack.Last();
+            }
         }
 
         public static AsyncOperation LoadScene(SceneName name)

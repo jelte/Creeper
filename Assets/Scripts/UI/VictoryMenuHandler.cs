@@ -18,8 +18,12 @@ namespace ProjectFTP.UI
 
         void Start()
         {
-            Attempt attempt = StackedSceneManager.Active.Get<Attempt>(SceneParameter.ATTEMPT);
             Time.timeScale = 0;
+            if (StackedSceneManager.Active == null)
+            {
+                return;
+            }
+            Attempt attempt = StackedSceneManager.Active.Get<Attempt>(SceneParameter.ATTEMPT);
             if (label)
             {
                 attempt.Victory();
@@ -27,7 +31,7 @@ namespace ProjectFTP.UI
                     StackedSceneManager.Active.Get<WorldConfig>(SceneParameter.WORLD),
                     StackedSceneManager.Active.Get<LevelConfig>(SceneParameter.LEVEL)
                 );
-                label.text = "Time take: " + stats.Minutes + " m " + stats.Seconds + " s.\n";
+                label.text = "Time taken: " + attempt.Minutes + " m " + attempt.Seconds + " s.\n";
                 label.text += "Attempts: " + stats.Attempts + "\n";
             } else
             {

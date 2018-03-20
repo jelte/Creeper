@@ -98,38 +98,44 @@ namespace ProjectFTP.Level
             }
         }
 
-        void OnDie(Character.Action action)
+        void Transition(SceneName scene)
         {
-            if (action == Character.Action.DIE)
+            // Hide all UI
+            foreach (Canvas canvas in FindObjectsOfType<Canvas>())
             {
-                // Stop all corruptions
-                GetComponent<CorruptionManager>().TearDown();
-
-                // Load the death scene
-                StackedSceneManager.LoadScene(SceneName.DeathScene, new Dictionary<SceneParameter, object>() {
-                    { SceneParameter.WORLD, StackedSceneManager.Active.Get<WorldConfig>(SceneParameter.WORLD)},
-                    { SceneParameter.LEVEL, StackedSceneManager.Active.Get<LevelConfig>(SceneParameter.LEVEL)},
-                    { SceneParameter.ATTEMPT, attempt}
-                });
+                if (canvas.gameObject.name != "Canvas")
+                {
+                    canvas.enabled = false;
+                }
             }
-        }
-
-        void OnFinish()
-        {
-            // Stop All corruptions
+            // Stop all corruptions
             GetComponent<CorruptionManager>().TearDown();
-            // Load the victory scene
-            StackedSceneManager.LoadScene(SceneName.VictoryScene, new Dictionary<SceneParameter, object>() {
+            // Load the death scene
+            StackedSceneManager.LoadScene(scene, new Dictionary<SceneParameter, object>() {
                 { SceneParameter.WORLD, StackedSceneManager.Active.Get<WorldConfig>(SceneParameter.WORLD)},
                 { SceneParameter.LEVEL, StackedSceneManager.Active.Get<LevelConfig>(SceneParameter.LEVEL)},
                 { SceneParameter.ATTEMPT, attempt}
             });
         }
 
+        void OnDie(Character.Action action)
+        {
+            if (action == Character.Action.DIE)
+            {
+                Transition(SceneName.DeathScene);
+            }
+        }
+
+        void OnFinish()
+        {
+            Transition(SceneName.VictoryScene);
+        }
+
         void OnDestroy()
         {
             // do some clean up when the level manager gets destroyed.
-            if (Camera.main != null && Camera.main.gameObject != null && Camera.main.gameObject.GetComponent<FollowPlayer>() != null) {
+            if (Camera.main != null && Camera.main.gameObject != null && Camera.main.gameObject.GetComponent<FollowPlayer>() != null)
+            {
                 Destroy(Camera.main.gameObject.GetComponent<FollowPlayer>());
             }
         }

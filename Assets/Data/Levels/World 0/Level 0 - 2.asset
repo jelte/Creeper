@@ -20,4 +20,6 @@ MonoBehaviour:
     type: 2}
   corruptions:
   - {fileID: 11400000, guid: eceb1d8a1e99b8b45b68130c3efedafb, type: 2}
+  - {fileID: 11400000, guid: 05adcebb4a52f594e9518a384989388d, type: 2}
   numberOfActiveCorruptions: 1
+  speechTriggers: []

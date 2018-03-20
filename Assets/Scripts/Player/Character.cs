@@ -230,6 +230,10 @@ namespace ProjectFTP.Player
             }
 
 #if UNITY_ANDROID
+    #if UNITY_EDITOR
+                // Add CharacterController if platform is not mobile 
+                gameObject.AddComponent<CharacterController>();
+    #endif
 #elif UNITY_IOS
 #else
             // Add CharacterController if platform is not mobile 

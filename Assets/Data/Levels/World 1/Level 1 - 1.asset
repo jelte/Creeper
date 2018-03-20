@@ -25,4 +25,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: da998720c4da5ed4a9af8d04778c7f7c, type: 2}
   - {fileID: 11400000, guid: c404405165523874cad74f0f9b157591, type: 2}
   - {fileID: 11400000, guid: 5834f3f37b567d84797f83d4c0fc42fd, type: 2}
-  numberOfActiveCorruptions: 3
+  numberOfActiveCorruptions: 1
+  speechTriggers: []

@@ -27,7 +27,7 @@ namespace ProjectFTP
 
         public static float BackgroundMusicVolume
         {
-            get { return PlayerPrefs.GetFloat(SETTINGS_BACKGROUND_MUSIC_VOLUME); }
+            get { return PlayerPrefs.GetFloat(SETTINGS_BACKGROUND_MUSIC_VOLUME, 0.5f); }
             set {
                 PlayerPrefs.SetFloat(SETTINGS_BACKGROUND_MUSIC_VOLUME, value);
                 BackgroundMusic.Instance.UpdateVolume();
@@ -36,7 +36,7 @@ namespace ProjectFTP
 
         public static float SoundEffectsVolume
         {
-            get { return PlayerPrefs.GetFloat(SETTINGS_SOUND_EFFECTS_VOLUME); }
+            get { return PlayerPrefs.GetFloat(SETTINGS_SOUND_EFFECTS_VOLUME, 1f); }
             set { PlayerPrefs.SetFloat(SETTINGS_SOUND_EFFECTS_VOLUME, value); }
         }
 

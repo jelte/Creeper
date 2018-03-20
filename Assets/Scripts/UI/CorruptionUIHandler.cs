@@ -23,6 +23,8 @@ namespace ProjectFTP.UI
                 case CorruptionState.START:
                     {
                         GameObject uiGameObject = GameObject.Instantiate(uiPrefab, gameObject.transform);
+                        Rect rect = uiGameObject.GetComponent<RectTransform>().rect;
+                        rect.width = GetComponent<RectTransform>().rect.width;
                         uiGameObject.transform.GetChild(0).GetComponentInChildren<Image>().sprite = corruption.Icon;
                         uiGameObject.GetComponentInChildren<Text>().text = corruption.Name;
                         corruptions.Add(corruption, uiGameObject);

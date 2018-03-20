@@ -77,6 +77,7 @@ namespace ProjectFTP.Corruptions
 
         public void TearDown()
         {
+            StopAllCoroutines();
             foreach (ActiveCorruption corruption in activeCorruptions) {
                 // notify listeners that the corruption has ended.
                 TriggerEvent(corruption, CorruptionState.END);

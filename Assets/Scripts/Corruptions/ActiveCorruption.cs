@@ -35,8 +35,11 @@ namespace ProjectFTP.Corruptions
 
         internal void TearDown()
         {
-            active = false;
-            corruption.TearDown();
+            if (active)
+            {
+                active = false;
+                corruption.TearDown();
+            }
         }
     }
 }

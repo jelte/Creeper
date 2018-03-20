@@ -1,5 +1,6 @@
 ﻿using ProjectFTP.Level;
 using System;
+using UnityEngine;
 
 namespace ProjectFTP.Player
 {
@@ -47,5 +48,13 @@ namespace ProjectFTP.Player
         public bool Success { get; internal set; }
         public string World { get; internal set; }
         public string Level { get; internal set; }
+        public float Minutes
+        {
+            get { return Mathf.Floor(Time / 60); }
+        }
+        public float Seconds
+        {
+            get { return Mathf.Round(Time % 60 * 1000) / 1000; }
+        }
     }
 }

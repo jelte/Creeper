@@ -76,9 +76,9 @@ namespace ProjectFTP.UI
                         first = false;
                         GameObject.Find(level.name).GetComponent<Button>().interactable = true;
                     }
-                    else if (profile.Completed(world, level))
+                    if (profile.Completed(world, level))
                     {
-                        GameObject.Find(level.name).GetComponent<Button>().interactable = true;
+                        GameObject.Find(level.name).GetComponent<Image>().color = new Color(64f, 27f,27f);
                         foreach (LevelConfig connection in level.connections)
                         {
                             GameObject.Find(connection.name).GetComponent<Button>().interactable = true;

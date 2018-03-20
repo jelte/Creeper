@@ -19,7 +19,7 @@ MonoBehaviour:
   imageConversionScheme: {fileID: 11400000, guid: c4db7d4073e2570498557e36e42f5d2f,
     type: 2}
   corruptions:
-  - {fileID: 11400000, guid: c404405165523874cad74f0f9b157591, type: 2}
-  - {fileID: 11400000, guid: 05adcebb4a52f594e9518a384989388d, type: 2}
-  - {fileID: 11400000, guid: eceb1d8a1e99b8b45b68130c3efedafb, type: 2}
-  numberOfActiveCorruptions: 2
+  - {fileID: 11400000, guid: 8b987c770e87949478c58ced82d7a6df, type: 2}
+  - {fileID: 11400000, guid: 76fd3709bd78c1d4d87f1d39ad26baa7, type: 2}
+  numberOfActiveCorruptions: 1
+  speechTriggers: []
